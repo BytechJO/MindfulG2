@@ -1,7 +1,7 @@
-# Mindful G1
+# Mindful G2
 
 ## Project Description
-Mindful G1 is a web application built using **React** with **Vite**.  
+Mindful G2 is a web application built using **React** with **Vite**.  
 It provides an interactive and responsive user interface using modern frontend development tools.
 
 ## Features
