@@ -1,12 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles, Maximize2, Minimize2 } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
 import '../../shared/StoryPage.css';
-import { Maximize2, Minimize2 } from "lucide-react";
-import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightLong } from '@fortawesome/free-solid-svg-icons';
+import ValidationAlert from '../../shared/ValidationAlert';
 
 import video1 from "./assets/1.mp4";
 import video2 from "./assets/2.mp4";
@@ -14,7 +10,6 @@ import video3 from "./assets/3.mp4";
 import video4 from "./assets/4.mp4";
 import video5 from "./assets/5.mp4";
 
-import questionGif from './assets/question.gif';
 
 export const StoryPage = () => {
   const [currentVideo, setCurrentVideo] = useState(0);
@@ -24,6 +19,7 @@ export const StoryPage = () => {
   const [duration, setDuration] = useState(0);
   const videoRef = useRef(null);
   const [selectedWords, setSelectedWords] = useState([]);
+  const { unitId, lessonId } = useParams();
   const navigate = useNavigate();
   const [showFeedback, setShowFeedback] = useState(false);
   const [showBubble, setShowBubble] = useState(true);
@@ -35,26 +31,13 @@ export const StoryPage = () => {
   const [showSpeedMenu, setShowSpeedMenu] = useState(false);
   const availableSpeeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
   const [isFullscreen, setIsFullscreen] = useState(false);
-
-  // --- START: التعديلات المطلوبة ---
-  // 1. إنشاء ref للحاوية التي ستدخل وضع ملء الشاشة
   const fullscreenContainerRef = useRef(null);
-  // --- END: التعديلات المطلوبة ---
 
   const videos = [
     {
       url: video1,
       title: "Section 1",
       subtitles: [
-        // {
-        //   start: 0, end: 3.12,
-        //   words: [
-        //     { text: "Nessie", start: 0.5, end: 1.2 },
-        //     { text: "Doesn’t", start: 1.2, end: 1.7 },
-        //     { text: "Like", start: 1.7, end: 2.1 },
-        //     { text: "Tag", start: 2.1, end: 2.5 },
-        //   ]
-        // },
       ]
     },
 
@@ -259,7 +242,7 @@ export const StoryPage = () => {
 
   const cloudPositions = {
     0: [
-      // { bottom: '30rem', left: '25%', transform: 'translateX(-50%)' }
+      
     ],
     1: [
       { top: '15%', left: '20%', isFlipped: true },
@@ -425,35 +408,14 @@ export const StoryPage = () => {
 
   const handleEnded = useCallback(() => {
     if (currentVideo === videos.length - 1) {
-      Swal.fire({
-        title: "Good Job!",
-        html: "You finished the story. Go to the quiz?",
-        imageUrl: questionGif,
-        imageWidth: 200,
-        imageHeight: 200,
-        imageAlt: "Question GIF",
-        background: "#dfeaf6",
-        confirmButtonText: '<i class="fa-solid fa-right-long"></i>',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        buttonsStyling: false,
-        customClass: {
-          popup: "my-popup",
-          image: "my-image",
-          title: "my-title",
-          content: "my-content",
-          confirmButton: "my-button",
-        },
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate('/quiz');
-        }
+      ValidationAlert.storyEnd(() => {
+        navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
       });
     } else if (currentVideo !== 3) {
       setShowBanner(false);
       setCurrentVideo(prev => prev + 1);
     }
-  }, [currentVideo, videos.length, navigate]);
+  }, [currentVideo, videos.length, navigate, unitId, lessonId]);
 
   const toggleWordSelection = (wordText) => {
     const correctWords = ["keep trying"];

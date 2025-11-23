@@ -1,12 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import './StoryPage.css';
-import { Maximize2, Minimize2 } from "lucide-react";
-import Swal from 'sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRightLong } from '@fortawesome/free-solid-svg-icons';
+import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles, Maximize2, Minimize2 } from 'lucide-react';
+import { useParams, useNavigate } from 'react-router-dom';
+import '../../shared/StoryPage.css';
+import ValidationAlert from '../../shared/ValidationAlert';
 
 import video1 from "./assets/1.mp4";
 import video2 from "./assets/2.mp4";
@@ -15,7 +11,6 @@ import video4 from "./assets/4.mp4";
 import video5 from "./assets/5.mp4";
 import img from "./assets/nex.png";
 
-import questionGif from './assets/question.gif';
 
 export const StoryPage = () => {
   const [currentVideo, setCurrentVideo] = useState(0);
@@ -25,6 +20,7 @@ export const StoryPage = () => {
   const [duration, setDuration] = useState(0);
   const videoRef = useRef(null);
   const [selectedWords, setSelectedWords] = useState([]);
+  const { unitId, lessonId } = useParams();
   const navigate = useNavigate();
   const [showFeedback, setShowFeedback] = useState(false);
   const [showBubble, setShowBubble] = useState(true);
@@ -417,36 +413,15 @@ export const StoryPage = () => {
 
     // إذا آخر عنصر أو العنصر صورة
     if (isLast || !currentItem.url.endsWith(".mp4")) {
-      Swal.fire({
-        title: "Good Job!",
-        html: "You finished the story. Go to the quiz?",
-        imageUrl: questionGif,
-        imageWidth: 200,
-        imageHeight: 200,
-        imageAlt: "Question GIF",
-        background: "#dfeaf6",
-        confirmButtonText: '<i class="fa-solid fa-right-long"></i>',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        buttonsStyling: false,
-        customClass: {
-          popup: "my-popup",
-          image: "my-image",
-          title: "my-title",
-          content: "my-content",
-          confirmButton: "my-button",
-        },
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate('/quiz');
-        }
+      ValidationAlert.storyEnd(() => {
+        navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
       });
     } else {
       // إذا ليس آخر عنصر فيديو
       setShowBanner(false);
       setCurrentVideo(prev => prev + 1);
     }
-  }, [currentVideo, videos, navigate]);
+  }, [currentVideo, videos, navigate, unitId, lessonId]);
   // Preload next video
   useEffect(() => {
     const nextVideoIndex = currentVideo + 1;

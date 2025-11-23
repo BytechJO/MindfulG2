@@ -1,7 +1,6 @@
 .star {
   cursor: pointer;
   display: inline-block;
-  /* padding-right: clamp(0px, 3vw, 15px); */
 }
 
 .star img {

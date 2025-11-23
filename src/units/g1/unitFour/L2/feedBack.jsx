@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import StarRating from './StarRating';
+import StarRating from '../../shared/StarRating.jsx';
 import Swal from 'sweetalert2';
 import Q2Image from './assets/feedBack.png';
-import './feedBack.css';
+import '../../shared/feedBack.css';
 
 function FeedBack() {
 
@@ -22,7 +22,7 @@ function FeedBack() {
       <img src={Q2Image} alt="Feedback background" className="feedback-bg-img" />
       
       <div
-        className="stars-container absolute left-[47%] transform -translate-x-1/2 flex flex-col gap-14"
+        className="stars-container absolute left-[47%] transform -translate-x-1/2 flex flex-col gap-10"
         style={{ top: '60%' }}
       >
         <StarRating value={0} />
