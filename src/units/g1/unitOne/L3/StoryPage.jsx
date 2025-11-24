@@ -42,16 +42,6 @@ export const StoryPage = () => {
       title: "Section 1",
       subtitles: [
         {
-          // start: 0, end: 3.5, 
-          // words: [
-          //   { text: "A", start: 0.2, end: 0.7 },
-          //   { text: "Clean", start: 0.7, end: 1.3 },
-          //   { text: "Place", start: 1.3, end: 2.0 },
-          //   { text: "is", start: 2.1, end: 2.3 },
-          //   { text: "a", start: 2.3, end: 2.5 },
-          //   { text: "Safe", start: 2.5, end: 2.9 }, // تعديل طفيف
-          //   { text: "Place.", start: 2.9, end: 3.3 }, // تعديل طفيف
-          // ]
         },
       ]
     },
@@ -158,14 +148,14 @@ export const StoryPage = () => {
           ]
         },
         {
-          start: 2.5, end: 7.0,
+          start: 8.0, end: 10.8,
           words: [
-            { text: "A good", start: 3.0, end: 3.3 },
-            { text: "citizen", start: 3.3, end: 3.6 },
-            { text: "always", start: 3.6, end: 3.9 },
-            { text: "follows", start: 3.9, end: 4.2 },
-            { text: "traffic", start: 3.6, end: 3.9 },
-            { text: "rules", start: 3.9, end: 4.2 },
+            { text: "A good", start: 8.5, end: 8.9 },
+            { text: "citizen", start: 8.9, end: 9.2 },
+            { text: "always", start: 9.2, end: 9.6 },
+            { text: "follows", start: 9.6, end: 9.9 },
+            { text: "traffic", start: 9.9, end: 10.2 },
+            { text: "rules", start: 10.2, end: 10.5 }
           ]
         },
       ]
@@ -176,168 +166,178 @@ export const StoryPage = () => {
       title: "Section 4",
       subtitles: [
         {
-          start: 0, end: 2,
+          start: 0, end: 1.7,
           words: [
-            { text: "What", start: 0, end: 0.2 },
-            { text: "are", start: 0.2, end: 0.4 },
-            { text: "these", start: 0.4, end: 0.6 },
-            { text: "lights", start: 0.6, end: 0.8 },
-            { text: "for?", start: 0.8, end: 1.0 },
+            { text: "What", start: 0, end: 0.3 },
+            { text: "are", start: 0.3, end: 0.6 },
+            { text: "these", start: 0.6, end: 1.0 },
+            { text: "lights", start: 1.0, end: 1.4 },
+            { text: "for?", start: 1.4, end: 1.7 },
           ]
         },
+
         {
-          start: 3, end: 8.7,
+          start: 1.8, end: 3.0,
           words: [
-            { text: "Those", start: 3.0, end: 3.2 },
-            { text: "are", start: 3.2, end: 3.5 },
-            { text: "for", start: 3.5, end: 3.8 },
-            { text: "pedestrians.", start: 3.8, end: 4.1 },
+            { text: "Those", start: 1.8, end: 2.0 },
+            { text: "are", start: 2.0, end: 2.2 },
+            { text: "for", start: 2.2, end: 2.4 },
+            { text: "pedestrians.", start: 2.4, end: 2.9 }
           ]
         },
+
         {
-          start: 3, end: 8.7,
+          start: 3.5, end: 7.0,
           words: [
-            { text: "Pedestrians", start: 3.0, end: 3.2 },
-            { text: "are", start: 3.2, end: 3.5 },
-            { text: "people", start: 3.5, end: 3.8 },
-            { text: "walking", start: 3.8, end: 4.1 },
-            { text: "or", start: 3.0, end: 3.2 },
-            { text: "not", start: 3.2, end: 3.5 },
-            { text: "in a", start: 3.5, end: 3.8 },
-            { text: "vehicle", start: 3.8, end: 4.1 },
+            { text: "Pedestrians", start: 3.9, end: 4.3 },
+            { text: "are", start: 4.3, end: 4.6 },
+            { text: "people", start: 4.6, end: 4.9 },
+            { text: "walking", start: 4.9, end: 5.2 },
+            { text: "or", start: 5.2, end: 5.5 },
+            { text: "not", start: 5.5, end: 5.8 },
+            { text: "in a", start: 5.8, end: 6.1 },
+            { text: "vehicle", start: 6.1, end: 6.5 }
           ]
         },
+
         {
-          start: 3, end: 8.7,
+          start: 7.0, end: 9.5,
           words: [
-            { text: "The", start: 3.0, end: 3.2 },
-            { text: "red", start: 3.2, end: 3.5 },
-            { text: "man", start: 3.5, end: 3.8 },
-            { text: "means", start: 3.8, end: 4.1 },
-            { text: "stop", start: 3.0, end: 3.2 },
-            { text: "and", start: 3.2, end: 3.5 },
-            { text: "wait,", start: 3.5, end: 3.8 },
+            { text: "The", start: 7.5, end: 7.7 },
+            { text: "red", start: 7.7, end: 7.9 },
+            { text: "man", start: 7.9, end: 8.1 },
+            { text: "means", start: 8.1, end: 8.3 },
+            { text: "stop", start: 8.3, end: 8.6 },
+            { text: "and", start: 8.6, end: 8.9 },
+            { text: "wait,", start: 8.9, end: 9.2 }
           ]
         },
+
         {
-          start: 3, end: 8.7,
+          start: 9.5, end: 12.0,
           words: [
-            { text: "and", start: 3.0, end: 3.2 },
-            { text: "the", start: 3.2, end: 3.5 },
-            { text: "green", start: 3.5, end: 3.8 },
-            { text: "man", start: 3.8, end: 4.1 },
-            { text: "means", start: 3.0, end: 3.2 },
-            { text: "cross", start: 3.2, end: 3.5 },
-            { text: "the road", start: 3.5, end: 3.8 },
+            { text: "and", start: 10.0, end: 10.1 },
+            { text: "the", start: 10.1, end: 10.3 },
+            { text: "green", start: 10.3, end: 10.5 },
+            { text: "man", start: 10.5, end: 10.7 },
+            { text: "means", start: 10.7, end: 10.8 },
+            { text: "cross", start: 10.8, end: 10.9 },
+            { text: "the road", start: 10.9, end: 11.5 }
           ]
         },
+
         {
-          start: 3, end: 8.7,
+          start: 12.0, end: 14.0,
           words: [
-            { text: "That’s", start: 3.0, end: 3.2 },
-            { text: "right,", start: 3.2, end: 3.5 },
-            { text: "Beth,", start: 3.5, end: 3.8 },
+            { text: "That’s", start: 12.5, end: 12.8 },
+            { text: "right,", start: 12.8, end: 13.2 },
+            { text: "Beth,", start: 13.2, end: 13.5 }
           ]
         },
+
         {
-          start: 3, end: 8.7,
+          start: 14.0, end: 20.0,
           words: [
-            { text: "But", start: 3.0, end: 3.2 },
-            { text: "we", start: 3.2, end: 3.5 },
-            { text: "must", start: 3.5, end: 3.8 },
-            { text: "always", start: 3.8, end: 4.1 },
-            { text: "stop,", start: 3.0, end: 3.2 },
-            { text: "wait,", start: 3.2, end: 3.5 },
-            { text: "look,", start: 3.5, end: 3.8 },
-            { text: "and", start: 3.0, end: 3.2 },
-            { text: "listen", start: 3.2, end: 3.5 },
-            { text: "before", start: 3.5, end: 3.8 },
-            { text: "we", start: 3.8, end: 4.1 },
-            { text: "cross", start: 3.0, end: 3.2 },
-            { text: "the", start: 3.2, end: 3.5 },
-            { text: "road", start: 3.5, end: 3.8 },
+            { text: "But", start: 14.5, end: 14.8 },
+            { text: "we", start: 14.8, end: 15.1 },
+            { text: "must", start: 15.1, end: 15.4 },
+            { text: "always", start: 15.4, end: 15.7 },
+            { text: "stop,", start: 16.0, end: 16.5 },
+            { text: "wait,", start: 16.5, end: 17.0 },
+            { text: "look,", start: 17.0, end: 17.5 },
+            { text: "and", start: 17.5, end: 17.8 },
+            { text: "listen", start: 17.8, end: 18.2 },
+            { text: "before", start: 18.2, end: 18.5 },
+            { text: "we", start: 18.5, end: 18.7 },
+            { text: "cross", start: 18.7, end: 19.0 },
+            { text: "the", start: 19.0, end: 19.3 },
+            { text: "road", start: 19.3, end: 19.6 }
           ]
         },
       ]
     },
+
 
     {
       url: video5,
       title: "Section 5",
       subtitles: [
         {
-          start: 2.6, end: 5.0,
+          start: 0.0, end: 4.0,
           words: [
-            { text: "The", start: 2.6, end: 2.8 },
-            { text: "next", start: 2.8, end: 3.0 },
-            { text: "day,", start: 3.0, end: 3.3 },
-            { text: "Beth", start: 3.3, end: 3.6 },
-            { text: "and", start: 3.6, end: 3.9 },
-            { text: "Liz", start: 3.9, end: 4.2 },
-            { text: "want", start: 4.2, end: 4.5 },
-            { text: "to", start: 4.5, end: 4.7 },
-            { text: "cross", start: 4.7, end: 4.9 },
-            { text: "the", start: 4.9, end: 5.0 },
-            { text: "road.", start: 5.0, end: 5.2 },
+            { text: "The", start: 0.2, end: 0.5 },
+            { text: "next", start: 0.5, end: 0.8 },
+            { text: "day,", start: 0.8, end: 1.1 },
+            { text: "Beth", start: 1.5, end: 1.8 },
+            { text: "and", start: 1.8, end: 2.1 },
+            { text: "Liz", start: 2.1, end: 2.4 },
+            { text: "want", start: 2.4, end: 2.7 },
+            { text: "to", start: 2.7, end: 3.0 },
+            { text: "cross", start: 3.0, end: 3.3 },
+            { text: "the", start: 3.3, end: 3.6 },
+            { text: "road.", start: 3.6, end: 3.9 }
           ]
         },
 
         {
-          start: 9.6, end: 13.5,
+          start: 4.0, end: 8.5,
           words: [
-            { text: "They", start: 9.6, end: 9.9 },
-            { text: "remember", start: 9.9, end: 10.3 },
-            { text: "the", start: 10.3, end: 10.5 },
-            { text: "traffic", start: 10.5, end: 10.9 },
-            { text: "rules", start: 10.9, end: 11.2 },
-            { text: "and", start: 11.2, end: 11.5 },
-            { text: "stop", start: 11.5, end: 11.8 },
-            { text: "at", start: 11.8, end: 12.0 },
-            { text: "the", start: 12.0, end: 12.2 },
-            { text: "pedestrian", start: 12.2, end: 12.8 },
-            { text: "crossing.", start: 12.8, end: 13.5 },
+            { text: "They", start: 4.3, end: 4.6 },
+            { text: "remember", start: 4.6, end: 5.0 },
+            { text: "the", start: 5.0, end: 5.2 },
+            { text: "traffic", start: 5.2, end: 5.6 },
+            { text: "rules", start: 5.6, end: 5.9 },
+            { text: "and", start: 5.9, end: 6.2 },
+            { text: "stop", start: 6.2, end: 6.5 },
+            { text: "at", start: 6.5, end: 6.7 },
+            { text: "the", start: 6.7, end: 6.9 },
+            { text: "pedestrian", start: 6.9, end: 7.5 },
+            { text: "crossing.", start: 7.5, end: 8.2 },
           ]
         },
 
         {
-          start: 13.6, end: 18.0,
+          start: 9.0, end: 14.0,
           words: [
-            { text: "Then,", start: 13.6, end: 13.9 },
-            { text: "they", start: 13.9, end: 14.2 },
-            { text: "wait", start: 14.2, end: 14.5 },
-            { text: "to", start: 14.5, end: 14.7 },
-            { text: "see", start: 14.7, end: 15.0 },
-            { text: "the", start: 15.0, end: 15.2 },
-            { text: "green", start: 15.2, end: 15.5 },
-            { text: "man", start: 15.5, end: 15.8 },
-            { text: "light", start: 15.8, end: 16.1 },
-            { text: "up.", start: 16.1, end: 16.4 },
-            { text: "Next,", start: 16.4, end: 16.7 },
-            { text: "they", start: 16.7, end: 17.0 },
-            { text: "look", start: 17.0, end: 17.3 },
-            { text: "and", start: 17.3, end: 17.5 },
-            { text: "listen.", start: 17.5, end: 18.0 },
+            { text: "Then,", start: 9.3, end: 9.6 },
+            { text: "they", start: 9.6, end: 9.9 },
+            { text: "wait", start: 9.9, end: 10.2 },
+            { text: "to", start: 10.2, end: 10.4 },
+            { text: "see", start: 10.4, end: 10.7 },
+            { text: "the", start: 10.7, end: 10.9 },
+            { text: "green", start: 10.9, end: 11.2 },
+            { text: "man", start: 11.2, end: 11.5 },
+            { text: "light", start: 11.5, end: 11.8 },
+            { text: "up", start: 11.8, end: 12.1 },
+            { text: "Next,", start: 12.1, end: 12.4 },
+            { text: "they", start: 12.4, end: 12.7 },
+            { text: "look", start: 12.7, end: 13.0 },
+            { text: "and", start: 13.0, end: 13.2 },
+            { text: "listen.", start: 13.2, end: 13.7 },
           ]
         },
 
         {
-          start: 18.1, end: 22.5,
+          start: 14.0, end: 22.5,
           words: [
-            { text: "Finally,", start: 18.1, end: 18.5 },
-            { text: "they", start: 18.5, end: 18.8 },
-            { text: "cross", start: 18.8, end: 19.2 },
-            { text: "the road", start: 19.4, end: 19.7 },
-            { text: "when", start: 19.7, end: 20.0 },
-            { text: "it", start: 20.0, end: 20.2 },
-            { text: "is safe.", start: 20.4, end: 20.7 },
-            { text: "Well", start: 20.7, end: 21.0 },
-            { text: "done,", start: 21.0, end: 21.3 },
-            { text: "girls!", start: 21.3, end: 21.6 },
-            { text: "You", start: 21.6, end: 21.8 },
-            { text: "followed", start: 21.8, end: 22.1 },
-            { text: "the", start: 22.1, end: 22.3 },
-            { text: "traffic", start: 22.3, end: 22.5 },
-            { text: "rules.", start: 22.5, end: 22.8 },
+            { text: "Finally,", start: 15.0, end: 15.4 },
+
+            { text: "they", start: 16.0, end: 16.3 },
+            { text: "cross", start: 16.3, end: 16.7 },
+            { text: "the road", start: 16.9, end: 17.2 },
+            { text: "when", start: 17.2, end: 17.5 },
+            { text: "it", start: 17.5, end: 17.7 },
+            { text: "is safe.", start: 17.9, end: 18.2 },
+
+            { text: "Well", start: 19.0, end: 19.4 },
+            { text: "done,", start: 19.4, end: 19.8 },
+            { text: "girls!", start: 19.8, end: 20.3 },
+
+            { text: "You", start: 20.6, end: 20.8 },
+            { text: "followed", start: 20.8, end: 21.1 },
+            { text: "the", start: 21.1, end: 21.3 },
+            { text: "traffic", start: 21.3, end: 21.5 },
+            { text: "rules.", start: 21.5, end: 21.8 },
           ]
         },
       ]
@@ -356,7 +356,9 @@ export const StoryPage = () => {
 
   const cloudPositions = {
 
-    0: [{ bottom: '35rem', left: '50%', transform: 'translateX(-50%)', isFlipped: true }],
+    0: [
+      // { bottom: '35rem', left: '50%', transform: 'translateX(-50%)', isFlipped: true }
+    ],
 
     1: [
       { top: '15%', left: '10%' },
@@ -375,10 +377,17 @@ export const StoryPage = () => {
     3: [
       { bottom: '80%', left: '28%', isFlipped: true },
       { top: '10%', left: '45%' },
+      { bottom: '80%', left: '28%', isFlipped: true },
+      { top: '10%', left: '45%' },
+      { bottom: '80%', left: '28%', isFlipped: true },
+      { top: '10%', left: '45%' },
+      { bottom: '80%', left: '28%', isFlipped: true },
     ],
 
     4: [
       { top: '10%', left: '30%', isFlipped: true },
+      { top: '5%', left: '35%' },
+      { top: '5%', left: '35%' },
       { top: '5%', left: '35%' },
     ],
     5: [
@@ -388,10 +397,7 @@ export const StoryPage = () => {
       { top: '70%', left: '50%', isFlipped: true }
     ],
     6: [
-      { bottom: '80%', left: '48%', transform: 'translateX(-50%)' },
-      { top: '10%', left: '10%' },
-      { top: '10%', left: '50%', isFlipped: true },
-    ],
+    ]
   };
 
   const currentVideoData = videos[currentVideo];
@@ -536,7 +542,7 @@ export const StoryPage = () => {
 
 
   const toggleWordSelection = (wordText) => {
-    const correctWords = ["cross", "the road", "is safe"];
+    const correctWords = ["remember", "traffic", "rules"];
     const cleanedWord = wordText.replace('.', '');
 
     if (correctWords.includes(cleanedWord)) {

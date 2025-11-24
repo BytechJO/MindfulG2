@@ -41,12 +41,6 @@ export const StoryPage = () => {
       title: "Section 1",
       subtitles: [
         {
-          // start: 0, end: 3.12,
-          // words: [
-          //   { text: "Kate's", start: 0.5, end: 1.2 },
-          //   { text: "Big", start: 1.2, end: 1.7 },
-          //   { text: "Feelings", start: 1.7, end: 2.5 },
-          // ]
         },
       ],
     },
@@ -164,32 +158,32 @@ export const StoryPage = () => {
           start: 0,
           end: 3,
           words: [
-           { text: "Sam", start: 0.2, end: 0.4 },
-  { text: "and", start: 0.4, end: 0.6 },
-  { text: "his", start: 0.6, end: 0.8 },
-  { text: "mum", start: 0.8, end: 1 },
-  { text: "take", start: 1, end: 1.3 },
-  { text: "the", start: 1.3, end: 1.6 },
-  { text: "cake", start: 1.6, end: 1.8 },
-  { text: "to", start: 1.8, end: 1.9 },
-  { text: "their", start: 1.9, end: 2 },
-  { text: "new", start: 2, end: 2.1 },
-  { text: "neighbours.", start: 2.1, end: 2.5 },
+            { text: "Sam", start: 0.2, end: 0.4 },
+            { text: "and", start: 0.4, end: 0.6 },
+            { text: "his", start: 0.6, end: 0.8 },
+            { text: "mum", start: 0.8, end: 1 },
+            { text: "take", start: 1, end: 1.3 },
+            { text: "the", start: 1.3, end: 1.6 },
+            { text: "cake", start: 1.6, end: 1.8 },
+            { text: "to", start: 1.8, end: 1.9 },
+            { text: "their", start: 1.9, end: 2 },
+            { text: "new", start: 2, end: 2.1 },
+            { text: "neighbours.", start: 2.1, end: 2.5 },
           ],
         },
         {
           start: 3.0,
           end: 7,
           words: [
-          { text: "Sam", start: 4, end: 4.3 },
-  { text: "feels", start: 4.3, end: 4.6 },
-  { text: "shy", start: 4.6, end: 4.9 },
-  { text: "and", start: 5.1, end: 5.4},
-  { text: "stays", start: 5.4, end: 5.7},
-  { text: "close", start: 5.7, end: 6 },
-  { text: "to", start: 6, end: 6.2 },
-  { text: "his", start: 6.2, end: 6.4 },
-  { text: "mum.", start: 6.4, end: 6.7 },
+            { text: "Sam", start: 4, end: 4.3 },
+            { text: "feels", start: 4.3, end: 4.6 },
+            { text: "shy", start: 4.6, end: 4.9 },
+            { text: "and", start: 5.1, end: 5.4 },
+            { text: "stays", start: 5.4, end: 5.7 },
+            { text: "close", start: 5.7, end: 6 },
+            { text: "to", start: 6, end: 6.2 },
+            { text: "his", start: 6.2, end: 6.4 },
+            { text: "mum.", start: 6.4, end: 6.7 },
           ],
         },
         {
@@ -197,31 +191,32 @@ export const StoryPage = () => {
           end: 10.7,
           words: [
             { text: "Mmm,", start: 7, end: 7.3 },
-  { text: "thank", start: 7.3, end: 7.5 },
-  { text: "you", start: 7.5, end: 7.9 },
-  { text: "Mrs", start: 7.9, end: 8.3 },
-  { text: "Roberts,", start: 8.3, end: 8.7 },
-  { text: "I", start: 8.7, end: 9.1 },
-  { text: "love", start: 9.1, end: 9.5 },
-  { text: "honey", start: 9.5, end: 9.9 },
-  { text: "cake,", start: 9.9, end: 10.3 }
+            { text: "thank", start: 7.3, end: 7.5 },
+            { text: "you", start: 7.5, end: 7.9 },
+            { text: "Mrs", start: 7.9, end: 8.3 },
+            { text: "Roberts,", start: 8.3, end: 8.7 },
+            { text: "I", start: 8.7, end: 9.1 },
+            { text: "love", start: 9.1, end: 9.5 },
+            { text: "honey", start: 9.5, end: 9.9 },
+            { text: "cake,", start: 9.9, end: 10.3 }
           ],
-        }, {
-          start:10.7 ,
+        },
+        {
+          start: 10.7,
           end: 18.0,
           words: [
-  { text: "You’re", start: 12.7, end: 13.1 },
-  { text: "welcome!", start: 13.1, end: 13.5 },
-  { text: "What", start: 13.5, end: 13.9 },
-  { text: "a", start: 13.9, end: 14.3 },
-  { text: "polite", start: 14.3, end: 14.7 },
-  { text: "young", start: 14.7, end: 15.1 },
-  { text: "man", start: 15.1, end: 15.5 },
-  { text: "you", start: 15.5, end: 15.9 },
-  { text: "are,", start: 15.9, end: 16.3 }
-]
+            { text: "You’re", start: 12.7, end: 13.1 },
+            { text: "welcome!", start: 13.1, end: 13.5 },
+            { text: "What", start: 13.5, end: 13.9 },
+            { text: "a", start: 13.9, end: 14.3 },
+            { text: "polite", start: 14.3, end: 14.7 },
+            { text: "young", start: 14.7, end: 15.1 },
+            { text: "man", start: 15.1, end: 15.5 },
+            { text: "you", start: 15.5, end: 15.9 },
+            { text: "are,", start: 15.9, end: 16.3 }
+          ]
 
-,
+          ,
         },
       ],
     },
@@ -232,79 +227,79 @@ export const StoryPage = () => {
         {
           start: 0,
           end: 3,
-          words:[
-  { text: "Sam", start: 0.2, end: 0.4 },
-  { text: "sees", start: 0.4, end: 0.6},
-  { text: "that", start: 0.6, end: 0.8 },
-  { text: "the", start: 0.8, end: 1 },
-  { text: "boy", start: 1, end: 1.2 },
-  { text: "seems", start: 1.2, end: 1.4 },
-  { text: "nice", start: 1.4, end: 1.8 },
-  { text: "and", start: 2, end: 2.2 },
-  { text: "goes", start:2.2, end: 2.4 },
-  { text: "to", start: 2.4, end: 2.6 },
-  { text: "introduce", start: 2.6, end: 2.8 },
-  { text: "himself.", start: 2.8, end: 3 },
+          words: [
+            { text: "Sam", start: 0.2, end: 0.4 },
+            { text: "sees", start: 0.4, end: 0.6 },
+            { text: "that", start: 0.6, end: 0.8 },
+            { text: "the", start: 0.8, end: 1 },
+            { text: "boy", start: 1, end: 1.2 },
+            { text: "seems", start: 1.2, end: 1.4 },
+            { text: "nice", start: 1.4, end: 1.8 },
+            { text: "and", start: 2, end: 2.2 },
+            { text: "goes", start: 2.2, end: 2.4 },
+            { text: "to", start: 2.4, end: 2.6 },
+            { text: "introduce", start: 2.6, end: 2.8 },
+            { text: "himself.", start: 2.8, end: 3 },
 
-  
 
-]
-,
+
+          ]
+          ,
         },
         {
           start: 3,
           end: 8.5,
           words: [
-  { text: "‘I’m", start: 4.2, end: 4.6 },
-  { text: "Sam,", start: 4.6, end: 5.0 },
-  { text: "do", start: 5.8, end: 6 },
-  { text: "you", start: 6, end: 6.2 },
-  { text: "want", start: 6.2, end: 6.4 },
-  { text: "to", start: 6.4, end: 6.6 },
-  { text: "go", start: 6.6, end: 7.0 },
-  { text: "outside", start: 7.0, end: 7.4 },
-  { text: "and", start: 7.4, end: 7.8 },
-  { text: "play?’", start: 7.8, end: 8.2 },
+            { text: "‘I’m", start: 4.2, end: 4.6 },
+            { text: "Sam,", start: 4.6, end: 5.0 },
+            { text: "do", start: 5.8, end: 6 },
+            { text: "you", start: 6, end: 6.2 },
+            { text: "want", start: 6.2, end: 6.4 },
+            { text: "to", start: 6.4, end: 6.6 },
+            { text: "go", start: 6.6, end: 7.0 },
+            { text: "outside", start: 7.0, end: 7.4 },
+            { text: "and", start: 7.4, end: 7.8 },
+            { text: "play?’", start: 7.8, end: 8.2 },
 
-]
+          ]
 
-,
+          ,
         },
         {
           start: 8.5,
           end: 12.6,
-          words:[
-  { text: "‘My", start: 7.7, end: 8.1 },
-  { text: "name", start: 8.1, end: 8.5 },
-  { text: "is", start: 8.5, end: 8.9 },
-  { text: "Lee,", start: 8.9, end: 9.3 },
-  { text: "I", start: 9.3, end: 9.7 },
-  { text: "would", start: 9.7, end: 10.1 },
-  { text: "really", start: 10.1, end: 10.5 },
-  { text: "like", start: 10.5, end: 10.9 },
-  { text: "that.", start: 10.9, end: 11.3 },
-  { text: "Let’s", start: 11.5, end: 11.9 },
-  { text: "go!’", start: 11.9, end: 12.3 },
- 
-]
+          words: [
+            { text: "‘My", start: 7.7, end: 8.1 },
+            { text: "name", start: 8.1, end: 8.5 },
+            { text: "is", start: 8.5, end: 8.9 },
+            { text: "Lee,", start: 8.9, end: 9.3 },
+            { text: "I", start: 9.3, end: 9.7 },
+            { text: "would", start: 9.7, end: 10.1 },
+            { text: "really", start: 10.1, end: 10.5 },
+            { text: "like", start: 10.5, end: 10.9 },
+            { text: "that.", start: 10.9, end: 11.3 },
+            { text: "Let’s", start: 11.5, end: 11.9 },
+            { text: "go!’", start: 11.9, end: 12.3 },
+
+          ]
 
 
 
 
 
 
-,
+          ,
         },
         {
           start: 12.7,
           end: 14,
           words: [
-  { text: "They", start: 12.3, end: 12.7 },
-  { text: "play", start: 12.7, end: 13.1 },
-  { text: "happily", start: 13.1, end: 13.5 },
-  { text: "together.", start: 13.5, end: 13.9 }
-]
-,
+            { text: "They", start: 12.3, end: 12.7 },
+            { text: "play", start: 12.7, end: 13.1 },
+            { text: "happily", start: 13.1, end: 13.5 },
+            { text: "together.", start: 13.5, end: 13.9 }
+          ]
+          ,
         },
         {
           start: 10.2,
@@ -323,7 +318,6 @@ export const StoryPage = () => {
 
   const cloudPositions = {
     0: [
-      // { bottom: '35rem', left: '50%', transform: 'translateX(-50%)', isFlipped: true }
     ],
 
     1: [
@@ -339,7 +333,7 @@ export const StoryPage = () => {
     ],
 
     3: [
-      { bottom: "85%", left: "60%", isFlipped: true },
+      { bottom: "70%", left: "60%", isFlipped: true },
       { top: "30%", left: "23%", isFlipped: true },
       { top: "15%", left: "55%" },
       { top: "5%", left: "35%", isFlipped: true },
@@ -487,16 +481,16 @@ export const StoryPage = () => {
     setCurrentVideo(prev => (prev < videos.length - 1 ? prev + 1 : 0));
   };
 
-const handleEnded = useCallback(() => {
-  if (currentVideo < videos.length - 1) {
-    setCurrentVideo(prev => prev + 1);
-  } 
-  else {
-    ValidationAlert.storyEnd(() => {
+  const handleEnded = useCallback(() => {
+    if (currentVideo < videos.length - 1) {
+      setCurrentVideo(prev => prev + 1);
+    }
+    else {
+      ValidationAlert.storyEnd(() => {
         navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
       });
-  }
-}, [currentVideo, videos.length, navigate, unitId, lessonId]);
+    }
+  }, [currentVideo, videos.length, navigate, unitId, lessonId]);
 
 
 

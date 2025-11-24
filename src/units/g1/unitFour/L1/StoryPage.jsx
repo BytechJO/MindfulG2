@@ -305,7 +305,7 @@ export const StoryPage = () => {
           start: 17.5, end: 20.3,
           words: [
             { text: "‘That’s", start: 17.5, end: 17.7 },
-            { text: "ok.", start: 17.7, end: 18.1 },
+            { text: "ok,", start: 17.7, end: 18.1 },
             { text: "Let’s", start: 18.1, end: 18.3 },
             { text: "try", start: 18.3, end: 18.7 },
             { text: "and", start: 18.7, end: 19.1 },
