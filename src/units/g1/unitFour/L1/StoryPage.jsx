@@ -314,12 +314,6 @@ export const StoryPage = () => {
             { text: "together.’", start: 19.9, end: 20.3 }
           ]
 
-
-
-
-
-
-
         },
         {
           start: 20.0, end: 25.0,
