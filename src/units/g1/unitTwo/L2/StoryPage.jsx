@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles, Maximize2, Minimize2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles, Maximize2, Minimize2, MessageSquareText } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../../shared/StoryPage.css';
 import ValidationAlert from '../../shared/ValidationAlert';
@@ -13,6 +13,8 @@ import img1 from "./assets/nex.png";
 
 
 export const StoryPage = () => {
+  const [showCaption, setShowCaption] = useState(true);
+  const [extraBubble, setExtraBubble] = useState(null);
   const [currentVideo, setCurrentVideo] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -41,50 +43,12 @@ export const StoryPage = () => {
       url: video1,
       title: "Section 1",
       subtitles: [
-        {
-          // start: 0, end: 3.5, 
-          // words: [
-          //   { text: "A", start: 0.2, end: 0.7 },
-          //   { text: "Clean", start: 0.7, end: 1.3 },
-          //   { text: "Place", start: 1.3, end: 2.0 },
-          //   { text: "is", start: 2.1, end: 2.3 },
-          //   { text: "a", start: 2.3, end: 2.5 },
-          //   { text: "Safe", start: 2.5, end: 2.9 }, // تعديل طفيف
-          //   { text: "Place.", start: 2.9, end: 3.3 }, // تعديل طفيف
-          // ]
-        },
       ]
     },
     {
       url: video2,
       title: "Section 2",
       subtitles: [
-        {
-          start: 0, end: 2.3,
-          words: [
-            { text: "Leo", start: 0.1, end: 0.4 },
-            { text: "is", start: 0.4, end: 0.6 },
-            { text: "at", start: 0.6, end: 0.8 },
-            { text: "his", start: 0.8, end: 1.0 },
-            { text: "friend", start: 1.0, end: 1.3 },
-            { text: "Zack’s", start: 1.3, end: 1.5 },
-            { text: "house.", start: 1.5, end: 1.8 },
-
-          ]
-        },
-        {
-          start: 2.3, end: 4.5,
-          words: [
-            { text: "Leo", start: 2.4, end: 2.6 },
-            { text: "shows", start: 2.6, end: 2.9 },
-            { text: "his", start: 2.9, end: 3.1 },
-            { text: "new", start: 3.1, end: 3.3 },
-            { text: "bike", start: 3.3, end: 3.5 },
-            { text: "to", start: 3.5, end: 3.7 },
-            { text: "Zack.", start: 3.7, end: 4.0 },
-
-          ]
-        },
         {
           start: 6.0, end: 11.0,
           words: [
@@ -129,42 +93,6 @@ export const StoryPage = () => {
       url: video4,
       title: "Section 4",
       subtitles: [
-        {
-          start: 0.0, end: 2.5,
-          words: [
-            { text: "Zack", start: 0.0, end: 0.3 },
-            { text: "and", start: 0.3, end: 0.6 },
-            { text: "Leo", start: 0.6, end: 0.9 },
-            { text: "race", start: 0.9, end: 1.2 },
-            { text: "on", start: 1.2, end: 1.5 },
-            { text: "the", start: 1.5, end: 1.8 },
-            { text: "bike", start: 1.8, end: 2.1 },
-            { text: "path.", start: 2.1, end: 2.4 },
-          ]
-        },
-        {
-          start: 3.5, end: 4.9,
-          words: [
-            { text: "The", start: 3.5, end: 3.8 },
-            { text: "boys", start: 3.8, end: 4.1 },
-            { text: "ride", start: 4.1, end: 4.4 },
-            { text: "fast,", start: 4.4, end: 4.7 },
-          ]
-        },
-
-        {
-          start: 5.0, end: 7.5,
-          words: [
-            { text: "but", start: 5.1, end: 5.4 },
-            { text: "Zack", start: 5.4, end: 5.7 },
-            { text: "is", start: 5.7, end: 6.0 },
-            { text: "faster", start: 6.0, end: 6.3 },
-            { text: "on", start: 6.3, end: 6.6 },
-            { text: "the", start: 6.6, end: 6.9 },
-            { text: "new", start: 6.9, end: 7.2 },
-            { text: "bike.", start: 7.2, end: 7.5 },
-          ]
-        },
 
         {
           start: 8.0, end: 9.0,
@@ -180,32 +108,7 @@ export const StoryPage = () => {
       url: video5,
       title: "Section 5",
       subtitles: [
-        {
-          start: 0.0, end: 3.5,
-          words: [
-            { text: "Suddenly,", start: 0.1, end: 0.6 },
-            { text: "Zack", start: 0.6, end: 1.1 },
-            { text: "hits", start: 1.1, end: 1.5 },
-            { text: "a", start: 1.5, end: 1.7 },
-            { text: "rock", start: 1.7, end: 2.2 },
-            { text: "and", start: 2.2, end: 2.5 },
-            { text: "crashes", start: 2.5, end: 2.8 },
-            { text: "to", start: 2.8, end: 2.9 },
-            { text: "the", start: 2.9, end: 3.0 },
-            { text: "ground.", start: 3.0, end: 3.3 },
-          ]
-        },
 
-        {
-          start: 3.5, end: 5.5,
-          words: [
-            { text: "Leo", start: 3.6, end: 3.9 },
-            { text: "rushes", start: 3.9, end: 4.3 },
-            { text: "to", start: 4.3, end: 4.5 },
-            { text: "help", start: 4.5, end: 4.8 },
-            { text: "him.", start: 4.8, end: 5.0 },
-          ]
-        },
 
         {
           start: 5.9, end: 8.0,
@@ -245,25 +148,6 @@ export const StoryPage = () => {
         },
 
         {
-          start: 11.5, end: 16.5,
-          words: [
-            { text: "Leo", start: 11.4, end: 11.7 },
-            { text: "is", start: 11.7, end: 12.0 },
-            { text: "upset", start: 12.0, end: 12.3 },
-            { text: "about", start: 12.3, end: 12.6 },
-            { text: "his", start: 12.6, end: 12.9 },
-            { text: "new", start: 12.9, end: 13.2 },
-            { text: "bike,", start: 13.2, end: 13.5 },
-            { text: "but", start: 14.3, end: 14.6 },
-            { text: "he", start: 14.6, end: 14.9 },
-            { text: "decides", start: 14.9, end: 15.2 },
-            { text: "to", start: 15.2, end: 15.5 },
-            { text: "forgive", start: 15.5, end: 15.8 },
-            { text: "Zack.", start: 15.8, end: 16.1 },
-          ]
-        },
-
-        {
           start: 16.6, end: 19.6,
           words: [
             { text: "Good", start: 16.6, end: 16.9 },
@@ -286,51 +170,128 @@ export const StoryPage = () => {
 
       ]
     },
-    { url: img1, title: "Section 2 (Image)", subtitles: [] },
-    // {
-    //   url: video6,
-    //   title: "Section 6",
-    //   subtitles: [
-    //     {
-    //       start: 0, end: 0.5,
-    //       words: [
-    //         { text: "Sorry", start: 0, end: 0.3 },
-    //       ]
-    //     },
-    //     {
-    //       start: 0.5, end: 2.0,
-    //       words: [
-    //         { text: "Sorry", start: 0.6, end: 0.9 },
-    //       ]
-    //     },
-    //   ]
-    // },
-    // {
-    //   url: video7,
-    //   title: "Section 7",
-    //   subtitles: [
-    //     {
-    //       start: 0, end: 0.5,
-
-    //     },
-    //     {
-    //       start: 0.5, end: 2.0,
-
-    //     },
-    //   ]
-    // },
-
-
+    {
+      url: img1, title: "Section 2 (Image)", subtitles: []
+    },
   ];
 
+  const extraBubblesData = [
+    {
+      videoIndex: 1,
+      start: 0,
+      end: 2.3,
+      words: [
+        { text: "Leo", start: 0.1, end: 0.4 },
+        { text: "is", start: 0.4, end: 0.6 },
+        { text: "at", start: 0.6, end: 0.8 },
+        { text: "his", start: 0.8, end: 1.0 },
+        { text: "friend", start: 1.0, end: 1.3 },
+        { text: "Zack’s", start: 1.3, end: 1.5 },
+        { text: "house.", start: 1.5, end: 1.8 },
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 2.3,
+      end: 4.5,
+      words: [
+        { text: "Leo", start: 2.4, end: 2.6 },
+        { text: "shows", start: 2.6, end: 2.9 },
+        { text: "his", start: 2.9, end: 3.1 },
+        { text: "new", start: 3.1, end: 3.3 },
+        { text: "bike", start: 3.3, end: 3.5 },
+        { text: "to", start: 3.5, end: 3.7 },
+        { text: "Zack.", start: 3.7, end: 4.0 },
+      ]
+    },
 
-  // const cloudPositions = [
-  //   { bottom: '34.375rem', left: '32%', transform: 'translateX(-50%)' },
-  //   { top: '1%', left: '45%', transform: 'translateY(0)' },
-  //   { top: '10%', right: '65%', transform: 'translateX(0)', left: 'auto' },
-  //   { bottom: '85%', left: '30%', transform: 'translateX(-50%)' },
-  //   { top: '10%', left: '50%', transform: 'translateX(0)', isFlipped: true },
-  // ];
+    {
+      videoIndex: 3,
+      start: 0, end: 2.5,
+      words: [
+        { text: "Zack", start: 0.0, end: 0.3 },
+        { text: "and", start: 0.3, end: 0.6 },
+        { text: "Leo", start: 0.6, end: 0.9 },
+        { text: "race", start: 0.9, end: 1.2 },
+        { text: "on", start: 1.2, end: 1.5 },
+        { text: "the", start: 1.5, end: 1.8 },
+        { text: "bike", start: 1.8, end: 2.1 },
+        { text: "path.", start: 2.1, end: 2.4 },
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 3.5, end: 4.9,
+      words: [
+        { text: "The", start: 3.5, end: 3.8 },
+        { text: "boys", start: 3.8, end: 4.1 },
+        { text: "ride", start: 4.1, end: 4.4 },
+        { text: "fast,", start: 4.4, end: 4.7 },
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 5.0, end: 7.5,
+      words: [
+        { text: "but", start: 5.1, end: 5.4 },
+        { text: "Zack", start: 5.4, end: 5.7 },
+        { text: "is", start: 5.7, end: 6.0 },
+        { text: "faster", start: 6.0, end: 6.3 },
+        { text: "on", start: 6.3, end: 6.6 },
+        { text: "the", start: 6.6, end: 6.9 },
+        { text: "new", start: 6.9, end: 7.2 },
+        { text: "bike.", start: 7.2, end: 7.5 },
+      ]
+    },
+
+    {
+      videoIndex: 4,
+      start: 0, end: 3.5,
+      words: [
+        { text: "Suddenly,", start: 0.1, end: 0.6 },
+        { text: "Zack", start: 0.6, end: 1.1 },
+        { text: "hits", start: 1.1, end: 1.5 },
+        { text: "a", start: 1.5, end: 1.7 },
+        { text: "rock", start: 1.7, end: 2.2 },
+        { text: "and", start: 2.2, end: 2.5 },
+        { text: "crashes", start: 2.5, end: 2.8 },
+        { text: "to", start: 2.8, end: 2.9 },
+        { text: "the", start: 2.9, end: 3.0 },
+        { text: "ground.", start: 3.0, end: 3.3 },
+      ]
+    },
+    {
+      videoIndex: 4,
+      start: 3.5, end: 5.5,
+      words: [
+        { text: "Leo", start: 3.6, end: 3.9 },
+        { text: "rushes", start: 3.9, end: 4.3 },
+        { text: "to", start: 4.3, end: 4.5 },
+        { text: "help", start: 4.5, end: 4.8 },
+        { text: "him.", start: 4.8, end: 5.0 },
+      ]
+    },
+    {
+      videoIndex: 4,
+      start: 11.5, end: 16.5,
+      words: [
+        { text: "Leo", start: 11.4, end: 11.7 },
+        { text: "is", start: 11.7, end: 12.0 },
+        { text: "upset", start: 12.0, end: 12.3 },
+        { text: "about", start: 12.3, end: 12.6 },
+        { text: "his", start: 12.6, end: 12.9 },
+        { text: "new", start: 12.9, end: 13.2 },
+        { text: "bike,", start: 13.2, end: 13.5 },
+        { text: "but", start: 14.3, end: 14.6 },
+        { text: "he", start: 14.6, end: 14.9 },
+        { text: "decides", start: 14.9, end: 15.2 },
+        { text: "to", start: 15.2, end: 15.5 },
+        { text: "forgive", start: 15.5, end: 15.8 },
+        { text: "Zack.", start: 15.8, end: 16.1 },
+      ]
+    },
+  ];
+
 
 
   const cloudPositions = {
@@ -339,12 +300,12 @@ export const StoryPage = () => {
     1: [
       { top: '15%', left: '10%' },
       { top: '15%', left: '60%', isFlipped: true },
-      { top: '20%', left: '40%', isFlipped: true  },
+      { top: '20%', left: '40%', isFlipped: true },
     ],
 
     2: [
       { top: '10%', right: '40%' },
-      { top: '15%', left: '30%', isFlipped: true  }
+      { top: '15%', left: '30%', isFlipped: true }
     ],
 
     3: [
@@ -369,6 +330,20 @@ export const StoryPage = () => {
       // { top: '35%', left: '40%' },                    
     ],
   };
+
+
+
+
+  useEffect(() => {
+    const bubbleToShow = extraBubblesData.find(bubble =>
+      bubble.videoIndex === currentVideo &&
+      currentTime >= bubble.start &&
+      currentTime < bubble.end
+    );
+
+    setExtraBubble(bubbleToShow || null);
+
+  }, [currentVideo, currentTime]);
 
   const currentVideoData = videos[currentVideo];
   const activeSubtitleIndex = currentVideoData.subtitles.findIndex(
@@ -499,9 +474,9 @@ export const StoryPage = () => {
     if (currentVideo === videos.length - 1 && !currentVideoData.url.endsWith(".mp4")) {
       const timer = setTimeout(() => {
         ValidationAlert.storyEnd(() => {
-        navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
-      });
-      }, 500); 
+          navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+        });
+      }, 500);
 
       return () => clearTimeout(timer);
     }
@@ -646,6 +621,22 @@ export const StoryPage = () => {
               </div>
             </div>
           )}
+          {showCaption && extraBubble && extraBubble.words && (
+            <div
+              className="subtitle-container"
+              style={{ bottom: '0%', left: '50%', transform: 'translateX(-50%)', zIndex: 101 }}
+            >
+              <div className="extra-cloud animate__animated animate__fadeIn">
+                <p>
+                  {extraBubble.words.map((word, index) => {
+                    const isHighlighted = currentTime >= word.start && currentTime < word.end;
+                    return <span key={index} className={`word-span ${isHighlighted ? 'active-word' : ''}`}>{word.text}{' '}</span>;
+                  })}
+                </p>
+              </div>
+            </div>
+          )}
+
 
           <div className="video-overlay" />
           <div className="controls-container">
@@ -664,6 +655,10 @@ export const StoryPage = () => {
                   <button onClick={() => setShowSubtitles(!showSubtitles)} className="control-btn" title="Subtitles">
                     <Subtitles className="w-6 h-6" />
                     <span className="control-label">Subtitle</span>
+                  </button>
+                  <button onClick={() => setShowCaption(!showCaption)} className="control-btn" title="Caption">
+                    <MessageSquareText className="w-6 h-6" />
+                    <span className="control-label">Caption</span>
                   </button>
                   <div
                     className="volume-control"

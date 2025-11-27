@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles, Maximize2, Minimize2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles, Maximize2, Minimize2, MessageSquareText } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../../shared/StoryPage.css';
 import ValidationAlert from '../../shared/ValidationAlert';
@@ -11,7 +11,8 @@ import video4 from "./assets/4.mp4";
 import img1 from "./assets/nex.png";
 
 export const StoryPage = () => {
-  // --- تعريف الحالات (States) ---
+  const [showCaption, setShowCaption] = useState(true);
+  const [extraBubble, setExtraBubble] = useState(null);
   const [currentItemIndex, setCurrentItemIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -45,63 +46,6 @@ export const StoryPage = () => {
       subtitles: [
 
         {
-          start: 0.1, end: 2.7,
-          words: [
-            { text: "Cole", start: 0.1, end: 0.6 },
-            { text: "and", start: 0.6, end: 0.9 },
-            { text: "Max", start: 0.9, end: 1.2 },
-            { text: "were", start: 1.2, end: 1.6 },
-            { text: "ice", start: 1.6, end: 2.1 },
-            { text: "skating.", start: 2.1, end: 2.5 }
-          ]
-        },
-
-        {
-          start: 2.9, end: 5.6,
-          words: [
-            { text: "They", start: 3.3, end: 3.6 },
-            { text: "get", start: 3.6, end: 3.9 },
-            { text: "a", start: 3.9, end: 4.1 },
-            { text: "drink", start: 4.1, end: 4.3 },
-            { text: "and", start: 4.3, end: 4.5 },
-            { text: "snack", start: 4.5, end: 4.8 },
-            { text: "from", start: 4.8, end: 5.0 },
-            { text: "the", start: 5.0, end: 5.2 },
-            { text: "cafeteria.", start: 5.2, end: 5.5 }
-          ]
-        },
-
-        {
-          start: 5.6, end: 10.0,
-          words: [
-            { text: "When", start: 5.6, end: 5.9 },
-            { text: "they", start: 6.2, end: 6.5 },
-            { text: "finish,", start: 6.8, end: 7.1 },
-            { text: "Cole", start: 7.4, end: 7.7 },
-            { text: "puts", start: 8.0, end: 8.3 },
-            { text: "his", start: 8.3, end: 8.6 },
-            { text: "rubbish", start: 8.6, end: 8.9 },
-            { text: "in", start: 8.9, end: 9.2 },
-            { text: "the", start: 9.2, end: 9.5 },
-            { text: "bin,", start: 9.5, end: 9.8 }
-          ]
-        },
-
-        {
-          start: 10.0, end: 12.5,
-          words: [
-            { text: "but", start: 10.3, end: 10.5 },
-            { text: "Max", start: 10.5, end: 10.6 },
-            { text: "leaves", start: 10.6, end: 10.8 },
-            { text: "his", start: 10.8, end: 11.0 },
-            { text: "rubbish", start: 11.0, end: 11.2 },
-            { text: "on", start: 11.2, end: 11.4 },
-            { text: "the", start: 11.4, end: 11.6 },
-            { text: "table.", start: 11.6, end: 11.8 },
-          ]
-        },
-
-        {
           start: 13.0, end: 17.0,
           words: [
             { text: "Don’t", start: 14.0, end: 14.3 },
@@ -124,42 +68,6 @@ export const StoryPage = () => {
             { text: "job,", start: 18.7, end: 19.0 }
           ]
         },
-
-        {
-          start: 19.4, end: 22.5,
-          words: [
-            { text: "Cole", start: 19.5, end: 19.8 },
-            { text: "is", start: 19.8, end: 20.0 },
-            { text: "upset,", start: 20.0, end: 20.4 },
-
-            { text: "Max", start: 20.5, end: 20.8 },
-            { text: "is", start: 20.8, end: 21.1 },
-            { text: "not", start: 21.1, end: 21.4 },
-            { text: "following", start: 21.4, end: 21.7 },
-            { text: "the", start: 21.7, end: 21.9 },
-            { text: "rules.", start: 21.9, end: 22.2 }
-          ]
-        },
-
-        {
-          start: 22.8, end: 24.0,
-          words: [
-            { text: "Oh", start: 23.0, end: 23.3 },
-            { text: "dear", start: 23.3, end: 23.8 },
-          ]
-        },
-
-        {
-          start: 24.0, end: 26.0,
-          words: [
-            { text: "what", start: 24.2, end: 24.5 },
-            { text: "should", start: 24.5, end: 24.8 },
-            { text: "Cole", start: 24.8, end: 25.2 },
-            { text: "do?", start: 25.2, end: 25.5 },
-          ]
-        },
-
-
       ]
     },
 
@@ -195,26 +103,6 @@ export const StoryPage = () => {
         },
 
         {
-          start: 5.0, end: 6.5,
-          words: [
-            { text: "Max", start: 5.1, end: 5.4 },
-            { text: "feels", start: 5.4, end: 5.7 },
-            { text: "bad", start: 5.7, end: 6.0 },
-          ]
-        },
-
-        {
-          start: 6.5, end: 9.0,
-          words: [
-            { text: "he", start: 7.0, end: 7.2 },
-            { text: "knows", start: 7.2, end: 7.5 },
-            { text: "Cole", start: 7.5, end: 7.8 },
-            { text: "is", start: 7.8, end: 8.1 },
-            { text: "right.", start: 8.1, end: 8.5 }
-          ]
-        },
-
-        {
           start: 9.2, end: 12.5,
           words: [
             { text: "I’m", start: 9.5, end: 9.8 },
@@ -235,15 +123,6 @@ export const StoryPage = () => {
       url: video4,
       title: "Section 4",
       subtitles: [
-        {
-          start: 0.0, end: 1.5,
-          words: [
-            { text: "The", start: 0.1, end: 0.4 },
-            { text: "cleaner", start: 0.4, end: 0.7 },
-            { text: "looks", start: 0.7, end: 1.0 },
-            { text: "at Cole,", start: 1.0, end: 1.3 },
-          ]
-        },
 
         {
           start: 1.8, end: 5.0,
@@ -260,33 +139,6 @@ export const StoryPage = () => {
             { text: "away.", start: 4.4, end: 4.8 }
           ]
         },
-
-        {
-          start: 5.2, end: 8.5,
-          words: [
-            { text: "Max", start: 5.5, end: 5.8 },
-            { text: "puts", start: 5.8, end: 6.1 },
-            { text: "his", start: 6.1, end: 6.4 },
-            { text: "rubbish", start: 6.5, end: 6.8 },
-            { text: "in", start: 6.8, end: 7.1 },
-            { text: "the", start: 7.1, end: 7.4 },
-            { text: "bin.", start: 7.7, end: 8.0 }
-          ]
-        },
-
-        {
-          start: 9.0, end: 12.5,
-          words: [
-            { text: "Max", start: 9.5, end: 9.7 },
-            { text: "is", start: 9.7, end: 10.0 },
-            { text: "happy", start: 10.0, end: 10.3 },
-            { text: "that", start: 10.3, end: 10.6 },
-            { text: "he", start: 10.6, end: 11.0 },
-            { text: "follows", start: 11.0, end: 11.3 },
-            { text: "the", start: 11.3, end: 11.6 },
-            { text: "rules.", start: 11.6, end: 12.0 }
-          ]
-        },
       ]
     },
 
@@ -299,7 +151,165 @@ export const StoryPage = () => {
       ]
     }
   ];
+  const extraBubblesData = [
+    {
+      videoIndex: 1,
+      start: 0,
+      end: 2.7,
+      words: [
+        { text: "Cole", start: 0.1, end: 0.6 },
+        { text: "and", start: 0.6, end: 0.9 },
+        { text: "Max", start: 0.9, end: 1.2 },
+        { text: "were", start: 1.2, end: 1.6 },
+        { text: "ice", start: 1.6, end: 2.1 },
+        { text: "skating.", start: 2.1, end: 2.5 }
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 2.9,
+      end: 5.6,
+      words: [
+        { text: "They", start: 3.3, end: 3.6 },
+        { text: "get", start: 3.6, end: 3.9 },
+        { text: "a", start: 3.9, end: 4.1 },
+        { text: "drink", start: 4.1, end: 4.3 },
+        { text: "and", start: 4.3, end: 4.5 },
+        { text: "snack", start: 4.5, end: 4.8 },
+        { text: "from", start: 4.8, end: 5.0 },
+        { text: "the", start: 5.0, end: 5.2 },
+        { text: "cafeteria.", start: 5.2, end: 5.5 }
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 5.6,
+      end: 10.0,
+      words: [
+        { text: "When", start: 5.6, end: 5.9 },
+        { text: "they", start: 6.2, end: 6.5 },
+        { text: "finish,", start: 6.8, end: 7.1 },
+        { text: "Cole", start: 7.4, end: 7.7 },
+        { text: "puts", start: 8.0, end: 8.3 },
+        { text: "his", start: 8.3, end: 8.6 },
+        { text: "rubbish", start: 8.6, end: 8.9 },
+        { text: "in", start: 8.9, end: 9.2 },
+        { text: "the", start: 9.2, end: 9.5 },
+        { text: "bin,", start: 9.5, end: 9.8 }
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 10.0,
+      end: 12.5,
+      words: [
+        { text: "but", start: 10.3, end: 10.5 },
+        { text: "Max", start: 10.5, end: 10.6 },
+        { text: "leaves", start: 10.6, end: 10.8 },
+        { text: "his", start: 10.8, end: 11.0 },
+        { text: "rubbish", start: 11.0, end: 11.2 },
+        { text: "on", start: 11.2, end: 11.4 },
+        { text: "the", start: 11.4, end: 11.6 },
+        { text: "table.", start: 11.6, end: 11.8 },
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 19.4,
+      end: 22.5,
+      words: [
+        { text: "Cole", start: 19.5, end: 19.8 },
+        { text: "is", start: 19.8, end: 20.0 },
+        { text: "upset,", start: 20.0, end: 20.4 },
 
+        { text: "Max", start: 20.5, end: 20.8 },
+        { text: "is", start: 20.8, end: 21.1 },
+        { text: "not", start: 21.1, end: 21.4 },
+        { text: "following", start: 21.4, end: 21.7 },
+        { text: "the", start: 21.7, end: 21.9 },
+        { text: "rules.", start: 21.9, end: 22.2 }
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 22.8,
+      end: 24.0,
+      words: [
+        { text: "Oh", start: 23.0, end: 23.3 },
+        { text: "dear", start: 23.3, end: 23.8 },
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 24.0,
+      end: 26.0,
+      words: [
+        { text: "what", start: 24.2, end: 24.5 },
+        { text: "should", start: 24.5, end: 24.8 },
+        { text: "Cole", start: 24.8, end: 25.2 },
+        { text: "do?", start: 25.2, end: 25.5 },
+      ]
+    },
+
+    {
+      videoIndex: 2,
+      start: 5.0, end: 6.5,
+      words: [
+        { text: "Max", start: 5.1, end: 5.4 },
+        { text: "feels", start: 5.4, end: 5.7 },
+        { text: "bad", start: 5.7, end: 6.0 },
+      ]
+    },
+    {
+      videoIndex: 2,
+      start: 6.5, end: 9.0,
+      words: [
+        { text: "he", start: 7.0, end: 7.2 },
+        { text: "knows", start: 7.2, end: 7.5 },
+        { text: "Cole", start: 7.5, end: 7.8 },
+        { text: "is", start: 7.8, end: 8.1 },
+        { text: "right.", start: 8.1, end: 8.5 }
+      ]
+    },
+
+    {
+      videoIndex: 3,
+      start: 0, end: 1.5,
+      words: [
+        { text: "The", start: 0.1, end: 0.4 },
+        { text: "cleaner", start: 0.4, end: 0.7 },
+        { text: "looks", start: 0.7, end: 1.0 },
+        { text: "at Cole,", start: 1.0, end: 1.3 },
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 5.2, end: 8.5,
+      words: [
+        { text: "Max", start: 5.5, end: 5.8 },
+        { text: "puts", start: 5.8, end: 6.1 },
+        { text: "his", start: 6.1, end: 6.4 },
+        { text: "rubbish", start: 6.5, end: 6.8 },
+        { text: "in", start: 6.8, end: 7.1 },
+        { text: "the", start: 7.1, end: 7.4 },
+        { text: "bin.", start: 7.7, end: 8.0 }
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 9.0, end: 12.5,
+      words: [
+        { text: "Max", start: 9.5, end: 9.7 },
+        { text: "is", start: 9.7, end: 10.0 },
+        { text: "happy", start: 10.0, end: 10.3 },
+        { text: "that", start: 10.3, end: 10.6 },
+        { text: "he", start: 10.6, end: 11.0 },
+        { text: "follows", start: 11.0, end: 11.3 },
+        { text: "the", start: 11.3, end: 11.6 },
+        { text: "rules.", start: 11.6, end: 12.0 }
+      ]
+    },
+  ];
 
   const currentItem = mediaItems[currentItemIndex];
   const availableSpeeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
@@ -309,33 +319,34 @@ export const StoryPage = () => {
       // { bottom: '35rem', left: '50%', transform: 'translateX(-50%)', isFlipped: true }
     ],
     1: [
-      { top: '15%', left: '10%' },
-      { top: '10%', left: '45%', isFlipped: true },
-      { top: '15%', left: '15%' },
-      { top: '15%', left: '15%' },
-      { top: '15%', left: '15%' },
-      { top: '15%', left: '15%' },
-      { top: '15%', left: '15%' },
-      { top: '15%', left: '15%' },
-      { top: '15%', left: '15%' }
+      { top: '15%', left: '40%', isFlipped: true },
+      { top: '10%', left: '35%' },
     ],
     2: [
-      { top: '10%', right: '5%', isFlipped: true },
+      { top: '10%', right: '30%' },
       { top: '1%', left: '45%', isFlipped: true },
-      { top: '1%', left: '25%', isFlipped: true },
-      { top: '10%', right: '5%', isFlipped: true },
-      { top: '1%', left: '25%', isFlipped: true }
+      { top: '5%', left: '45%', isFlipped: true },
     ],
     3: [
-      { bottom: '80%', left: '28%' },
-      { top: '30%', left: '35%', isFlipped: true },
-      { bottom: '80%', left: '28%' },
-      { top: '30%', left: '35%', isFlipped: true }
+      { bottom: '65%', left: '60%', isFlipped: true },
     ],
     5: [
     ]
   };
 
+
+
+
+  useEffect(() => {
+    const bubbleToShow = extraBubblesData.find(bubble =>
+      bubble.videoIndex === currentItemIndex &&
+      currentTime >= bubble.start &&
+      currentTime < bubble.end
+    );
+
+    setExtraBubble(bubbleToShow || null);
+
+  }, [currentItemIndex, currentTime]);
   const activeSubtitleIndex = currentItem.type === 'video' ? currentItem.subtitles.findIndex(sub => currentTime >= sub.start && currentTime < sub.end) : 0;
   const activeSubtitle = activeSubtitleIndex !== -1 ? currentItem.subtitles[activeSubtitleIndex] : null;
   const activeCloudPosition = activeSubtitleIndex !== -1 ? cloudPositions[currentItemIndex]?.[activeSubtitleIndex] : null;
@@ -476,6 +487,23 @@ export const StoryPage = () => {
             </div>
           )}
 
+          {showCaption && extraBubble && extraBubble.words && (
+            <div
+              className="subtitle-container"
+              style={{ bottom: '0%', left: '50%', transform: 'translateX(-50%)', zIndex: 101 }}
+            >
+              <div className="extra-cloud animate__animated animate__fadeIn">
+                <p>
+                  {extraBubble.words.map((word, index) => {
+                    const isHighlighted = currentTime >= word.start && currentTime < word.end;
+                    return <span key={index} className={`word-span ${isHighlighted ? 'active-word' : ''}`}>{word.text}{' '}</span>;
+                  })}
+                </p>
+              </div>
+            </div>
+          )}
+
+
           {/* --- أزرار التحكم --- */}
           <div className="video-overlay" />
           <div className="controls-container">
@@ -488,7 +516,14 @@ export const StoryPage = () => {
               <div className="controls-row">
                 <div className="controls-group-left">
                   {/* --- 5. تعطيل الأزرار عند عرض الصورة --- */}
-                  <button onClick={() => setShowSubtitles(!showSubtitles)} className="control-btn" title="Subtitles"><Subtitles className="w-6 h-6" /></button>
+                  <button onClick={() => setShowSubtitles(!showSubtitles)} className="control-btn" title="Subtitles">
+                    <Subtitles className="w-6 h-6" />
+                    <span className="control-label">Subtitle</span>
+                  </button>
+                  <button onClick={() => setShowCaption(!showCaption)} className="control-btn" title="Caption">
+                    <MessageSquareText className="w-6 h-6" />
+                    <span className="control-label">Caption</span>
+                  </button>
                   <div className="volume-control" onMouseEnter={() => setShowVolumeSlider(true)} onMouseLeave={() => setShowVolumeSlider(false)}>
                     <button onClick={toggleMute} className="control-btn" disabled={currentItem.type === 'image'}>
                       {isMuted || volume === 0 ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}

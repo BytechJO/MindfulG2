@@ -49,49 +49,6 @@ export const StoryPage = () => {
       url: video2,
       title: "Section 2",
       subtitles: [
-        {
-          start: 0, end: 1.5,
-          words: [
-            { text: "Sue", start: 0.0, end: 0.7 },
-            { text: "is", start: 0.7, end: 1.0 },
-            { text: "in school.", start: 1.0, end: 1.4 },
-          ]
-        },
-        {
-          start: 1.7, end: 4.8,
-          words: [
-            { text: "The", start: 1.7, end: 2.0 },
-            { text: "teacher", start: 2.0, end: 2.3 },
-            { text: "asks", start: 2.3, end: 2.6 },
-            { text: "Sue", start: 2.6, end: 2.9 },
-            { text: "to", start: 2.9, end: 3.2 },
-            { text: "spell", start: 3.2, end: 3.5 },
-            { text: "‘apple’", start: 3.5, end: 3.8 },
-            { text: "for", start: 3.8, end: 4.1 },
-            { text: "the", start: 4.1, end: 4.4 },
-            { text: "class.", start: 4.4, end: 4.7 },
-          ]
-        },
-        {
-          start: 5.0, end: 7.5,
-          words: [
-            { text: "Sue", start: 5.0, end: 5.3 },
-            { text: "doesn’t", start: 5.3, end: 5.6 },
-            { text: "know", start: 5.6, end: 5.9 },
-            { text: "how", start: 5.9, end: 6.2 },
-            { text: "to", start: 6.2, end: 6.5 },
-            { text: "spell", start: 6.5, end: 6.8 },
-            { text: "‘apple’.", start: 6.8, end: 7.1 },
-          ]
-        },
-        {
-          start: 7.6, end: 9.0,
-          words: [
-            { text: "She", start: 7.6, end: 7.9 },
-            { text: "feels", start: 7.9, end: 8.4 },
-            { text: "worried.", start: 8.4, end: 8.9 },
-          ]
-        },
       ]
     },
 
@@ -99,42 +56,6 @@ export const StoryPage = () => {
       url: video3,
       title: "Section 3",
       subtitles: [
-        {
-          start: 0, end: 3.5,
-          words: [
-            { text: "The", start: 0.0, end: 0.3 },
-            { text: "teacher", start: 0.3, end: 0.6 },
-            { text: "asks", start: 0.6, end: 0.9 },
-            { text: "all", start: 0.9, end: 1.2 },
-            { text: "the", start: 1.2, end: 1.5 },
-            { text: "students", start: 1.5, end: 1.8 },
-            { text: "to", start: 1.8, end: 2.1 },
-            { text: "try", start: 2.1, end: 2.4 },
-            { text: "to spell", start: 2.4, end: 2.7 },
-            { text: "the word", start: 2.7, end: 3.0 },
-            { text: "‘apple’.", start: 3.0, end: 3.3 },
-          ]
-        },
-        {
-          start: 4.3, end: 6.4,
-          words: [
-            { text: "Sue", start: 4.5, end: 4.8 },
-            { text: "doesn’t", start: 4.8, end: 5.1 },
-            { text: "know", start: 5.1, end: 5.4 },
-            { text: "what", start: 5.4, end: 5.7 },
-            { text: "to", start: 5.7, end: 6.0 },
-            { text: "write.", start: 6.0, end: 6.3 },
-          ]
-        },
-        {
-          start: 7.2, end: 8.5,
-          words: [
-            { text: "She", start: 7.2, end: 7.5 },
-            { text: "doesn’t", start: 7.5, end: 7.8 },
-            { text: "want", start: 7.8, end: 8.1 },
-            { text: "to try.", start: 8.1, end: 8.4 },
-          ]
-        }
       ]
     },
 
@@ -142,19 +63,6 @@ export const StoryPage = () => {
       url: video4,
       title: "Section 4",
       subtitles: [
-        {
-          start: 0.0, end: 2.7,
-          words: [
-            { text: "The", start: 0.2, end: 0.5 },
-            { text: "teacher", start: 0.5, end: 0.8 },
-            { text: "asks", start: 0.8, end: 1.1 },
-            { text: "Sue", start: 1.1, end: 1.4 },
-            { text: "if", start: 1.4, end: 1.7 },
-            { text: "there", start: 1.7, end: 2.0 },
-            { text: "is a", start: 2.0, end: 2.3 },
-            { text: "problem.", start: 2.3, end: 2.6 },
-          ]
-        },
         {
           start: 2.9, end: 5.9,
           words: [
@@ -201,45 +109,7 @@ export const StoryPage = () => {
       url: video5,
       title: "Section 5",
       subtitles: [
-        {
-          start: 0, end: 5.8,
-          words: [
-            { text: "Sue", start: 0.1, end: 0.5 },
-            { text: "decides", start: 0.5, end: 0.9 },
-            { text: "to try.", start: 0.9, end: 1.3 },
-            { text: "The", start: 3.0, end: 3.3 },
-            { text: "teacher", start: 3.3, end: 3.6 },
-            { text: "reminds", start: 3.6, end: 4.0 },
-            { text: "her", start: 4.0, end: 4.2 },
-            { text: "to", start: 4.2, end: 4.5 },
-            { text: "sound", start: 4.5, end: 4.8 },
-            { text: "out", start: 4.8, end: 5.1 },
-            { text: "the", start: 5.1, end: 5.4 },
-            { text: "letters.", start: 5.4, end: 5.7 },
-          ]
-        },
-        {
-          start: 6.9, end: 9.5,
-          words: [
-            { text: "Sue", start: 7.0, end: 7.3 },
-            { text: "starts", start: 7.3, end: 7.6 },
-            { text: "to", start: 7.6, end: 7.9 },
-            { text: "write", start: 7.9, end: 8.2 },
-            { text: "each", start: 8.2, end: 8.5 },
-            { text: "letter.", start: 8.5, end: 8.8 },
-          ]
-        },
-        {
-          start: 10.5, end: 13.0,
-          words: [
-            { text: "Sue", start: 10.6, end: 10.9 },
-            { text: "and", start: 10.9, end: 11.2 },
-            { text: "the teacher", start: 11.2, end: 11.5 },
-            { text: "are", start: 11.5, end: 11.8 },
-            { text: "happy", start: 11.8, end: 12.1 },
-            { text: "she tried.", start: 12.1, end: 12.4 },
-          ]
-        },
+
       ]
     },
   ];
@@ -249,28 +119,15 @@ export const StoryPage = () => {
 
     ],
     1: [
-      { top: '15%', left: '20%', isFlipped: true },
-      { top: '15%', left: '15%', isFlipped: true },
-      { top: '15%', left: '15%' },
-      { top: '30%', left: '10%' },
     ],
     2: [
-      { top: '10%', right: '65%', left: 'auto' },
-      { top: '10%', left: '30%' },
-      { top: '15%', left: '30%' },
     ],
     3: [
       { bottom: '80%', left: '48%', transform: 'translateX(-50%)' },
       { top: '10%', left: '30%' },
-      { top: '10%', left: '30%' },
-      { top: '10%', left: '50%', isFlipped: true }
+      { top: '10%', left: '50%', isFlipped: true },
     ],
     4: [
-      { top: '10%', left: '25%', transform: 'translateX(-50%)' },
-      { top: '10%', left: '5%' },
-      { top: '10%', left: '5%' },
-      { bottom: '80%', left: '50%', isFlipped: true },
-      { bottom: '80%', left: '40%' }
     ]
   };
 
@@ -278,96 +135,148 @@ export const StoryPage = () => {
     {
       videoIndex: 1,
       start: 0,
-      end: 4.5,
+      end: 1.5,
       words: [
-        { text: "Kate", start: 0, end: 0.5 },
-        { text: "has", start: 0.6, end: 0.69 },
-        { text: "a", start: 0.69, end: 0.9 },
-        { text: "little", start: 0.9, end: 1.3 },
-        { text: "sister", start: 1.3, end: 1.8 },
-        { text: "named", start: 1.8, end: 2.2 },
-        { text: "May", start: 2.2, end: 2.6 },
-        { text: "Mum", start: 2.8, end: 3.1 },
-        { text: "helps", start: 3.1, end: 3.5 },
-        { text: "May", start: 3.5, end: 3.8 },
-        { text: "with", start: 3.8, end: 4.0 },
-        { text: "everything.", start: 4.0, end: 4.5 }
+        { text: "Sue", start: 0.0, end: 0.7 },
+        { text: "is", start: 0.7, end: 1.0 },
+        { text: "in school.", start: 1.0, end: 1.4 },
       ]
     },
     {
       videoIndex: 1,
-      start: 4.6,
-      end: 8,
+      start: 1.7,
+      end: 4.8,
       words: [
-        { text: "If", start: 5.0, end: 5.3 },
-        { text: "Kate", start: 5.3, end: 5.7 },
-        { text: "wants", start: 5.7, end: 6.1 },
-        { text: "help,", start: 6.1, end: 6.6 },
-        { text: "Mum", start: 6.6, end: 7.0 },
-        { text: "says.", start: 7.0, end: 7.9 }
+        { text: "The", start: 1.7, end: 2.0 },
+        { text: "teacher", start: 2.0, end: 2.3 },
+        { text: "asks", start: 2.3, end: 2.6 },
+        { text: "Sue", start: 2.6, end: 2.9 },
+        { text: "to", start: 2.9, end: 3.2 },
+        { text: "spell", start: 3.2, end: 3.5 },
+        { text: "‘apple’", start: 3.5, end: 3.8 },
+        { text: "for", start: 3.8, end: 4.1 },
+        { text: "the", start: 4.1, end: 4.4 },
+        { text: "class.", start: 4.4, end: 4.7 },
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 5.0, end: 7.5,
+      words: [
+        { text: "Sue", start: 5.0, end: 5.3 },
+        { text: "doesn’t", start: 5.3, end: 5.6 },
+        { text: "know", start: 5.6, end: 5.9 },
+        { text: "how", start: 5.9, end: 6.2 },
+        { text: "to", start: 6.2, end: 6.5 },
+        { text: "spell", start: 6.5, end: 6.8 },
+        { text: "‘apple’.", start: 6.8, end: 7.1 },
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 7.6, end: 9.0,
+      words: [
+        { text: "She", start: 7.6, end: 7.9 },
+        { text: "feels", start: 7.9, end: 8.4 },
+        { text: "worried.", start: 8.4, end: 8.9 },
+      ]
+    },
+
+    {
+      videoIndex: 2,
+      start: 0.0, end: 3.5,
+      words: [
+        { text: "The", start: 0.0, end: 0.3 },
+        { text: "teacher", start: 0.3, end: 0.6 },
+        { text: "asks", start: 0.6, end: 0.9 },
+        { text: "all", start: 0.9, end: 1.2 },
+        { text: "the", start: 1.2, end: 1.5 },
+        { text: "students", start: 1.5, end: 1.8 },
+        { text: "to", start: 1.8, end: 2.1 },
+        { text: "try", start: 2.1, end: 2.4 },
+        { text: "to spell", start: 2.4, end: 2.7 },
+        { text: "the word", start: 2.7, end: 3.0 },
+        { text: "‘apple’.", start: 3.0, end: 3.3 },
+      ]
+    },
+    {
+      videoIndex: 2,
+      start: 4.3, end: 6.4,
+      words: [
+        { text: "Sue", start: 4.5, end: 4.8 },
+        { text: "doesn’t", start: 4.8, end: 5.1 },
+        { text: "know", start: 5.1, end: 5.4 },
+        { text: "what", start: 5.4, end: 5.7 },
+        { text: "to", start: 5.7, end: 6.0 },
+        { text: "write.", start: 6.0, end: 6.3 },
+      ]
+    },
+    {
+      videoIndex: 2,
+      start: 7.2, end: 8.5,
+      words: [
+        { text: "She", start: 7.2, end: 7.5 },
+        { text: "doesn’t", start: 7.5, end: 7.8 },
+        { text: "want", start: 7.8, end: 8.1 },
+        { text: "to try.", start: 8.1, end: 8.4 },
       ]
     },
 
     {
       videoIndex: 3,
-      start: 0, end: 4,
+      start: 0.0, end: 2.7,
       words: [
-        { text: "Kate", start: 0.2, end: 0.5 },
-        { text: "looks", start: 0.5, end: 0.8 },
-        { text: "sad", start: 0.9, end: 1.3 },
-        { text: "Her", start: 1.3, end: 1.6 },
-        { text: "mum", start: 1.6, end: 2.4 },
-        { text: "asks", start: 2.4, end: 3 },
-        { text: "her", start: 3.1, end: 3.4 },
-        { text: "why", start: 3.5, end: 4 },
-      ]
-    },
-    {
-      videoIndex: 3,
-      start: 4.0, end: 7.0,
-      words: [
-        { text: "Kate", start: 4.1, end: 4.6 },
-        { text: "tells", start: 4.6, end: 5.0 },
-        { text: "her", start: 5.0, end: 5.4 },
-        { text: "mum", start: 5.4, end: 5.9 },
-        { text: "how", start: 5.9, end: 5.9 },
-        { text: "she", start: 5.9, end: 6.4 },
-        { text: "feels.", start: 6.4, end: 7.0 },
-      ]
-    },
-    {
-      videoIndex: 3,
-      start: 7.0, end: 8.0,
-      words: [
-        { text: "she", start: 7.1, end: 7.4 },
-        { text: "says", start: 7.4, end: 8.0 },
+        { text: "The", start: 0.2, end: 0.5 },
+        { text: "teacher", start: 0.5, end: 0.8 },
+        { text: "asks", start: 0.8, end: 1.1 },
+        { text: "Sue", start: 1.1, end: 1.4 },
+        { text: "if", start: 1.4, end: 1.7 },
+        { text: "there", start: 1.7, end: 2.0 },
+        { text: "is a", start: 2.0, end: 2.3 },
+        { text: "problem.", start: 2.3, end: 2.6 },
       ]
     },
 
     {
-      videoIndex: 7,
-      start: 0, end: 2,
+      videoIndex: 4,
+      start: 0, end: 5.8,
       words: [
-        { text: "Kate", start: 0, end: 0.3 },
-        { text: "and", start: 0.3, end: 0.5 },
-        { text: "Mum", start: 0.5, end: 0.8 },
-        { text: "bake", start: 0.8, end: 1.2 },
-        { text: "a chocolate", start: 1.2, end: 1.6 },
-        { text: "cake.", start: 1.6, end: 1.9 },
+        { text: "Sue", start: 0.1, end: 0.5 },
+        { text: "decides", start: 0.5, end: 0.9 },
+        { text: "to try.", start: 0.9, end: 1.3 },
+        { text: "The", start: 3.0, end: 3.3 },
+        { text: "teacher", start: 3.3, end: 3.6 },
+        { text: "reminds", start: 3.6, end: 4.0 },
+        { text: "her", start: 4.0, end: 4.2 },
+        { text: "to", start: 4.2, end: 4.5 },
+        { text: "sound", start: 4.5, end: 4.8 },
+        { text: "out", start: 4.8, end: 5.1 },
+        { text: "the", start: 5.1, end: 5.4 },
+        { text: "letters.", start: 5.4, end: 5.7 },
       ]
     },
     {
-      videoIndex: 7,
-      start: 9.0, end: 12.0,
+      videoIndex: 4,
+      start: 6.9, end: 9.5,
       words: [
-        { text: "Kate", start: 9.1, end: 9.4 },
-        { text: "understands", start: 9.4, end: 9.7 },
-        { text: "and", start: 9.7, end: 10.0 },
-        { text: "gives", start: 10.0, end: 10.3 },
-        { text: "her", start: 10.3, end: 10.6 },
-        { text: "mum", start: 10.6, end: 10.9 },
-        { text: "a", start: 10.9, end: 11.0 },
-        { text: "hug.", start: 11.1, end: 11.5 },
+        { text: "Sue", start: 7.0, end: 7.3 },
+        { text: "starts", start: 7.3, end: 7.6 },
+        { text: "to", start: 7.6, end: 7.9 },
+        { text: "write", start: 7.9, end: 8.2 },
+        { text: "each", start: 8.2, end: 8.5 },
+        { text: "letter.", start: 8.5, end: 8.8 },
+      ]
+    },
+    {
+      videoIndex: 4,
+      start: 10.5, end: 13.0,
+      words: [
+        { text: "Sue", start: 10.6, end: 10.9 },
+        { text: "and", start: 10.9, end: 11.2 },
+        { text: "the teacher", start: 11.2, end: 11.5 },
+        { text: "are", start: 11.5, end: 11.8 },
+        { text: "happy", start: 11.8, end: 12.1 },
+        { text: "she tried.", start: 12.1, end: 12.4 },
       ]
     },
   ];
@@ -708,7 +617,7 @@ export const StoryPage = () => {
                     <MessageSquareText className="w-6 h-6" />
                     <span className="control-label">Caption</span>
                   </button>
-                  
+
                   <div
                     className="volume-control"
                     onMouseEnter={() => setShowVolumeSlider(true)}

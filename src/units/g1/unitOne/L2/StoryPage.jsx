@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles, Maximize2, Minimize2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles, Maximize2, Minimize2, MessageSquareText } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../../shared/StoryPage.css';
 import ValidationAlert from '../../shared/ValidationAlert';
@@ -14,6 +14,9 @@ import img from "./assets/nex.png";
 import questionGif from './assets/question.gif';
 
 export const StoryPage = () => {
+  // 1
+  const [extraBubble, setExtraBubble] = useState(null);
+  // e
   const [currentVideo, setCurrentVideo] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -30,6 +33,7 @@ export const StoryPage = () => {
   const [volume, setVolume] = useState(1);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [showSubtitles, setShowSubtitles] = useState(true);
+  const [showCaption, setShowCaption] = useState(true);
   const [showSpeedMenu, setShowSpeedMenu] = useState(false);
   const availableSpeeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -42,15 +46,6 @@ export const StoryPage = () => {
       url: video1,
       title: "Section 1",
       subtitles: [
-        // {
-        //   start: 0, end: 3.12,
-        //   words: [
-        //     { text: "Nessie", start: 0.5, end: 1.2 },
-        //     { text: "Doesn’t", start: 1.2, end: 1.7 },
-        //     { text: "Like", start: 1.7, end: 2.1 },
-        //     { text: "Tag", start: 2.1, end: 2.5 },
-        //   ]
-        // },
       ]
     },
 
@@ -58,53 +53,6 @@ export const StoryPage = () => {
       url: video2,
       title: "Section 2",
       subtitles: [
-        {
-          start: 0, end: 2.9,
-          words: [
-            { text: "Henry", start: 0.0, end: 0.3 },
-            { text: "takes", start: 0.3, end: 0.6 },
-            { text: "a maths", start: 0.6, end: 0.9 },
-            { text: "test", start: 0.9, end: 1.2 },
-            { text: "in school.", start: 1.2, end: 1.5 },
-          ]
-        },
-        {
-          start: 2.9, end: 6.5,
-          words: [
-            { text: "He", start: 3.0, end: 3.3 },
-            { text: "is worried", start: 3.3, end: 3.6 },
-            { text: "he", start: 3.6, end: 3.9 },
-            { text: "will", start: 3.9, end: 4.2 },
-            { text: "take", start: 4.2, end: 4.5 },
-            { text: "too", start: 4.5, end: 4.8 },
-            { text: "long", start: 4.8, end: 5.1 },
-            { text: "to", start: 5.1, end: 5.4 },
-            { text: "finish", start: 5.4, end: 5.7 },
-            { text: "the", start: 5.7, end: 6.0 },
-            { text: "test.", start: 6.0, end: 6.3 },
-          ]
-        },
-        {
-          start: 6.5, end: 12.0,
-          words: [
-            { text: "If", start: 6.7, end: 7.0 },
-            { text: "he", start: 7.0, end: 7.3 },
-            { text: "takes", start: 7.3, end: 7.6 },
-            { text: "too", start: 7.6, end: 7.9 },
-            { text: "long,", start: 7.9, end: 8.2 },
-            { text: "he", start: 8.2, end: 8.5 },
-            { text: "will", start: 8.5, end: 8.8 },
-            { text: "not", start: 8.8, end: 9.1 },
-            { text: "be", start: 9.1, end: 9.4 },
-            { text: "able", start: 9.4, end: 9.7 },
-            { text: "to go,", start: 9.7, end: 10.0 },
-            { text: "out", start: 10.0, end: 10.3 },
-            { text: "and", start: 10.3, end: 10.6 },
-            { text: "play", start: 10.6, end: 10.9 },
-            { text: "during", start: 10.9, end: 11.2 },
-            { text: "break.", start: 11.2, end: 11.5 },
-          ]
-        },
       ]
     },
 
@@ -112,37 +60,6 @@ export const StoryPage = () => {
       url: video3,
       title: "Section 3",
       subtitles: [
-        {
-          start: 0, end: 3.5,
-          words: [
-            { text: "Henry", start: 0.0, end: 0.3 },
-            { text: "thinks", start: 0.3, end: 0.6 },
-            { text: "about", start: 0.6, end: 0.9 },
-            { text: "how", start: 0.9, end: 1.2 },
-            { text: "he", start: 1.2, end: 1.5 },
-            { text: "can", start: 1.5, end: 1.8 },
-            { text: "get", start: 1.8, end: 2.0 },
-            { text: "his", start: 2.0, end: 2.3 },
-            { text: "test", start: 2.3, end: 2.5 },
-            { text: "finished", start: 2.5, end: 2.8 },
-            { text: "on time.", start: 2.8, end: 3.3 },
-          ]
-        },
-        {
-          start: 3.5, end: 9.0,
-          words: [
-            { text: "He looks", start: 3.6, end: 3.9 },
-            { text: "around", start: 3.9, end: 4.2 },
-            { text: "and", start: 4.2, end: 4.4 },
-            { text: "sees", start: 4.4, end: 4.7 },
-            { text: "that", start: 4.7, end: 5.0 },
-            { text: "his", start: 5.0, end: 5.3 },
-            { text: "friend", start: 5.3, end: 5.6 },
-            { text: "is", start: 5.6, end: 5.9 },
-            { text: "almost", start: 5.9, end: 6.2 },
-            { text: "finished.", start: 6.2, end: 6.5 },
-          ]
-        },
       ]
     },
 
@@ -150,85 +67,6 @@ export const StoryPage = () => {
       url: video4,
       title: "Section 4",
       subtitles: [
-
-        {
-          start: 0, end: 2.9,
-          words: [
-            { text: "Henry", start: 0.1, end: 0.6 },
-            { text: "thinks", start: 0.6, end: 1.0 },
-            { text: "that", start: 1.0, end: 1.2 },
-            { text: "if", start: 1.2, end: 1.4 },
-            { text: "he", start: 1.4, end: 1.6 },
-            { text: "copies", start: 1.6, end: 1.9 },
-            { text: "his", start: 1.9, end: 2.2 },
-            { text: "friend’s", start: 2.2, end: 2.5 },
-            { text: "answers,", start: 2.5, end: 2.8 },
-          ]
-        },
-
-        {
-          start: 3.0, end: 4.9,
-          words: [
-            { text: "he", start: 3.0, end: 3.3 },
-            { text: "can", start: 3.3, end: 3.6 },
-            { text: "finish", start: 3.6, end: 3.9 },
-            { text: "the", start: 3.9, end: 4.1 },
-            { text: "test", start: 4.1, end: 4.4 },
-            { text: "faster.", start: 4.4, end: 4.8 },
-          ]
-        },
-
-        {
-          start: 5.0, end: 6.0,
-          words: [
-            { text: "Oh", start: 5.0, end: 5.3 },
-            { text: "dear!", start: 5.3, end: 5.6 },
-          ]
-        },
-
-        {
-          start: 6.0, end: 7.5,
-          words: [
-            { text: "What", start: 6.0, end: 6.3 },
-            { text: "will", start: 6.3, end: 6.6 },
-            { text: "Henry", start: 6.6, end: 6.9 },
-            { text: "do?", start: 6.9, end: 7.2 },
-          ]
-        },
-
-        {
-          start: 9.0, end: 12.5,
-          words: [
-            { text: "Henry", start: 9.0, end: 9.3 },
-            { text: "remembers", start: 9.3, end: 9.6 },
-            { text: "that", start: 9.6, end: 9.9 },
-            { text: "if", start: 9.9, end: 10.2 },
-            { text: "he", start: 10.2, end: 10.5 },
-            { text: "copies,", start: 10.5, end: 10.8 },
-            { text: "he", start: 10.8, end: 11.1 },
-            { text: "will", start: 11.1, end: 11.4 },
-            { text: "not", start: 11.4, end: 11.7 },
-            { text: "be", start: 11.7, end: 12.0 },
-            { text: "learning", start: 12.0, end: 12.3 },
-          ]
-        },
-
-        {
-          start: 12.5, end: 17.0,
-          words: [
-            { text: "and", start: 13.3, end: 13.6 },
-            { text: "the", start: 13.6, end: 13.9 },
-            { text: "teacher", start: 13.9, end: 14.2 },
-            { text: "will", start: 14.2, end: 14.5 },
-            { text: "not", start: 14.5, end: 14.8 },
-            { text: "know", start: 14.8, end: 15.1 },
-            { text: "if", start: 15.1, end: 15.4 },
-            { text: "he", start: 15.4, end: 15.7 },
-            { text: "understands", start: 15.7, end: 16.0 },
-            { text: "the", start: 16.0, end: 16.3 },
-            { text: "work.", start: 16.3, end: 16.6 },
-          ]
-        },
       ]
     },
 
@@ -236,56 +74,6 @@ export const StoryPage = () => {
       url: video5,
       title: "Section 5",
       subtitles: [
-        {
-          start: 0, end: 3.1,
-          words: [
-            { text: "Henry", start: 0.1, end: 0.5 },
-            { text: "decides", start: 0.5, end: 0.9 },
-            // { text: "he", start: 0.9, end: 1.3 },
-            // { text: "wants", start: 1.3, end: 1.5 },
-            { text: "to", start: 0.9, end: 1.2 },
-            { text: "get", start: 1.2, end: 1.5 },
-            { text: "a good", start: 1.5, end: 1.8 },
-            { text: "grade", start: 1.8, end: 2.1 },
-            { text: "on", start: 2.1, end: 2.4 },
-            { text: "his", start: 2.4, end: 2.7 },
-            { text: "own.", start: 2.7, end: 3.0 },
-          ]
-        },
-        {
-          start: 4.0, end: 6.0,
-          words: [
-            { text: "He", start: 4.5, end: 4.8 },
-            { text: "works", start: 4.8, end: 5.4 },
-            { text: "hard", start: 5.4, end: 5.7 },
-          ]
-        },
-        {
-          start: 6.0, end: 7.9,
-          words: [
-            { text: "and", start: 6.0, end: 6.3 },
-            { text: "finishes", start: 6.3, end: 6.6 },
-            { text: "the", start: 6.6, end: 6.9 },
-            { text: "test", start: 6.9, end: 7.2 },
-            { text: "on", start: 7.2, end: 7.5 },
-            { text: "time.", start: 7.5, end: 7.8 },
-          ]
-        },
-        {
-          start: 8.0, end: 12.0,
-          words: [
-            { text: "Henry", start: 9.0, end: 9.3 },
-            { text: "is", start: 9.3, end: 9.5 },
-            { text: "happy", start: 9.5, end: 9.9 },
-            { text: "that", start: 9.9, end: 10.2 },
-            { text: "he", start: 10.2, end: 10.4 },
-            { text: "did", start: 10.4, end: 10.6 },
-            { text: "the", start: 10.6, end: 10.8 },
-            { text: "right", start: 10.8, end: 11.1 },
-            { text: "thing.", start: 11.1, end: 11.4 },
-          ]
-        },
-
 
         {
           start: 12.0, end: 13.0,
@@ -310,7 +98,6 @@ export const StoryPage = () => {
       url: img,
       title: "img",
       subtitles: [
-
       ]
     },
 
@@ -346,6 +133,245 @@ export const StoryPage = () => {
     ]
   };
 
+  const extraBubblesData = [
+    {
+      videoIndex: 1,
+      start: 0,
+      end: 2.5,
+      words: [
+        { text: "Henry", start: 0.0, end: 0.3 },
+        { text: "takes", start: 0.3, end: 0.6 },
+        { text: "a maths", start: 0.6, end: 0.9 },
+        { text: "test", start: 0.9, end: 1.2 },
+        { text: "in school.", start: 1.2, end: 1.5 },
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 2.9,
+      end: 6.5,
+      words: [
+        { text: "He", start: 3.0, end: 3.3 },
+        { text: "is worried", start: 3.3, end: 3.6 },
+        { text: "he", start: 3.6, end: 3.9 },
+        { text: "will", start: 3.9, end: 4.2 },
+        { text: "take", start: 4.2, end: 4.5 },
+        { text: "too", start: 4.5, end: 4.8 },
+        { text: "long", start: 4.8, end: 5.1 },
+        { text: "to", start: 5.1, end: 5.4 },
+        { text: "finish", start: 5.4, end: 5.7 },
+        { text: "the", start: 5.7, end: 6.0 },
+        { text: "test.", start: 6.0, end: 6.3 },
+      ]
+    },
+    {
+      videoIndex: 1,
+      start: 6.5,
+      end: 12.0,
+      words: [
+        { text: "If", start: 6.7, end: 7.0 },
+        { text: "he", start: 7.0, end: 7.3 },
+        { text: "takes", start: 7.3, end: 7.6 },
+        { text: "too", start: 7.6, end: 7.9 },
+        { text: "long,", start: 7.9, end: 8.2 },
+        { text: "he", start: 8.2, end: 8.5 },
+        { text: "will", start: 8.5, end: 8.8 },
+        { text: "not", start: 8.8, end: 9.1 },
+        { text: "be", start: 9.1, end: 9.4 },
+        { text: "able", start: 9.4, end: 9.7 },
+        { text: "to go,", start: 9.7, end: 10.0 },
+        { text: "out", start: 10.0, end: 10.3 },
+        { text: "and", start: 10.3, end: 10.6 },
+        { text: "play", start: 10.6, end: 10.9 },
+        { text: "during", start: 10.9, end: 11.2 },
+        { text: "break.", start: 11.2, end: 11.5 },
+      ]
+    },
+
+    {
+      videoIndex: 2,
+      start: 0, end: 3.5,
+      words: [
+        { text: "Henry", start: 0.0, end: 0.3 },
+        { text: "thinks", start: 0.3, end: 0.6 },
+        { text: "about", start: 0.6, end: 0.9 },
+        { text: "how", start: 0.9, end: 1.2 },
+        { text: "he", start: 1.2, end: 1.5 },
+        { text: "can", start: 1.5, end: 1.8 },
+        { text: "get", start: 1.8, end: 2.0 },
+        { text: "his", start: 2.0, end: 2.3 },
+        { text: "test", start: 2.3, end: 2.5 },
+        { text: "finished", start: 2.5, end: 2.8 },
+        { text: "on time.", start: 2.8, end: 3.3 },
+      ]
+    },
+    {
+      videoIndex: 2,
+      start: 3.5, end: 9.0,
+      words: [
+        { text: "He looks", start: 3.6, end: 3.9 },
+        { text: "around", start: 3.9, end: 4.2 },
+        { text: "and", start: 4.2, end: 4.4 },
+        { text: "sees", start: 4.4, end: 4.7 },
+        { text: "that", start: 4.7, end: 5.0 },
+        { text: "his", start: 5.0, end: 5.3 },
+        { text: "friend", start: 5.3, end: 5.6 },
+        { text: "is", start: 5.6, end: 5.9 },
+        { text: "almost", start: 5.9, end: 6.2 },
+        { text: "finished.", start: 6.2, end: 6.5 },
+      ]
+    },
+
+    {
+      videoIndex: 3,
+      start: 0, end: 2.9,
+      words: [
+        { text: "Henry", start: 0.1, end: 0.6 },
+        { text: "thinks", start: 0.6, end: 1.0 },
+        { text: "that", start: 1.0, end: 1.2 },
+        { text: "if", start: 1.2, end: 1.4 },
+        { text: "he", start: 1.4, end: 1.6 },
+        { text: "copies", start: 1.6, end: 1.9 },
+        { text: "his", start: 1.9, end: 2.2 },
+        { text: "friend’s", start: 2.2, end: 2.5 },
+        { text: "answers,", start: 2.5, end: 2.8 },
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 3.0, end: 4.9,
+      words: [
+        { text: "he", start: 3.0, end: 3.3 },
+        { text: "can", start: 3.3, end: 3.6 },
+        { text: "finish", start: 3.6, end: 3.9 },
+        { text: "the", start: 3.9, end: 4.1 },
+        { text: "test", start: 4.1, end: 4.4 },
+        { text: "faster.", start: 4.4, end: 4.8 },
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 5.0, end: 6.0,
+      words: [
+        { text: "Oh", start: 5.0, end: 5.3 },
+        { text: "dear!", start: 5.3, end: 5.6 },
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 6.0, end: 7.5,
+      words: [
+        { text: "What", start: 6.0, end: 6.3 },
+        { text: "will", start: 6.3, end: 6.6 },
+        { text: "Henry", start: 6.6, end: 6.9 },
+        { text: "do?", start: 6.9, end: 7.2 },
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 9.0, end: 12.5,
+      words: [
+        { text: "Henry", start: 9.0, end: 9.3 },
+        { text: "remembers", start: 9.3, end: 9.6 },
+        { text: "that", start: 9.6, end: 9.9 },
+        { text: "if", start: 9.9, end: 10.2 },
+        { text: "he", start: 10.2, end: 10.5 },
+        { text: "copies,", start: 10.5, end: 10.8 },
+        { text: "he", start: 10.8, end: 11.1 },
+        { text: "will", start: 11.1, end: 11.4 },
+        { text: "not", start: 11.4, end: 11.7 },
+        { text: "be", start: 11.7, end: 12.0 },
+        { text: "learning", start: 12.0, end: 12.3 },
+      ]
+    },
+    {
+      videoIndex: 3,
+      start: 12.5, end: 17.0,
+      words: [
+        { text: "and", start: 13.3, end: 13.6 },
+        { text: "the", start: 13.6, end: 13.9 },
+        { text: "teacher", start: 13.9, end: 14.2 },
+        { text: "will", start: 14.2, end: 14.5 },
+        { text: "not", start: 14.5, end: 14.8 },
+        { text: "know", start: 14.8, end: 15.1 },
+        { text: "if", start: 15.1, end: 15.4 },
+        { text: "he", start: 15.4, end: 15.7 },
+        { text: "understands", start: 15.7, end: 16.0 },
+        { text: "the", start: 16.0, end: 16.3 },
+        { text: "work.", start: 16.3, end: 16.6 },
+      ]
+    },
+
+    {
+      videoIndex: 4,
+      start: 0.0, end: 3.1,
+      words: [
+        { text: "Henry", start: 0.1, end: 0.5 },
+        { text: "decides", start: 0.5, end: 0.9 },
+        { text: "to", start: 0.9, end: 1.2 },
+        { text: "get", start: 1.2, end: 1.5 },
+        { text: "a good", start: 1.5, end: 1.8 },
+        { text: "grade", start: 1.8, end: 2.1 },
+        { text: "on", start: 2.1, end: 2.4 },
+        { text: "his", start: 2.4, end: 2.7 },
+        { text: "own.", start: 2.7, end: 3.0 },
+      ]
+    },
+    {
+      videoIndex: 4,
+      start: 4.0, end: 6.0,
+      words: [
+        { text: "He", start: 4.5, end: 4.8 },
+        { text: "works", start: 4.8, end: 5.4 },
+        { text: "hard", start: 5.4, end: 5.7 },
+      ]
+    },
+    {
+      videoIndex: 4,
+      start: 6.0, end: 7.9,
+      words: [
+        { text: "and", start: 6.0, end: 6.3 },
+        { text: "finishes", start: 6.3, end: 6.6 },
+        { text: "the", start: 6.6, end: 6.9 },
+        { text: "test", start: 6.9, end: 7.2 },
+        { text: "on", start: 7.2, end: 7.5 },
+        { text: "time.", start: 7.5, end: 7.8 },
+      ]
+    },
+    {
+      videoIndex: 4,
+      start: 8.0, end: 12.0,
+      words: [
+        { text: "Henry", start: 9.0, end: 9.3 },
+        { text: "is", start: 9.3, end: 9.5 },
+        { text: "happy", start: 9.5, end: 9.9 },
+        { text: "that", start: 9.9, end: 10.2 },
+        { text: "he", start: 10.2, end: 10.4 },
+        { text: "did", start: 10.4, end: 10.6 },
+        { text: "the", start: 10.6, end: 10.8 },
+        { text: "right", start: 10.8, end: 11.1 },
+        { text: "thing.", start: 11.1, end: 11.4 },
+      ]
+    },
+    {
+      videoIndex: 4,
+      start: 8.0, end: 12.0,
+      words: [
+        { text: "Henry", start: 9.0, end: 9.3 },
+        { text: "is", start: 9.3, end: 9.5 },
+        { text: "happy", start: 9.5, end: 9.9 },
+        { text: "that", start: 9.9, end: 10.2 },
+        { text: "he", start: 10.2, end: 10.4 },
+        { text: "did", start: 10.4, end: 10.6 },
+        { text: "the", start: 10.6, end: 10.8 },
+        { text: "right", start: 10.8, end: 11.1 },
+        { text: "thing.", start: 11.1, end: 11.4 },
+      ]
+    },
+  ];
+
+
+
   const currentVideoData = videos[currentVideo];
   const activeSubtitleIndex = currentVideoData.subtitles.findIndex(
     sub => currentTime >= sub.start && currentTime < sub.end
@@ -368,6 +394,17 @@ export const StoryPage = () => {
       document.removeEventListener('fullscreenchange', handleFullscreenChange);
     };
   }, []);
+
+  useEffect(() => {
+    const bubbleToShow = extraBubblesData.find(bubble =>
+      bubble.videoIndex === currentVideo &&
+      currentTime >= bubble.start &&
+      currentTime < bubble.end
+    );
+
+    setExtraBubble(bubbleToShow || null);
+
+  }, [currentVideo, currentTime]);
 
   useEffect(() => {
     const nextVideoIndex = currentVideo + 1;
@@ -445,13 +482,13 @@ export const StoryPage = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    setIsLoading(true); 
-    video.load(); 
+    setIsLoading(true);
+    video.load();
     setCurrentTime(0);
     setShowBubble(true);
 
     const handleCanPlay = () => {
-      setIsLoading(false); 
+      setIsLoading(false);
       if (!showBanner) video.play().catch(() => { });
     };
 
@@ -480,35 +517,35 @@ export const StoryPage = () => {
   };
 
   const handleEnded = useCallback(() => {
-  const currentData = videos[currentVideo];
+    const currentData = videos[currentVideo];
 
-  const isImage = !currentData.url.endsWith('.mp4');
+    const isImage = !currentData.url.endsWith('.mp4');
 
-  if (isImage) {
-    ValidationAlert.storyEnd(() => {
-        navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
-      });
-  } else if (!isImage) {
-    setShowBanner(false);
-    setCurrentVideo(prev => prev + 1);
-  }
-}, [currentVideo, videos, navigate, unitId, lessonId]);
-
-useEffect(() => {
-  const currentData = videos[currentVideo];
-  const isImage = !currentData.url.endsWith('.mp4');
-
-  if (isImage) {
-    // عرض SweetAlert بعد ثانية واحدة (أو فوراً)
-    const timer = setTimeout(() => {
+    if (isImage) {
       ValidationAlert.storyEnd(() => {
         navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
       });
-    }, 1000);
+    } else if (!isImage) {
+      setShowBanner(false);
+      setCurrentVideo(prev => prev + 1);
+    }
+  }, [currentVideo, videos, navigate, unitId, lessonId]);
 
-    return () => clearTimeout(timer);
-  }
-}, [currentVideo, navigate]);
+  useEffect(() => {
+    const currentData = videos[currentVideo];
+    const isImage = !currentData.url.endsWith('.mp4');
+
+    if (isImage) {
+      // عرض SweetAlert بعد ثانية واحدة (أو فوراً)
+      const timer = setTimeout(() => {
+        ValidationAlert.storyEnd(() => {
+          navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+        });
+      }, 1000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [currentVideo, navigate]);
 
 
   const toggleWordSelection = (wordText) => {
@@ -652,7 +689,24 @@ useEffect(() => {
                     );
                   })}
                 </p>
-                <button className="close" onClick={() => setShowBubble(false)}>×</button>
+                {/* <button className="close" onClick={() => setShowBubble(false)}>×</button> */}
+              </div>
+            </div>
+          )}
+
+          {/* 4 */}
+          {showCaption && extraBubble && extraBubble.words && (
+            <div
+              className="subtitle-container"
+              style={{ bottom: '0%', left: '50%', transform: 'translateX(-50%)', zIndex: 101 }}
+            >
+              <div className="extra-cloud animate__animated animate__fadeIn">
+                <p>
+                  {extraBubble.words.map((word, index) => {
+                    const isHighlighted = currentTime >= word.start && currentTime < word.end;
+                    return <span key={index} className={`word-span ${isHighlighted ? 'active-word' : ''}`}>{word.text}{' '}</span>;
+                  })}
+                </p>
               </div>
             </div>
           )}
@@ -674,6 +728,10 @@ useEffect(() => {
                   <button onClick={() => setShowSubtitles(!showSubtitles)} className="control-btn" title="Subtitles">
                     <Subtitles className="w-6 h-6" />
                     <span className="control-label">Subtitle</span>
+                  </button>
+                  <button onClick={() => setShowCaption(!showCaption)} className="control-btn" title="Caption">
+                    <MessageSquareText className="w-6 h-6" />
+                    <span className="control-label">Caption</span>
                   </button>
                   <div
                     className="volume-control"
