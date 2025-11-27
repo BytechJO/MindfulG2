@@ -74,7 +74,53 @@ export const StoryPage = () => {
       url: video5,
       title: "Section 5",
       subtitles: [
-
+        {
+          start: 0, end: 3.1,
+          words: [
+            { text: "Henry", start: 0.1, end: 0.5 },
+            { text: "decides", start: 0.5, end: 0.9 },
+            { text: "to", start: 0.9, end: 1.2 },
+            { text: "get", start: 1.2, end: 1.5 },
+            { text: "a good", start: 1.5, end: 1.8 },
+            { text: "grade", start: 1.8, end: 2.1 },
+            { text: "on", start: 2.1, end: 2.4 },
+            { text: "his", start: 2.4, end: 2.7 },
+            { text: "own.", start: 2.7, end: 3.0 },
+          ]
+        },
+        {
+          start: 4.0, end: 6.0,
+          words: [
+            { text: "He", start: 4.5, end: 4.8 },
+            { text: "works", start: 4.8, end: 5.4 },
+            { text: "hard", start: 5.4, end: 5.7 },
+          ]
+        },
+        {
+          start: 6.0, end: 7.9,
+          words: [
+            { text: "and", start: 6.0, end: 6.3 },
+            { text: "finishes", start: 6.3, end: 6.6 },
+            { text: "the", start: 6.6, end: 6.9 },
+            { text: "test", start: 6.9, end: 7.2 },
+            { text: "on", start: 7.2, end: 7.5 },
+            { text: "time.", start: 7.5, end: 7.8 },
+          ]
+        },
+        {
+          start: 8.0, end: 12.0,
+          words: [
+            { text: "Henry", start: 9.0, end: 9.3 },
+            { text: "is", start: 9.3, end: 9.5 },
+            { text: "happy", start: 9.5, end: 9.9 },
+            { text: "that", start: 9.9, end: 10.2 },
+            { text: "he", start: 10.2, end: 10.4 },
+            { text: "did", start: 10.4, end: 10.6 },
+            { text: "the", start: 10.6, end: 10.8 },
+            { text: "right", start: 10.8, end: 11.1 },
+            { text: "thing.", start: 11.1, end: 11.4 },
+          ]
+        },
         {
           start: 12.0, end: 13.0,
           words: [
@@ -105,7 +151,6 @@ export const StoryPage = () => {
 
   const cloudPositions = {
     0: [
-      // { bottom: '30rem', left: '25%', transform: 'translateX(-50%)' }
     ],
     1: [
       { top: '20%', left: '40%' },
@@ -301,73 +346,7 @@ export const StoryPage = () => {
         { text: "work.", start: 16.3, end: 16.6 },
       ]
     },
-
-    {
-      videoIndex: 4,
-      start: 0.0, end: 3.1,
-      words: [
-        { text: "Henry", start: 0.1, end: 0.5 },
-        { text: "decides", start: 0.5, end: 0.9 },
-        { text: "to", start: 0.9, end: 1.2 },
-        { text: "get", start: 1.2, end: 1.5 },
-        { text: "a good", start: 1.5, end: 1.8 },
-        { text: "grade", start: 1.8, end: 2.1 },
-        { text: "on", start: 2.1, end: 2.4 },
-        { text: "his", start: 2.4, end: 2.7 },
-        { text: "own.", start: 2.7, end: 3.0 },
-      ]
-    },
-    {
-      videoIndex: 4,
-      start: 4.0, end: 6.0,
-      words: [
-        { text: "He", start: 4.5, end: 4.8 },
-        { text: "works", start: 4.8, end: 5.4 },
-        { text: "hard", start: 5.4, end: 5.7 },
-      ]
-    },
-    {
-      videoIndex: 4,
-      start: 6.0, end: 7.9,
-      words: [
-        { text: "and", start: 6.0, end: 6.3 },
-        { text: "finishes", start: 6.3, end: 6.6 },
-        { text: "the", start: 6.6, end: 6.9 },
-        { text: "test", start: 6.9, end: 7.2 },
-        { text: "on", start: 7.2, end: 7.5 },
-        { text: "time.", start: 7.5, end: 7.8 },
-      ]
-    },
-    {
-      videoIndex: 4,
-      start: 8.0, end: 12.0,
-      words: [
-        { text: "Henry", start: 9.0, end: 9.3 },
-        { text: "is", start: 9.3, end: 9.5 },
-        { text: "happy", start: 9.5, end: 9.9 },
-        { text: "that", start: 9.9, end: 10.2 },
-        { text: "he", start: 10.2, end: 10.4 },
-        { text: "did", start: 10.4, end: 10.6 },
-        { text: "the", start: 10.6, end: 10.8 },
-        { text: "right", start: 10.8, end: 11.1 },
-        { text: "thing.", start: 11.1, end: 11.4 },
-      ]
-    },
-    {
-      videoIndex: 4,
-      start: 8.0, end: 12.0,
-      words: [
-        { text: "Henry", start: 9.0, end: 9.3 },
-        { text: "is", start: 9.3, end: 9.5 },
-        { text: "happy", start: 9.5, end: 9.9 },
-        { text: "that", start: 9.9, end: 10.2 },
-        { text: "he", start: 10.2, end: 10.4 },
-        { text: "did", start: 10.4, end: 10.6 },
-        { text: "the", start: 10.6, end: 10.8 },
-        { text: "right", start: 10.8, end: 11.1 },
-        { text: "thing.", start: 11.1, end: 11.4 },
-      ]
-    },
+    
   ];
 
 
@@ -536,7 +515,6 @@ export const StoryPage = () => {
     const isImage = !currentData.url.endsWith('.mp4');
 
     if (isImage) {
-      // عرض SweetAlert بعد ثانية واحدة (أو فوراً)
       const timer = setTimeout(() => {
         ValidationAlert.storyEnd(() => {
           navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
@@ -597,10 +575,7 @@ export const StoryPage = () => {
     setIsMuted(newVolume === 0);
   };
 
-  // --- START: التعديلات المطلوبة ---
-  // 2. تعديل الدالة لتستهدف الحاوية الصحيحة
   const toggleFullscreen = () => {
-    // تم تغيير containerRef إلى fullscreenContainerRef ليكون الاسم أوضح
     const container = fullscreenContainerRef.current;
     if (!container) return;
 
