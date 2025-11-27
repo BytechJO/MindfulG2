@@ -1,8 +1,20 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles, Maximize2, Minimize2 } from 'lucide-react';
-import { useParams, useNavigate } from 'react-router-dom';
-import '../../shared/StoryPage.css';
-import ValidationAlert from '../../shared/ValidationAlert';
+
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Play,
+  Pause,
+  Volume2,
+  VolumeX,
+  Subtitles,
+  Maximize2,
+  Minimize2,
+  MessageSquareText,
+} from "lucide-react";
+import { useParams, useNavigate } from "react-router-dom";
+import "../../shared/StoryPage.css";
+import ValidationAlert from "../../shared/ValidationAlert";
 
 import video1 from "./assets/1.mp4";
 import video2 from "./assets/2.mp4";
@@ -10,8 +22,9 @@ import video3 from "./assets/3.mp4";
 import video4 from "./assets/4.mp4";
 import video5 from "./assets/5.mp4";
 
-
 export const StoryPage = () => {
+  const [extraBubble, setExtraBubble] = useState(null);
+  const [showCaption, setShowCaption] = useState(true);
   const [currentVideo, setCurrentVideo] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
@@ -39,62 +52,20 @@ export const StoryPage = () => {
     {
       url: video1,
       title: "Section 1",
-      subtitles: [
-        {
-        },
-      ],
+      subtitles: [{}],
     },
     {
       url: video2,
       title: "Section 2",
       subtitles: [
         {
-          start: 0,
-          end: 2,
-          words: [
-            { text: "Sam", start: 0.0, end: 0.1 },
-            { text: "looks", start: 0.1, end: 0.3 },
-            { text: "out", start: 0.3, end: 0.6 },
-            { text: "of", start: 0.6, end: 1 },
-            { text: "the", start: 1, end: 1.3 },
-            { text: "window.", start: 1.3, end: 1.9 },
-          ],
+      
         },
         {
-          start: 2,
-          end: 5.2,
-          words: [
-            { text: "He", start: 0.7, end: 1.1 },
-            { text: "can", start: 1.1, end: 1.5 },
-            { text: "see", start: 1.5, end: 1.9 },
-            { text: "the", start: 1.9, end: 2.3 },
-            { text: "new", start: 2.3, end: 2.7 },
-            { text: "neighbours", start: 2.7, end: 3.1 },
-            { text: "who", start: 3.1, end: 3.5 },
-            { text: "moved", start: 3.5, end: 3.9 },
-            { text: "in", start: 3.9, end: 4.3 },
-            { text: "next", start: 4.3, end: 4.7 },
-            { text: "door.", start: 4.7, end: 5.1 },
-          ],
+       
         },
         {
-          start: 5.3,
-          end: 10.5,
-          words: [
-            { text: "There", start: 5, end: 5.3 },
-            { text: "is", start: 5.3, end: 5.7 },
-            { text: "a", start: 5.7, end: 6 },
-            { text: "little", start: 6, end: 6.3 },
-            { text: "boy", start: 6.3, end: 6.6 },
-            { text: "who", start: 6.6, end: 7 },
-            { text: "looks", start: 7, end: 7.5 },
-            { text: "the", start: 7.5, end: 8 },
-            { text: "the", start: 8.0, end: 8.2 },
-            { text: "same", start: 8.2, end: 8.4 },
-            { text: "age", start: 8.4, end: 8.6 },
-            { text: "as", start: 8.6, end: 8.8 },
-            { text: "Sam.", start: 9, end: 10.0 },
-          ],
+       
         },
       ],
     },
@@ -155,36 +126,10 @@ export const StoryPage = () => {
       title: "Section 4",
       subtitles: [
         {
-          start: 0,
-          end: 3,
-          words: [
-            { text: "Sam", start: 0.2, end: 0.4 },
-            { text: "and", start: 0.4, end: 0.6 },
-            { text: "his", start: 0.6, end: 0.8 },
-            { text: "mum", start: 0.8, end: 1 },
-            { text: "take", start: 1, end: 1.3 },
-            { text: "the", start: 1.3, end: 1.6 },
-            { text: "cake", start: 1.6, end: 1.8 },
-            { text: "to", start: 1.8, end: 1.9 },
-            { text: "their", start: 1.9, end: 2 },
-            { text: "new", start: 2, end: 2.1 },
-            { text: "neighbours.", start: 2.1, end: 2.5 },
-          ],
+       
         },
         {
-          start: 3.0,
-          end: 7,
-          words: [
-            { text: "Sam", start: 4, end: 4.3 },
-            { text: "feels", start: 4.3, end: 4.6 },
-            { text: "shy", start: 4.6, end: 4.9 },
-            { text: "and", start: 5.1, end: 5.4 },
-            { text: "stays", start: 5.4, end: 5.7 },
-            { text: "close", start: 5.7, end: 6 },
-            { text: "to", start: 6, end: 6.2 },
-            { text: "his", start: 6.2, end: 6.4 },
-            { text: "mum.", start: 6.4, end: 6.7 },
-          ],
+        
         },
         {
           start: 7,
@@ -198,7 +143,7 @@ export const StoryPage = () => {
             { text: "I", start: 8.7, end: 9.1 },
             { text: "love", start: 9.1, end: 9.5 },
             { text: "honey", start: 9.5, end: 9.9 },
-            { text: "cake,", start: 9.9, end: 10.3 }
+            { text: "cake,", start: 9.9, end: 10.3 },
           ],
         },
         {
@@ -213,10 +158,8 @@ export const StoryPage = () => {
             { text: "young", start: 14.7, end: 15.1 },
             { text: "man", start: 15.1, end: 15.5 },
             { text: "you", start: 15.5, end: 15.9 },
-            { text: "are,", start: 15.9, end: 16.3 }
-          ]
-
-          ,
+            { text: "are,", start: 15.9, end: 16.3 },
+          ],
         },
       ],
     },
@@ -225,26 +168,7 @@ export const StoryPage = () => {
       title: "Section 5",
       subtitles: [
         {
-          start: 0,
-          end: 3,
-          words: [
-            { text: "Sam", start: 0.2, end: 0.4 },
-            { text: "sees", start: 0.4, end: 0.6 },
-            { text: "that", start: 0.6, end: 0.8 },
-            { text: "the", start: 0.8, end: 1 },
-            { text: "boy", start: 1, end: 1.2 },
-            { text: "seems", start: 1.2, end: 1.4 },
-            { text: "nice", start: 1.4, end: 1.8 },
-            { text: "and", start: 2, end: 2.2 },
-            { text: "goes", start: 2.2, end: 2.4 },
-            { text: "to", start: 2.4, end: 2.6 },
-            { text: "introduce", start: 2.6, end: 2.8 },
-            { text: "himself.", start: 2.8, end: 3 },
-
-
-
-          ]
-          ,
+         
         },
         {
           start: 3,
@@ -260,10 +184,7 @@ export const StoryPage = () => {
             { text: "outside", start: 7.0, end: 7.4 },
             { text: "and", start: 7.4, end: 7.8 },
             { text: "play?’", start: 7.8, end: 8.2 },
-
-          ]
-
-          ,
+          ],
         },
         {
           start: 8.5,
@@ -280,26 +201,10 @@ export const StoryPage = () => {
             { text: "that.", start: 10.9, end: 11.3 },
             { text: "Let’s", start: 11.5, end: 11.9 },
             { text: "go!’", start: 11.9, end: 12.3 },
-
-          ]
-
-
-
-
-
-
-          ,
+          ],
         },
         {
-          start: 12.7,
-          end: 14,
-          words: [
-            { text: "They", start: 12.3, end: 12.7 },
-            { text: "play", start: 12.7, end: 13.1 },
-            { text: "happily", start: 13.1, end: 13.5 },
-            { text: "together.", start: 13.5, end: 13.9 }
-          ]
-          ,
+      
         },
         {
           start: 10.2,
@@ -317,13 +222,12 @@ export const StoryPage = () => {
   ];
 
   const cloudPositions = {
-    0: [
-    ],
+    0: [],
 
     1: [
       { top: "10%", left: "5%" },
       { top: "10%", left: "15%" },
-      { top: "10%", left: "5%" }
+      { top: "10%", left: "5%" },
     ],
 
     2: [
@@ -346,19 +250,150 @@ export const StoryPage = () => {
     ],
   };
 
+  const extraBubblesData = [
+    {
+      videoIndex: 1,
+        start: 0,
+          end: 2,
+          words: [
+            { text: "Sam", start: 0.0, end: 0.1 },
+            { text: "looks", start: 0.1, end: 0.3 },
+            { text: "out", start: 0.3, end: 0.6 },
+            { text: "of", start: 0.6, end: 1 },
+            { text: "the", start: 1, end: 1.3 },
+            { text: "window.", start: 1.3, end: 1.9 },
+          ],
+    },
+    {
+      videoIndex: 1,
+       start: 2,
+          end: 5.2,
+          words: [
+            { text: "He", start: 0.7, end: 1.1 },
+            { text: "can", start: 1.1, end: 1.5 },
+            { text: "see", start: 1.5, end: 1.9 },
+            { text: "the", start: 1.9, end: 2.3 },
+            { text: "new", start: 2.3, end: 2.7 },
+            { text: "neighbours", start: 2.7, end: 3.1 },
+            { text: "who", start: 3.1, end: 3.5 },
+            { text: "moved", start: 3.5, end: 3.9 },
+            { text: "in", start: 3.9, end: 4.3 },
+            { text: "next", start: 4.3, end: 4.7 },
+            { text: "door.", start: 4.7, end: 5.1 },
+          ],
+    },
+    {
+      videoIndex: 1,
+      start: 5.3,
+          end: 10.5,
+          words: [
+            { text: "There", start: 5, end: 5.3 },
+            { text: "is", start: 5.3, end: 5.7 },
+            { text: "a", start: 5.7, end: 6 },
+            { text: "little", start: 6, end: 6.3 },
+            { text: "boy", start: 6.3, end: 6.6 },
+            { text: "who", start: 6.6, end: 7 },
+            { text: "looks", start: 7, end: 7.5 },
+            { text: "the", start: 7.5, end: 8 },
+            { text: "the", start: 8.0, end: 8.2 },
+            { text: "same", start: 8.2, end: 8.4 },
+            { text: "age", start: 8.4, end: 8.6 },
+            { text: "as", start: 8.6, end: 8.8 },
+            { text: "Sam.", start: 9, end: 10.0 },
+          ],
+    },
+
+    {
+      videoIndex: 3,
+         start: 0,
+          end: 3,
+          words: [
+            { text: "Sam", start: 0.2, end: 0.4 },
+            { text: "and", start: 0.4, end: 0.6 },
+            { text: "his", start: 0.6, end: 0.8 },
+            { text: "mum", start: 0.8, end: 1 },
+            { text: "take", start: 1, end: 1.3 },
+            { text: "the", start: 1.3, end: 1.6 },
+            { text: "cake", start: 1.6, end: 1.8 },
+            { text: "to", start: 1.8, end: 1.9 },
+            { text: "their", start: 1.9, end: 2 },
+            { text: "new", start: 2, end: 2.1 },
+            { text: "neighbours.", start: 2.1, end: 2.5 },
+          ],
+    },
+    {
+      videoIndex: 3,
+      start: 3.0,
+          end: 7,
+          words: [
+            { text: "Sam", start: 4, end: 4.3 },
+            { text: "feels", start: 4.3, end: 4.6 },
+            { text: "shy", start: 4.6, end: 4.9 },
+            { text: "and", start: 5.1, end: 5.4 },
+            { text: "stays", start: 5.4, end: 5.7 },
+            { text: "close", start: 5.7, end: 6 },
+            { text: "to", start: 6, end: 6.2 },
+            { text: "his", start: 6.2, end: 6.4 },
+            { text: "mum.", start: 6.4, end: 6.7 },
+          ],
+    },
+    {
+      videoIndex: 4,
+    start: 0,
+          end: 3,
+          words: [
+            { text: "Sam", start: 0.2, end: 0.4 },
+            { text: "sees", start: 0.4, end: 0.6 },
+            { text: "that", start: 0.6, end: 0.8 },
+            { text: "the", start: 0.8, end: 1 },
+            { text: "boy", start: 1, end: 1.2 },
+            { text: "seems", start: 1.2, end: 1.4 },
+            { text: "nice", start: 1.4, end: 1.8 },
+            { text: "and", start: 2, end: 2.2 },
+            { text: "goes", start: 2.2, end: 2.4 },
+            { text: "to", start: 2.4, end: 2.6 },
+            { text: "introduce", start: 2.6, end: 2.8 },
+            { text: "himself.", start: 2.8, end: 3 },
+          ],
+    },
+    {
+      videoIndex: 4,
+        start: 12.7,
+          end: 14,
+          words: [
+            { text: "They", start: 12.3, end: 12.7 },
+            { text: "play", start: 12.7, end: 13.1 },
+            { text: "happily", start: 13.1, end: 13.5 },
+            { text: "together.", start: 13.5, end: 13.9 },
+          ],
+    },
+   
+  ];
+  useEffect(() => {
+    const bubbleToShow = extraBubblesData.find(
+      (bubble) =>
+        bubble.videoIndex === currentVideo &&
+        currentTime >= bubble.start &&
+        currentTime < bubble.end
+    );
+
+    setExtraBubble(bubbleToShow || null);
+  }, [currentVideo, currentTime]);
+
   const currentVideoData = videos[currentVideo];
   const activeSubtitleIndex = currentVideoData.subtitles.findIndex(
-    sub => currentTime >= sub.start && currentTime < sub.end
+    (sub) => currentTime >= sub.start && currentTime < sub.end
   );
 
+  const activeSubtitle =
+    activeSubtitleIndex !== -1
+      ? currentVideoData.subtitles[activeSubtitleIndex]
+      : null;
 
-  const activeSubtitle = activeSubtitleIndex !== -1
-    ? currentVideoData.subtitles[activeSubtitleIndex]
-    : null;
-
-  const activeCloudPosition = activeSubtitleIndex !== -1
-    ? cloudPositions[currentVideo]?.[activeSubtitleIndex]
-    : null;
+  const activeCloudPosition =
+    activeSubtitleIndex !== -1
+      ? cloudPositions[currentVideo]?.[activeSubtitleIndex]
+      : null;
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const video = videoRef.current;
@@ -371,11 +406,11 @@ export const StoryPage = () => {
 
     const handleCanPlay = () => {
       setIsLoading(false);
-      if (!showBanner) video.play().catch(() => { });
+      if (!showBanner) video.play().catch(() => {});
     };
-    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener("canplay", handleCanPlay);
     return () => {
-      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener("canplay", handleCanPlay);
     };
   }, [currentVideo]);
 
@@ -384,9 +419,9 @@ export const StoryPage = () => {
     const nextVideoIndex = currentVideo + 1;
     if (nextVideoIndex < videos.length) {
       const nextVideoUrl = videos[nextVideoIndex].url;
-      const link = document.createElement('link');
-      link.rel = 'preload';
-      link.as = 'video';
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "video";
       link.href = nextVideoUrl;
       document.head.appendChild(link);
       return () => {
@@ -405,16 +440,16 @@ export const StoryPage = () => {
     const handlePause = () => setIsPlaying(false);
     const handleLoadedData = () => setDuration(video.duration);
 
-    video.addEventListener('timeupdate', handleTimeUpdate);
-    video.addEventListener('play', handlePlay);
-    video.addEventListener('pause', handlePause);
-    video.addEventListener('loadeddata', handleLoadedData);
+    video.addEventListener("timeupdate", handleTimeUpdate);
+    video.addEventListener("play", handlePlay);
+    video.addEventListener("pause", handlePause);
+    video.addEventListener("loadeddata", handleLoadedData);
 
     return () => {
-      video.removeEventListener('timeupdate', handleTimeUpdate);
-      video.removeEventListener('play', handlePlay);
-      video.removeEventListener('pause', handlePause);
-      video.removeEventListener('loadeddata', handleLoadedData);
+      video.removeEventListener("timeupdate", handleTimeUpdate);
+      video.removeEventListener("play", handlePlay);
+      video.removeEventListener("pause", handlePause);
+      video.removeEventListener("loadeddata", handleLoadedData);
     };
   }, []);
 
@@ -429,7 +464,7 @@ export const StoryPage = () => {
       } else {
         const playPromise = videoRef.current.play();
         if (playPromise !== undefined) {
-          playPromise.catch(() => { });
+          playPromise.catch(() => {});
         }
       }
     }
@@ -450,17 +485,15 @@ export const StoryPage = () => {
   //   }
   // }, [currentTime, currentVideo, isPlaying, duration]);
 
-
   useEffect(() => {
     const handleFullscreenChange = () => {
       setIsFullscreen(!!document.fullscreenElement);
     };
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
     return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
     };
   }, []);
-
 
   useEffect(() => {
     if (videoRef.current) {
@@ -468,40 +501,34 @@ export const StoryPage = () => {
     }
   }, [currentVideo, isPlaying, playbackSpeed]);
 
-
-
-
   const handlePrevious = () => {
     setShowBanner(false);
-    setCurrentVideo(prev => (prev > 0 ? prev - 1 : videos.length - 1));
+    setCurrentVideo((prev) => (prev > 0 ? prev - 1 : videos.length - 1));
   };
 
   const handleNext = () => {
     setShowBanner(false);
-    setCurrentVideo(prev => (prev < videos.length - 1 ? prev + 1 : 0));
+    setCurrentVideo((prev) => (prev < videos.length - 1 ? prev + 1 : 0));
   };
 
   const handleEnded = useCallback(() => {
     if (currentVideo < videos.length - 1) {
-      setCurrentVideo(prev => prev + 1);
-    }
-    else {
+      setCurrentVideo((prev) => prev + 1);
+    } else {
       ValidationAlert.storyEnd(() => {
         navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
       });
     }
   }, [currentVideo, videos.length, navigate, unitId, lessonId]);
 
-
-
   const toggleWordSelection = (wordText) => {
     const correctWords = ["uncomfortable"];
-    const cleanedWord = wordText.replace('.', '');
+    const cleanedWord = wordText.replace(".", "");
 
     if (correctWords.includes(cleanedWord)) {
-      setSelectedWords(prev =>
+      setSelectedWords((prev) =>
         prev.includes(wordText)
-          ? prev.filter(w => w !== wordText)
+          ? prev.filter((w) => w !== wordText)
           : [...prev, wordText]
       );
       setShowFeedback(true);
@@ -524,7 +551,7 @@ export const StoryPage = () => {
     }
   };
 
-  const toggleMute = () => setIsMuted(prev => !prev);
+  const toggleMute = () => setIsMuted((prev) => !prev);
 
   const selectPlaybackSpeed = (speed) => {
     setPlaybackSpeed(speed);
@@ -543,27 +570,32 @@ export const StoryPage = () => {
     setIsMuted(newVolume === 0);
   };
 
-
   const toggleFullscreen = () => {
     const container = fullscreenContainerRef.current;
     if (!container) return;
 
     if (!document.fullscreenElement) {
-      container.requestFullscreen().catch(err => {
-        alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+      container.requestFullscreen().catch((err) => {
+        alert(
+          `Error attempting to enable full-screen mode: ${err.message} (${err.name})`
+        );
       });
     } else {
       document.exitFullscreen();
     }
   };
 
-
   return (
     <div className="story-page-container">
       <div className="w-full max-w-6xl">
         <div ref={fullscreenContainerRef} className="video-wrapper">
           {videos.map((vid, index) => (
-            <video key={index} src={vid.url} preload="auto" style={{ display: 'none' }} />
+            <video
+              key={index}
+              src={vid.url}
+              preload="auto"
+              style={{ display: "none" }}
+            />
           ))}
           <video
             ref={videoRef}
@@ -576,11 +608,7 @@ export const StoryPage = () => {
             Your browser does not support the video tag.
           </video>
 
-          {showFeedback && (
-            <div className="feedback-popup">
-              Good Job! 👍
-            </div>
-          )}
+          {showFeedback && <div className="feedback-popup">Good Job! 👍</div>}
 
           {/* {currentVideo === 3 && showBanner && (
             <div className="instruction-banner show">
@@ -593,34 +621,79 @@ export const StoryPage = () => {
             </div>
           )} */}
 
-          {activeSubtitle && activeCloudPosition && showBubble && showSubtitles && (
+          {activeSubtitle &&
+            activeCloudPosition &&
+            showBubble &&
+            showSubtitles && (
+              <div className="subtitle-container" style={activeCloudPosition}>
+                <div
+                  className={`bubble-cloud animate__animated animate__fadeIn ${
+                    activeCloudPosition.isFlipped ? "flipped" : ""
+                  }`}
+                >
+                  <p>
+                    {activeSubtitle.words.map((word, index) => {
+                      const isHighlighted =
+                        currentTime >= word.start && currentTime < word.end;
+                      return (
+                        <span
+                          key={index}
+                          onClick={() => {
+                            if (currentVideo === 3)
+                              toggleWordSelection(word.text);
+                          }}
+                          className={`
+                word-span
+                ${isHighlighted ? "active-word" : ""}
+                ${
+                  currentVideo === 3 && selectedWords.includes(word.text)
+                    ? "selected-word"
+                    : ""
+                }
+                ${currentVideo === 3 ? "clickable-word" : ""}
+              `}
+                        >
+                          {word.text}{" "}
+                        </span>
+                      );
+                    })}
+                  </p>
+                  <button
+                    className="close"
+                    onClick={() => setShowBubble(false)}
+                  >
+                    ×
+                  </button>
+                </div>
+              </div>
+            )}
+          {showCaption && extraBubble && extraBubble.words && (
             <div
               className="subtitle-container"
-              style={activeCloudPosition}
+              style={{
+                bottom: "0%",
+                left: "50%",
+                transform: "translateX(-50%)",
+                zIndex: 101,
+              }}
             >
-              <div className={`bubble-cloud animate__animated animate__fadeIn ${activeCloudPosition.isFlipped ? 'flipped' : ''}`}>
+              <div className="extra-cloud animate__animated animate__fadeIn">
                 <p>
-                  {activeSubtitle.words.map((word, index) => {
-                    const isHighlighted = currentTime >= word.start && currentTime < word.end;
+                  {extraBubble.words.map((word, index) => {
+                    const isHighlighted =
+                      currentTime >= word.start && currentTime < word.end;
                     return (
                       <span
                         key={index}
-                        onClick={() => {
-                          if (currentVideo === 3) toggleWordSelection(word.text);
-                        }}
-                        className={`
-                word-span
-                ${isHighlighted ? 'active-word' : ''}
-                ${currentVideo === 3 && selectedWords.includes(word.text) ? 'selected-word' : ''}
-                ${currentVideo === 3 ? 'clickable-word' : ''}
-              `}
+                        className={`word-span ${
+                          isHighlighted ? "active-word" : ""
+                        }`}
                       >
-                        {word.text}{' '}
+                        {word.text}{" "}
                       </span>
                     );
                   })}
                 </p>
-                <button className="close" onClick={() => setShowBubble(false)}>×</button>
               </div>
             </div>
           )}
@@ -628,10 +701,16 @@ export const StoryPage = () => {
           <div className="video-overlay" />
           <div className="controls-container">
             <div className="controlbbtn">
-              <button onClick={handlePrevious} className="control-btn left-nav-btn">
+              <button
+                onClick={handlePrevious}
+                className="control-btn left-nav-btn"
+              >
                 <ChevronLeft className="w-8 h-8" />
               </button>
-              <button onClick={handleNext} className="control-btn right-nav-btn">
+              <button
+                onClick={handleNext}
+                className="control-btn right-nav-btn"
+              >
                 <ChevronRight className="w-8 h-8" />
               </button>
             </div>
@@ -639,17 +718,34 @@ export const StoryPage = () => {
             <div className="controls-wrapper-new">
               <div className="controls-row">
                 <div className="controls-group-left">
-                  <button onClick={() => setShowSubtitles(!showSubtitles)} className="control-btn" title="Subtitles">
+                  <button
+                    onClick={() => setShowSubtitles(!showSubtitles)}
+                    className="control-btn"
+                    title="Subtitles"
+                  >
                     <Subtitles className="w-6 h-6" />
                     <span className="control-label">Subtitle</span>
                   </button>
+
+                       <button
+                                                       onClick={() => setShowCaption(!showCaption)}
+                                                       className="control-btn"
+                                                       title="Caption"
+                                                     >
+                                                       <MessageSquareText className="w-6 h-6" />
+                                                       <span className="control-label">Caption</span>
+                                                     </button>
                   <div
                     className="volume-control"
                     onMouseEnter={() => setShowVolumeSlider(true)}
                     onMouseLeave={() => setShowVolumeSlider(false)}
                   >
                     <button onClick={toggleMute} className="control-btn">
-                      {isMuted || volume === 0 ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
+                      {isMuted || volume === 0 ? (
+                        <VolumeX className="w-6 h-6" />
+                      ) : (
+                        <Volume2 className="w-6 h-6" />
+                      )}
                     </button>
                     {showVolumeSlider && (
                       <div className="volume-slider-container">
@@ -668,7 +764,7 @@ export const StoryPage = () => {
                   </div>
                   <div className="speed-control-container">
                     <button
-                      onClick={() => setShowSpeedMenu(prev => !prev)}
+                      onClick={() => setShowSpeedMenu((prev) => !prev)}
                       className="control-btn speed-btn"
                       title="Playback Speed"
                     >
@@ -680,27 +776,35 @@ export const StoryPage = () => {
                           <li
                             key={speed}
                             onClick={() => selectPlaybackSpeed(speed)}
-                            className={playbackSpeed === speed ? 'active-speed' : ''}
+                            className={
+                              playbackSpeed === speed ? "active-speed" : ""
+                            }
                           >
                             {speed}x
                           </li>
                         ))}
                       </ul>
                     )}
-
-
                   </div>
                 </div>
 
                 <div className="controls-group-center">
                   <button onClick={togglePlay} className="control-btn play-btn">
-                    {isPlaying ? <Pause className="w-12 h-12" fill="white" /> : <Play className="w-12 h-12" fill="white" />}
+                    {isPlaying ? (
+                      <Pause className="w-12 h-12" fill="white" />
+                    ) : (
+                      <Play className="w-12 h-12" fill="white" />
+                    )}
                   </button>
                 </div>
 
                 <div className="controls-group-right">
                   <button onClick={toggleFullscreen} className="control-btn">
-                    {isFullscreen ? <Minimize2 className="w-6 h-6" /> : <Maximize2 className="w-6 h-6" />}
+                    {isFullscreen ? (
+                      <Minimize2 className="w-6 h-6" />
+                    ) : (
+                      <Maximize2 className="w-6 h-6" />
+                    )}
                   </button>
                 </div>
               </div>
@@ -709,7 +813,12 @@ export const StoryPage = () => {
 
           <div className="progress-indicator-container">
             {videos.map((_, index) => (
-              <div key={index} className={`progress-dot ${index === currentVideo ? 'active' : ''}`} />
+              <div
+                key={index}
+                className={`progress-dot ${
+                  index === currentVideo ? "active" : ""
+                }`}
+              />
             ))}
           </div>
         </div>
