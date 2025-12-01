@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-
+import { motion } from "motion/react";
 import { Play } from "lucide-react";
 import { AnimatedBackground } from "./AnimatedBackground";
 import { AnimatedCharacter } from "./AnimatedCharacter";

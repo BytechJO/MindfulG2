@@ -1,8 +1,6 @@
-import { Suspense, lazy } from "react";
-import { motion } from "framer-motion";
-
-
-import { Home, PlayCircle } from "lucide-react";
+import { Suspense, lazy, useState } from "react";
+import { motion } from "motion/react";
+import { Home, PlayCircle, Menu } from "lucide-react";
 import { AnimatedBackground } from "./AnimatedBackground";
 import { AnimatedCharacter } from "./AnimatedCharacter";
 import { useParams, useNavigate } from "react-router-dom";
@@ -34,17 +32,19 @@ const lessons = [
 const FeedbackWrapper = () => {
   const { unitId, lessonId } = useParams();
   const navigate = useNavigate();
+  const [showLessonDropdown, setShowLessonDropdown] = useState(false);
+
   const key = `${unitId}-${lessonId}`;
   const Component = pages[key];
 
   const handleLessonSelect = (lessonNumber) => {
     navigate(`/unit/${unitId}/lesson/${lessonNumber}`);
+    setShowLessonDropdown(false); // إخفاء القائمة بعد الاختيار
   };
 
   const handleBackToUnits = () => {
     navigate("/UnitsPage");
   };
-
 
   if (!Component) return <div>feedback not found</div>;
 
@@ -78,6 +78,7 @@ const FeedbackWrapper = () => {
         transition={{ delay: 0.3 }}
       >
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          {/* Home Button */}
           <motion.button
             onClick={handleBackToUnits}
             className="bg-yellow-400 text-blue-900 px-8 py-3 rounded-full shadow-lg flex items-center gap-2"
@@ -88,21 +89,53 @@ const FeedbackWrapper = () => {
             <span className="text-base sm:text-lg">Units</span>
           </motion.button>
 
-          <motion.div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4">
+          {/* Lesson Buttons - Large Screens */}
+          <div className="hidden sm:flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4">
             {lessons.map((l) => (
               <button
                 key={l.number}
                 onClick={() => handleLessonSelect(l.number)}
-                className={`px-6 py-3 rounded-xl ${Number(lessonId) === l.number
-                  ? `bg-gradient-to-r ${l.color} text-white`
-                  : "bg-white"
-                  }`}
+                className={`px-6 py-3 rounded-xl flex items-center gap-2 ${
+                  Number(lessonId) === l.number
+                    ? `bg-gradient-to-r ${l.color} text-white`
+                    : "bg-white"
+                }`}
               >
                 <PlayCircle />
                 Lesson {l.number}
               </button>
             ))}
-          </motion.div>
+          </div>
+
+          {/* Lesson Dropdown - Small Screens */}
+          <div className="sm:hidden relative">
+            <button
+              onClick={() => setShowLessonDropdown(!showLessonDropdown)}
+              className="bg-white px-4 py-3 rounded-full flex items-center gap-2 shadow-lg"
+            >
+              <Menu />
+              Lessons
+            </button>
+
+            {showLessonDropdown && (
+              <div className="fixed bottom-16 left-1/2 transform -translate-x-1/2 w-72 bg-white rounded-xl shadow-xl flex flex-col z-50 p-2">
+                {lessons.map((l) => (
+                  <button
+                    key={l.number}
+                    onClick={() => handleLessonSelect(l.number)}
+                    className={`px-4 py-2 text-left rounded-lg flex items-center gap-2 ${
+                      Number(lessonId) === l.number
+                        ? `bg-gradient-to-r ${l.color} text-white`
+                        : 'hover:bg-gray-100'
+                    }`}
+                  >
+                    <PlayCircle />
+                    Lesson {l.number}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </motion.div>
     </div>

@@ -29,7 +29,7 @@
   position: relative;
   display: inline-block;
   background: #ffffff;
-  padding: 1rem 1.25rem;
+  padding: 10px;
   border-radius: 2.5rem;
   font-family: "Segoe UI", sans-serif;
   font-size: 1.125rem;
@@ -56,7 +56,20 @@
   text-align: center;
   font-size: 28px;
   text-align: center;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  
+}
+
+@media (max-width:500px){
+
+  .extra-cloud{
+font-size: 9px;
+  height: 70px;
+
+  }
+
+
+
 }
 
 .bubble-cloud::after,
@@ -990,6 +1003,14 @@ html {
   z-index: 100;
   /* للتأكد من أنها فوق العناصر الأخرى */
 }
+@media(max-width:500px){
+.speed-dropdown-list{
+  margin: 0;
+  padding: 0;
+
+}
+
+}
 
 /* عناصر القائمة */
 .speed-dropdown-list li {
@@ -1076,7 +1097,7 @@ html {
 @media (max-width: 480px) {
   .video-wrapper:hover .left-nav-btn,
   .video-wrapper:hover .right-nav-btn {
-    top: -120%;
+    top: -0%;
     transform: translateY(-50%) scale(0.7);
   }
 }
