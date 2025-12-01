@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import React from "react";
-import StoryLayout from "./StoryLayout";
+
 
 export default function StoryWrapper() {
   const { unitId, lessonId } = useParams();
@@ -10,13 +10,11 @@ export default function StoryWrapper() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Load the StoryPage component whenever unitId or lessonId changes
   useEffect(() => {
     setIsLoading(true);
     setError(null);
     setLessonData(`Unit: ${unitId}, Lesson: ${lessonId}`);
     
-    // Dynamically import the StoryPage component
     const loadStoryPage = async () => {
       try {
         const module = await import(
@@ -32,43 +30,41 @@ export default function StoryWrapper() {
     };
 
     loadStoryPage();
-  }, [unitId, lessonId]); // This dependency array ensures the effect runs when route changes
+  }, [unitId, lessonId]); 
 
   if (isLoading) {
     return (
-      <StoryLayout>
+      
         <div style={{ padding: 30, textAlign: 'center' }}>
-          <p>جاري التحميل...</p>
+          <p>Loading...</p>
         </div>
-      </StoryLayout>
+      
     );
   }
 
   if (error) {
     return (
-      <StoryLayout>
+      
         <div style={{ padding: 30, textAlign: 'center', color: 'red' }}>
-          <p>حدث خطأ في تحميل الدرس: {error}</p>
+          <p>somthing happend: {error}</p>
         </div>
-      </StoryLayout>
+      
     );
   }
 
   if (!storyPageComponent) {
     return (
-      <StoryLayout>
+      
         <div style={{ padding: 30, textAlign: 'center' }}>
-          <p>لم يتم العثور على محتوى الدرس</p>
+          <p>Not Found</p>
         </div>
-      </StoryLayout>
+      
     );
   }
 
   const StoryPageComponent = storyPageComponent;
 
   return (
-    <StoryLayout>
       <StoryPageComponent unitId={unitId} lessonId={lessonId} />
-    </StoryLayout>
   );
 }

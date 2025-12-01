@@ -1,20 +1,18 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import { QuizPage } from './QuizPage.jsx';
-// import { StoryPage } from './StoryPage.jsx';
-// import FeedBack from './feedBack.jsx';
+import {Routes, Route } from "react-router-dom";
 import StoryWrapper from './pages/StoryWrapper.jsx';
 import Home from "./pages/home";
 import QuizWrapper from "./pages/quizwrapper.jsx";
 import FeedBackWrapper from "./pages/feedbackwrapper.jsx";
-import Welcome from "./pages/welcome.jsx";
-// import FeedBack from "./unit/:unitId/lesson/:lessonId/feedback";
+import HomePage from "./pages/HomePage.jsx";
+import UnitsPage from "./pages/UnitsPage.jsx";
+import VideoPlayerPage from './pages/VideoPlayerPage';
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Welcome />}/>
-      <Route path="/home" element={<Home />} />
-      <Route path="/unit/:unitId/lesson/:lessonId" element={<StoryWrapper />} />
+      <Route path="/" element={<HomePage />}/>
+      <Route path="/UnitsPage" element={<UnitsPage />} />
+      <Route path="/unit/:unitId/lesson/:lessonId" element={<VideoPlayerPage />} />
       <Route path="/unit/:unitId/lesson/:lessonId/quiz" element={<QuizWrapper />} />
       <Route path="/unit/:unitId/lesson/:lessonId/feedback" element={<FeedBackWrapper />} />
     </Routes>
