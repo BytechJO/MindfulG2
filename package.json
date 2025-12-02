@@ -13,6 +13,7 @@
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
     "@fortawesome/react-fontawesome": "^3.1.0",
+    "@motionone/react": "^10.16.4",
     "@tailwindcss/vite": "^4.1.17",
     "@tareqalsadaqa/subtitleinbubble": "^0.1.11",
     "animate.css": "^4.1.1",
