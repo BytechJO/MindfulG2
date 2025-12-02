@@ -1,5 +1,6 @@
 import { Suspense, lazy, useState } from "react";
 import { motion } from "framer-motion";
+
 import { Home, PlayCircle, Menu } from "lucide-react";
 import { AnimatedBackground } from "./AnimatedBackground";
 import { AnimatedCharacter } from "./AnimatedCharacter";
@@ -33,7 +34,6 @@ const lessons = [
 const FeedbackWrapper = () => {
   const { unitId, lessonId } = useParams();
   const navigate = useNavigate();
-  const [showLessonDropdown, setShowLessonDropdown] = useState(false);
 
   const [showLessonDropdown, setShowLessonDropdown] = useState(false);
 

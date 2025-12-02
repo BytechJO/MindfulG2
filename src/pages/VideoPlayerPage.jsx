@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-
 import { useState } from 'react';
 import { Home, PlayCircle, Menu } from 'lucide-react';
 import { AnimatedBackground } from './AnimatedBackground';
@@ -18,7 +17,6 @@ const lessons = [
 function VideoPlayerPage() {
   const { unitId, lessonId } = useParams();
   const navigate = useNavigate();
-  const [showLessonDropdown, setShowLessonDropdown] = useState(false);
   const [showLessonDropdown, setShowLessonDropdown] = useState(false);
 
   const handleLessonSelect = (lessonNumber) => {
