@@ -35,12 +35,14 @@ export default function VideoPlayerPage() {
   const { unitId, lessonId } = useParams();
   const navigate = useNavigate();
   const [showLessonDropdown, setShowLessonDropdown] = useState(false);
+  const [showLessonDropdown, setShowLessonDropdown] = useState(false);
 
   const key = `${unitId}-${lessonId}`;
   const Component = pages[key];
 
   const handleLessonSelect = (lessonNumber) => {
     navigate(`/unit/${unitId}/lesson/${lessonNumber}`);
+    setShowLessonDropdown(false); // إخفاء القائمة بعد الاختيار
     setShowLessonDropdown(false); // إخفاء القائمة بعد الاختيار
   };
 

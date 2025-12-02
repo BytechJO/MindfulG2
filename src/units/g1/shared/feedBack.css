@@ -5,18 +5,15 @@
   margin: 0 auto;
   overflow: hidden;
   border-radius: 1.5rem;
-  margin-top: 50px;
+  margin-top: 0px;
 }
-
-
-
 
 .star-rating-container {
   display: flex; 
   justify-content: center; 
   gap: clamp(10px, 2vw, 30px);
-  margin-bottom: -5px; 
-  margin-left: 90px;
+  margin-bottom: -10px; 
+  margin-left: 70px;
 }
 #feedBtn {
   bottom: 2%; 
@@ -77,6 +74,16 @@
     flex-wrap: wrap;
   }
 
+  @media(max-width:800px){
+ #feedBtn {
+    
+    width: clamp(70px, 30vw, 100px);
+    height: clamp(20px, 6vw, 30px);
+    
+  }
+
+
+  }
   #feedBtn {
     left: 60%;
     width: clamp(70px, 30vw, 100px);
