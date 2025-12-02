@@ -1,74 +1,89 @@
-import { motion } from "framer-motion";
-
+import { motion } from "motion/react";
 import { AnimatedBackground } from "./AnimatedBackground";
 import { AnimatedCharacter } from "./AnimatedCharacter";
-import { useNavigate } from 'react-router-dom';
-// const units = [
-//   { number: 1, color: "from-blue-400 to-blue-500" },
-//   { number: 2, color: "from-green-400 to-green-500" },
-//   { number: 3, color: "from-pink-400 to-pink-500" },
-//   { number: 4, color: "from-orange-400 to-orange-500" },
-// ];
+import { BookOpen } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 const units = [
-  {id: "One", path: "/unit/One/lesson/1", color: "from-blue-400 to-blue-500"},
-  {id: "Two", path: "/unit/Two/lesson/1", color: "from-green-400 to-green-500" },
-  {id: "Three", path: "/unit/Three/lesson/1", color: "from-pink-400 to-pink-500"},
-  {id: "Four", path: "/unit/Four/lesson/1", color: "from-orange-400 to-orange-500"}
+  { id: 1, path: "/unit/One/lesson/1", color: '#6a3996', name: 'Unit One' },
+  { id: 2, path: "/unit/Two/lesson/1", color: '#6a3996', name: 'Unit Two' },
+  { id: 3, path: "/unit/Three/lesson/1", color: '#6a3996', name: 'Unit Three' },
+  { id: 4, path: "/unit/Four/lesson/1", color: '#6a3996', name: 'Unit Four' },
 ];
 
-function UnitsPage({ onUnitSelect }) {
+export default function UnitsPage({ onUnitSelect }) {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+    <div className="h-screen w-screen flex flex-col items-center justify-center p-4 sm:p-8 relative overflow-hidden">
+
+      {/* Animated Background */}
       <AnimatedBackground />
+
+      {/* Animated Character */}
       <AnimatedCharacter />
 
-      <div className="max-w-4xl w-full relative z-10">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-blue-600 text-center mb-6 sm:mb-8 md:mb-10 text-2xl sm:text-3xl md:text-4xl px-4"
-        >
-          Choose a Unit
-        </motion.h2>
+      {/* Title */}
+      <motion.h1
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-3xl sm:text-4xl md:text-5xl mb-8 sm:mb-12 text-center relative z-10"
+        style={{ color: '#284660' }}
+      >
+        Choose a Unit
+      </motion.h1>
 
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 px-4">
-          {units.map((unit, index) => (
-            <motion.button
-              key={unit.id}
-              onClick={() => navigate(unit.path)}
-              className={`bg-gradient-to-br ${unit.color} p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl shadow-2xl text-white relative overflow-hidden`}
-              initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{
-                delay: index * 0.1,
-                type: "spring",
-                stiffness: 200,
-                damping: 15,
-              }}
-              whileHover={{
-                scale: 1.05,
-                rotate: 2,
-                boxShadow: "0 30px 60px -12px rgba(0, 0, 0, 0.4)",
-              }}
-              whileTap={{ scale: 0.95 }}
+      {/* Units Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-3xl w-full relative z-10">
+        {units.map((unit, index) => (
+          <motion.button
+            key={unit.id}
+            onClick={() => navigate(unit.path)}
+            className="bg-white rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all relative overflow-hidden group flex items-center gap-4 sm:gap-6"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1, duration: 0.5 }}
+            whileHover={{ scale: 1.03, y: -5 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            {/* Colored Icon Background */}
+            <div
+              className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center text-white shadow-md"
+              style={{ backgroundColor: unit.color }}
             >
-              {/* Decorative circles */}
-              <div className="absolute -top-10 -right-10 w-24 h-24 sm:w-32 sm:h-32 bg-white opacity-10 rounded-full"></div>
-              <div className="absolute -bottom-10 -left-10 w-32 h-32 sm:w-40 sm:h-40 bg-white opacity-10 rounded-full"></div>
+              <BookOpen className="w-8 h-8 sm:w-10 sm:h-10" />
+            </div>
 
-              <div className="relative z-10">
-                <span className="text-xl sm:text-2xl md:text-3xl">
-                  Unit {unit.id}
-                </span>
+            {/* Text */}
+            <div className="flex-1 text-left">
+              <div
+                className="text-2xl sm:text-3xl font-semibold"
+                style={{ color: unit.color }}
+              >
+                {unit.name}
               </div>
-            </motion.button>
-          ))}
-        </div>
+            </div>
+
+            {/* Arrow */}
+            <motion.div
+              className="text-gray-300 group-hover:text-gray-400"
+              animate={{ x: [0, 5, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </motion.div>
+
+            {/* Hover glow */}
+            <motion.div
+              className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity rounded-3xl"
+              style={{ backgroundColor: unit.color }}
+            />
+          </motion.button>
+        ))}
       </div>
     </div>
   );
 }
-
-export default UnitsPage;

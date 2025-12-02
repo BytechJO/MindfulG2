@@ -6,7 +6,7 @@ import mindfulKidsImage from "../assets/Mind.png";
 
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 
-function  HomePage() {
+function HomePage() {
   const navigate = useNavigate();
 
   const handlePlayClick = () => {
@@ -14,20 +14,15 @@ function  HomePage() {
   };
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center p-4 sm:p-6 md:p-8 relative overflow-hidden">
+    <div className="h-screen w-screen flex items-center justify-center p-4 sm:p-8 relative overflow-hidden ">
       <AnimatedBackground />
       <AnimatedCharacter />
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{
-          duration: 1,
-          type: "spring",
-          stiffness: 100,
-          damping: 15,
-        }}
-        className="relative z-10 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 w-full max-w-md lg:max-w-lg "
       >
         <img
           src={mindfulKidsImage}
@@ -36,53 +31,82 @@ function  HomePage() {
         />
       </motion.div>
 
-      {/* زر Play ثابت على اليمين */}
-      <motion.div
-        initial={{ opacity: 0, x: 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-        className="fixed right-4 sm:right-8 md:right-12 top-1/2 -translate-y-1/2 z-20"
-      >
+     
         <motion.button
           onClick={handlePlayClick}
-          className="bg-gradient-to-br from-yellow-400 via-yellow-500 to-orange-500 text-blue-900 px-6 sm:px-8 py-4 sm:py-5 rounded-full shadow-2xl flex flex-row items-center gap-3 hover:from-yellow-500 hover:to-orange-600 transform transition-all"
-          whileHover={{
-            scale: 1.1,
-            boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.4)",
-          }}
+          className="fixed right-12 sm:right-16 md:right-20 top-1/2 -translate-y-1/2 z-20 group"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
-          animate={{
-            y: [0, -8, 0],
-          }}
-          transition={{
-            y: {
-              repeat: Infinity,
-              duration: 2,
-              ease: "easeInOut",
-            },
-          }}
         >
+          {/* Outer Glow Ring */}
           <motion.div
-            className="bg-white/30 p-2 rounded-full"
+            className="absolute inset-0 rounded-full opacity-40 blur-xl"
+            style={{ backgroundColor: '#4a78bc' }}
             animate={{
-              rotate: [0, 360],
+              scale: [1, 1.3, 1],
+              opacity: [0.4, 0.6, 0.4]
             }}
             transition={{
-              rotate: {
-                repeat: Infinity,
-                duration: 3,
-                ease: "linear",
-              },
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+
+          {/* Pulse Ring */}
+          <motion.div
+            className="absolute inset-0 rounded-full border-4"
+            style={{ borderColor: '#4a78bc' }}
+            animate={{
+              scale: [1, 1.4],
+              opacity: [0.6, 0]
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeOut"
+            }}
+          />
+
+          {/* Main Button */}
+          <div className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full flex flex-col items-center justify-center text-white shadow-2xl overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, #4a78bc 0%, #6a9dd4 100%)'
             }}
           >
-            <Play
-              className="w-8 h-8 sm:w-10 sm:h-10"
-              fill="currentColor"
+            {/* Shimmer effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+              animate={{
+                x: ['-200%', '200%']
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                repeatDelay: 1,
+                ease: "linear"
+              }}
             />
-          </motion.div>
-          <span className="text-xl sm:text-2xl">Lets Play!</span>
+
+            {/* Content */}
+            <motion.div
+              animate={{
+                scale: [1, 1.1, 1]
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            >
+              <Play className="w-12 h-12 sm:w-16 sm:h-16 mb-1" fill="currentColor" />
+            </motion.div>
+            <span className="text-base sm:text-lg font-bold relative z-10">Let's Play!</span>
+          </div>
         </motion.button>
-      </motion.div>
     </div>
   );
 }

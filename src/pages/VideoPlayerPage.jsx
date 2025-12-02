@@ -1,28 +1,25 @@
-import { motion } from "framer-motion";
+import { motion } from 'motion/react';
 import { useState } from 'react';
-import { Home, PlayCircle, Menu } from 'lucide-react';
+import { Home, PlayCircle } from 'lucide-react';
 import { AnimatedBackground } from './AnimatedBackground';
 import { AnimatedCharacter } from './AnimatedCharacter';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import StoryWrapper from './StoryWrapper';
-import QuizPage from '../units/g1/unitOne/L1/QuizPage';
 import logo from "../assets/PreissMurphy Logo-BGSDEhSA (1).svg";
-
 const lessons = [
-  { number: 1, color: 'from-blue-400 to-blue-500' },
-  { number: 2, color: 'from-green-400 to-green-500' },
-  { number: 3, color: 'from-pink-400 to-pink-500' },
+  { number: 1, color: '#1E3A8A', name: 'LESSON ONE' },
+  { number: 2, color: '#9333EA', name: 'LESSON TWO' },
+  { number: 3, color: '#06B6D4', name: 'LESSON THREE' },
 ];
 
-function VideoPlayerPage() {
-  const { unitId, lessonId } = useParams();
+export default function VideoPlayerPage() {
   const navigate = useNavigate();
-  const [showLessonDropdown, setShowLessonDropdown] = useState(false);
+  const { unitId, lessonId } = useParams();
+  const [currentLesson, setCurrentLesson] = useState(Number(lessonId) || 1);
 
   const handleLessonSelect = (lessonNumber) => {
+    setCurrentLesson(lessonNumber);
     navigate(`/unit/${unitId}/lesson/${lessonNumber}`);
-    setShowLessonDropdown(false); // إخفاء القائمة بعد الاختيار
-    setShowLessonDropdown(false); // إخفاء القائمة بعد الاختيار
   };
 
   const handleBackToUnits = () => {
@@ -30,9 +27,25 @@ function VideoPlayerPage() {
   };
 
   return (
-    <div className="h-screen w-screen relative overflow-hidden flex flex-col ">
+    <div className="h-screen w-screen relative overflow-hidden flex flex-col">
       <AnimatedBackground />
       <AnimatedCharacter />
+
+      {/* Decorative stars */}
+      <motion.div
+        className="absolute top-10 left-10 text-orange-400 text-2xl z-0"
+        animate={{ rotate: [0, 360], scale: [1, 1.2, 1] }}
+        transition={{ duration: 3, repeat: Infinity }}
+      >
+        ⭐
+      </motion.div>
+      <motion.div
+        className="absolute top-20 right-20 text-orange-400 text-xl z-0"
+        animate={{ rotate: [0, -360], scale: [1, 1.3, 1] }}
+        transition={{ duration: 4, repeat: Infinity, delay: 1 }}
+      >
+        ⭐
+      </motion.div>
 
       {/* Main Content Area - Video Player */}
       <div className="flex-1 p-4 sm:p-6 md:p-8 flex items-center justify-center overflow-hidden">
@@ -48,9 +61,8 @@ function VideoPlayerPage() {
       </div>
 
       {/* Divider Line */}
-      <div className="w-full h-[2px]  relative z-10"></div>
+      <div className="w-full h-[2px] bg-white/30 relative z-10"></div>
 
-      {/* Footer with Home Button and Lesson Buttons */}
       <motion.div
         className="relative z-10 py-4 sm:py-5 px-4 sm:px-6 bg-white border-t-[1px] border-t-black border-t-solid"
         initial={{ y: 100, opacity: 0 }}
@@ -91,25 +103,23 @@ function VideoPlayerPage() {
               <button
                 key={l.number}
                 onClick={() => handleLessonSelect(l.number)}
-                className={`
-            px-4 py-2 rounded-xl border font-medium transition-all duration-200 text-sm flex items-center gap-4
-            ${Number(lessonId) === l.number
-                    ? `border-[#6B40C8] text-white bg-gradient-to-r ${l.color}`
-                    : "border-[#b99cfa] text-[#6B40C8] hover:bg-purple-50"
-                  }
-          `}
+                className={`px-4 py-2 rounded-xl border font-medium text-sm flex items-center gap-4 ${Number(lessonId) === l.number ? '' : 'border-[#b99cfa] text-[#6B40C8] hover:bg-purple-50'
+                  }`}
+                style={
+                  Number(lessonId) === l.number
+                    ? { backgroundColor: l.color, color: 'white', borderColor: l.color }
+                    : {}
+                }
               >
                 <PlayCircle className="w-5 h-5" />
                 Lesson {l.number}
               </button>
             ))}
+
           </motion.div>
 
         </div>
       </motion.div>
-
     </div>
   );
 }
-
-export default VideoPlayerPage;
