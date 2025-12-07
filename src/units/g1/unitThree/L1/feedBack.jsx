@@ -19,7 +19,7 @@ function FeedBack() {
     <div id="p4" className="paper-feedback animate__animated animate__backInDown">
       
       
-      <img src={Q2Image} alt="Feedback background" className="feedback-bg-img" />
+      <img src={Q2Image} alt="Feedback background" className="feedback-bg-img u2l1" />
       
       <div
         className="stars-container absolute left-[47%] transform -translate-x-1/2 flex flex-col gap-12"

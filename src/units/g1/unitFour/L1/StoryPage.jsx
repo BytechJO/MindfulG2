@@ -37,7 +37,7 @@ export const StoryPage = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [showBubble, setShowBubble] = useState(true);
   const [showBanner, setShowBanner] = useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1);
+  const [playbackSpeed, setPlaybackSpeed] = useState(0.75);
   const [volume, setVolume] = useState(1);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [showSubtitles, setShowSubtitles] = useState(true);
@@ -54,12 +54,6 @@ export const StoryPage = () => {
       title: "Section 1",
       subtitles: [
         {
-          // start: 0, end: 3.12,
-          // words: [
-          //   { text: "Kate's", start: 0.5, end: 1.2 },
-          //   { text: "Big", start: 1.2, end: 1.7 },
-          //   { text: "Feelings", start: 1.7, end: 2.5 },
-          // ]
         },
       ],
     },
@@ -203,11 +197,6 @@ export const StoryPage = () => {
           ],
         },
       ],
-    },
-    {
-      url: img,
-      title: "Section 6",
-      subtitles: [],
     },
   ];
 
@@ -536,8 +525,11 @@ export const StoryPage = () => {
   };
 
   const handleNext = () => {
-    setShowBanner(false);
-    setCurrentVideo((prev) => (prev < videos.length - 1 ? prev + 1 : 0));
+    if (currentVideo === videos.length - 1) {
+      navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+    } else {
+      setCurrentVideo(prev => prev + 1);
+    }
   };
 
   const handleEnded = useCallback(() => {
@@ -791,21 +783,21 @@ export const StoryPage = () => {
               <div className="controls-row">
                 <div className="controls-group-left">
                   <button
-                    onClick={() => setShowSubtitles(!showSubtitles)}
-                    className="control-btn"
-                    title="Subtitles"
-                  >
-                    <Subtitles className="w-6 h-6" />
-                    <span className="control-label">Subtitle</span>
-                  </button>
-
-                  <button
                     onClick={() => setShowCaption(!showCaption)}
-                    className="control-btn"
+                    className={`control-btn ${!showCaption ? "disabled-btn" : ""}`}
                     title="Caption"
                   >
                     <MessageSquareText className="w-6 h-6" />
                     <span className="control-label">Caption</span>
+                  </button>
+                  
+                  <button
+                    onClick={() => setShowSubtitles(!showSubtitles)}
+                    className={`control-btn ${!showSubtitles ? "disabled-btn" : ""}`}
+                    title="Subtitles"
+                  >
+                    <Subtitles className="w-6 h-6" />
+                    <span className="control-label">Subtitle</span>
                   </button>
 
                   <div

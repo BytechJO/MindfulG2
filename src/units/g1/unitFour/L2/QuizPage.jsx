@@ -9,11 +9,24 @@ export const QuizPage = () => {
   const { unitId, lessonId } = useParams();
   const navigate = useNavigate();
   const [answers, setAnswers] = useState({ q1: null, q2: null, q3: null });
+  const [showSkip, setShowSkip] = useState(false);
+  const [showtry, setshowtry] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAnswers(prev => ({ ...prev, [name]: value }));
   };
+
+  const handleTryAgain = () => {
+    setAnswers({ q1: null, q2: null, q3: null });
+    setShowSkip(true);
+    setshowtry(true);
+
+    // إزالة التحديد عن كل radio
+    const radios = document.querySelectorAll('input[type="radio"]');
+    radios.forEach(radio => (radio.checked = false));
+  };
+
 
   const handleSubmit = () => {
     if (!answers.q1 || !answers.q2 || !answers.q3) {
@@ -26,6 +39,8 @@ export const QuizPage = () => {
       q2: answers.q2 === correctAnswers.q2,
       q3: answers.q3 === correctAnswers.q3
     };
+    setShowSkip(true);
+    setshowtry(true);
     const score = Object.values(results).filter(isCorrect => isCorrect).length;
     const totalQuestions = Object.keys(results).length;
     const scoreString = `${score}/${totalQuestions}`;
@@ -45,47 +60,62 @@ export const QuizPage = () => {
           navigate(`/unit/${unitId}/lesson/${lessonId}/feedBack`);
         });
     } else {
-      ValidationAlert.error("Try again", "", scoreString)  
+      ValidationAlert.error("Try again", "", scoreString)
     }
   };
 
+  const handleSkip = () => {
+    navigate(`/unit/${unitId}/lesson/${lessonId}/feedBack`);
+  };
+
   return (
-    <div className="story-pages-container">
+    <div className="story-pages-container dd">
       <div className="w-full max-w-6xl">
         <div className="paper animate__animated animate__backInDown" id="p3">
           <img src={Q1Image} alt="Background" className="bg-img" />
-          
-          <div className="contentu4l2">
+
+          <div className="content">
             <div className="Q1">
               <span>Mum wanted to bake cookies for ________.</span>
               <ul>
-                <li>Her friend <input type="radio" name="q1" value="0" onChange={handleChange} /></li>
-                <li>The neighbour <input type="radio" name="q1" value="1" onChange={handleChange}/></li>
-                <li>Claire<input type="radio" name="q1" value="2" onChange={handleChange}/></li>
+                <li>Her friend <input type="radio" name="q1" value="0" onChange={handleChange} style={{ marginLeft: '28px' }}/></li>
+                <li>The neighbour <input type="radio" name="q1" value="1" onChange={handleChange} style={{ marginLeft: '28px' }}/></li>
+                <li>Claire<input type="radio" name="q1" value="2" onChange={handleChange} style={{ marginLeft: '28px' }}/></li>
               </ul>
             </div>
-            
+
             <div className="Q2">
               <span>What idea did Claire come up with?</span>
               <ul>
-                <li>She wanted to eat the cookies. <input type="radio" name="q2" value="0" onChange={handleChange}/></li>
-                <li>She wanted to bake cookies for her grandparents. <input type="radio" name="q2" value="1" onChange={handleChange}/></li>
-                <li>She wanted to bake cookies for her friend. <input type="radio" name="q2" value="2" onChange={handleChange}/></li>
+                <li>She wanted to eat the cookies. <input type="radio" name="q2" value="0" onChange={handleChange} style={{ marginLeft: '28px' }}/></li>
+                <li>She wanted to bake cookies for her grandparents. <input type="radio" name="q2" value="1" onChange={handleChange} style={{ marginLeft: '28px' }}/></li>
+                <li>She wanted to bake cookies for her friend. <input type="radio" name="q2" value="2" onChange={handleChange} style={{ marginLeft: '28px' }}/></li>
               </ul>
             </div>
-            
+
             <div className="Q3" >
               <span>What did Mum and Claire do to show they were</span>
               <br />
               <span> thinking of their friends?</span>
               <ul>
-                <li>They took them to the park.<input type="radio" name="q3" value="0" onChange={handleChange}/></li>
-                <li>They baked cookies for them.<input type="radio" name="q3" value="1" onChange={handleChange}/></li>
-                <li>They made pizza for them.<input type="radio" name="q3" value="2" onChange={handleChange}/></li>
+                <li>They took them to the park.<input type="radio" name="q3" value="0" onChange={handleChange} style={{ marginLeft: '28px' }} /></li>
+                <li>They baked cookies for them.<input type="radio" name="q3" value="1" onChange={handleChange} style={{ marginLeft: '28px' }} /></li>
+                <li>They made pizza for them.<input type="radio" name="q3" value="2" onChange={handleChange} style={{ marginLeft: '28px' }}/></li>
               </ul>
             </div>
 
             <button type="button" id="submitBtn1" onClick={handleSubmit}>Submit</button>
+            {showSkip && (
+              <button type="button" className="skip-btn" onClick={handleSkip}>
+                Skip
+              </button>
+            )}
+
+            {showtry && (
+              <button className="try-btn" onClick={handleTryAgain}>
+                Try again
+              </button>
+            )}
           </div>
 
         </div>

@@ -19,7 +19,7 @@ export const StoryPage = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1);
+  const [playbackSpeed, setPlaybackSpeed] = useState(0.75);
   const [showSubtitles, setShowSubtitles] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [showBubble, setShowBubble] = useState(true);
@@ -141,15 +141,6 @@ export const StoryPage = () => {
         },
       ]
     },
-
-    {
-      type: 'image',
-      url: img1,
-      title: "The End",
-      subtitles: [
-
-      ]
-    }
   ];
   const extraBubblesData = [
     {
@@ -353,14 +344,12 @@ export const StoryPage = () => {
 
   // --- دوال التحكم بالوسائط ---
   const handleNext = useCallback(() => {
-    if (currentItemIndex === mediaItems.length - 1) {
-      ValidationAlert.storyEnd(() => {
-        navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
-      });
-    } else {
-      setCurrentItemIndex(prev => prev + 1);
-    }
-  }, [currentItemIndex, mediaItems.length, navigate, unitId, lessonId]);
+  if (currentItemIndex === mediaItems.length - 1) {
+    navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+  } else {
+    setCurrentItemIndex(prev => prev + 1);
+  }
+}, [currentItemIndex, mediaItems.length, navigate, unitId, lessonId]);
 
   const handlePrevious = () => {
     setCurrentItemIndex(prev => (prev > 0 ? prev - 1 : mediaItems.length - 1));
@@ -515,15 +504,25 @@ export const StoryPage = () => {
             <div className="controls-wrapper-new">
               <div className="controls-row">
                 <div className="controls-group-left">
-                  {/* --- 5. تعطيل الأزرار عند عرض الصورة --- */}
-                  <button onClick={() => setShowSubtitles(!showSubtitles)} className="control-btn" title="Subtitles">
-                    <Subtitles className="w-6 h-6" />
-                    <span className="control-label">Subtitle</span>
-                  </button>
-                  <button onClick={() => setShowCaption(!showCaption)} className="control-btn" title="Caption">
+
+                  <button
+                    onClick={() => setShowCaption(!showCaption)}
+                    className={`control-btn ${!showCaption ? "disabled-btn" : ""}`}
+                    title="Caption"
+                  >
                     <MessageSquareText className="w-6 h-6" />
                     <span className="control-label">Caption</span>
                   </button>
+                  
+                  <button
+                    onClick={() => setShowSubtitles(!showSubtitles)}
+                    className={`control-btn ${!showSubtitles ? "disabled-btn" : ""}`}
+                    title="Subtitles"
+                  >
+                    <Subtitles className="w-6 h-6" />
+                    <span className="control-label">Subtitle</span>
+                  </button>
+
                   <div className="volume-control" onMouseEnter={() => setShowVolumeSlider(true)} onMouseLeave={() => setShowVolumeSlider(false)}>
                     <button onClick={toggleMute} className="control-btn" disabled={currentItem.type === 'image'}>
                       {isMuted || volume === 0 ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}

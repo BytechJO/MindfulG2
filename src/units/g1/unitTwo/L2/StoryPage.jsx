@@ -32,7 +32,7 @@ export const StoryPage = () => {
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [showSubtitles, setShowSubtitles] = useState(true);
   const [showSpeedMenu, setShowSpeedMenu] = useState(false);
-
+  
   const availableSpeeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
 
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -169,9 +169,6 @@ export const StoryPage = () => {
 
 
       ]
-    },
-    {
-      url: img1, title: "Section 2 (Image)", subtitles: []
     },
   ];
 
@@ -456,8 +453,11 @@ export const StoryPage = () => {
   };
 
   const handleNext = () => {
-    setShowBanner(false);
-    setCurrentVideo(prev => (prev < videos.length - 1 ? prev + 1 : 0));
+    if (currentVideo === videos.length - 1) {
+      navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+    } else {
+      setCurrentVideo(prev => prev + 1);
+    }
   };
 
   const handleEnded = useCallback(() => {
@@ -652,13 +652,22 @@ export const StoryPage = () => {
             <div className="controls-wrapper-new">
               <div className="controls-row">
                 <div className="controls-group-left">
-                  <button onClick={() => setShowSubtitles(!showSubtitles)} className="control-btn" title="Subtitles">
-                    <Subtitles className="w-6 h-6" />
-                    <span className="control-label">Subtitle</span>
-                  </button>
-                  <button onClick={() => setShowCaption(!showCaption)} className="control-btn" title="Caption">
+                  <button
+                    onClick={() => setShowCaption(!showCaption)}
+                    className={`control-btn ${!showCaption ? "disabled-btn" : ""}`}
+                    title="Caption"
+                  >
                     <MessageSquareText className="w-6 h-6" />
                     <span className="control-label">Caption</span>
+                  </button>
+                  
+                  <button
+                    onClick={() => setShowSubtitles(!showSubtitles)}
+                    className={`control-btn ${!showSubtitles ? "disabled-btn" : ""}`}
+                    title="Subtitles"
+                  >
+                    <Subtitles className="w-6 h-6" />
+                    <span className="control-label">Subtitle</span>
                   </button>
                   <div
                     className="volume-control"

@@ -1,7 +1,7 @@
 import { Suspense, lazy, useState } from "react";
 import { motion } from "framer-motion";
 
-import { Home, PlayCircle, Menu } from "lucide-react";
+import { Home, PlayCircle, ChevronLeft } from "lucide-react";
 import { AnimatedBackground } from "./AnimatedBackground";
 import { AnimatedCharacter } from "./AnimatedCharacter";
 import { useParams, useNavigate } from "react-router-dom";
@@ -52,12 +52,20 @@ const FeedbackWrapper = () => {
 
   if (!Component) return <div>feedback not found</div>;
 
+  const handlePrevious = () => {
+    navigate(-1);
+  };
+
+
   return (
     <div className="h-screen w-screen relative overflow-hidden flex flex-col ">
       <AnimatedBackground />
       <AnimatedCharacter />
 
       <div className="flex-1 p-4 sm:p-6 md:p-8 flex items-center justify-center overflow-hidden">
+        <button onClick={handlePrevious} className="feedquiz left">
+          <ChevronLeft className="w-8 h-8" />
+        </button>
         <div className="max-w-5xl mx-auto relative z-10 w-full">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}

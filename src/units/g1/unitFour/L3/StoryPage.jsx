@@ -37,7 +37,7 @@ export const StoryPage = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [showBubble, setShowBubble] = useState(true);
   const [showBanner, setShowBanner] = useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1);
+  const [playbackSpeed, setPlaybackSpeed] = useState(0.75);
   const [volume, setVolume] = useState(1);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [showSubtitles, setShowSubtitles] = useState(true);
@@ -69,7 +69,7 @@ export const StoryPage = () => {
       url: video2,
       title: "Section 2",
       subtitles: [
-      
+
         {
           start: 3.8,
           end: 4.8,
@@ -104,14 +104,14 @@ export const StoryPage = () => {
       title: "Section 3",
       subtitles: [
         {
-        
+
         },
 
         {
-   
+
         },
         {
-       
+
         },
       ],
     },
@@ -119,13 +119,13 @@ export const StoryPage = () => {
       url: video4,
       title: "Section 4",
       subtitles: [
-    
-        
+
+
         {
-         
+
         },
         {
-      
+
         },
       ],
     },
@@ -133,13 +133,8 @@ export const StoryPage = () => {
       url: video5,
       title: "Section 5",
       subtitles: [
-     
+
       ],
-    },
-    {
-      url: img,
-      title: "Section 6",
-      subtitles: [],
     },
   ];
 
@@ -186,163 +181,163 @@ export const StoryPage = () => {
     //   { top: '10%', left: '50%', isFlipped: true },
     // ],
   };
-   const extraBubblesData = [
+  const extraBubblesData = [
     {
       videoIndex: 1,
-          start: 0,
-          end: 3.8,
-          words: [
-            { text: "Jade", start: 0.2, end: 0.5 },
-            { text: "and", start: 0.5, end: 0.8 },
-            { text: "Ella", start: 0.8, end: 1.1 },
-            { text: "are", start: 1.1, end: 1.4 },
-            { text: "in", start: 1.4, end: 1.7 },
-            { text: "the", start: 1.7, end: 2.0 },
-            { text: "cafeteria", start: 2.0, end: 2.3 },
-            { text: "at", start: 2.3, end: 2.6 },
-            { text: "lunchtime.", start: 2.6, end: 3.4 },
-          ],
+      start: 0,
+      end: 3.8,
+      words: [
+        { text: "Jade", start: 0.2, end: 0.5 },
+        { text: "and", start: 0.5, end: 0.8 },
+        { text: "Ella", start: 0.8, end: 1.1 },
+        { text: "are", start: 1.1, end: 1.4 },
+        { text: "in", start: 1.4, end: 1.7 },
+        { text: "the", start: 1.7, end: 2.0 },
+        { text: "cafeteria", start: 2.0, end: 2.3 },
+        { text: "at", start: 2.3, end: 2.6 },
+        { text: "lunchtime.", start: 2.6, end: 3.4 },
+      ],
     },
     {
       videoIndex: 2,
-        start: 0,
-          end: 2.5,
-          words: [
-            { text: "Jade’s", start: 0.2, end: 0.5 },
-            { text: "lunch", start: 0.5, end: 0.8 },
-            { text: "has", start: 0.8, end: 1.1 },
-            { text: "everything", start: 1.1, end: 1.4 },
-            { text: "she", start: 1.4, end: 1.7 },
-            { text: "likes.", start: 1.7, end: 2.0 },
-          ],
+      start: 0,
+      end: 2.5,
+      words: [
+        { text: "Jade’s", start: 0.2, end: 0.5 },
+        { text: "lunch", start: 0.5, end: 0.8 },
+        { text: "has", start: 0.8, end: 1.1 },
+        { text: "everything", start: 1.1, end: 1.4 },
+        { text: "she", start: 1.4, end: 1.7 },
+        { text: "likes.", start: 1.7, end: 2.0 },
+      ],
     },
     {
       videoIndex: 2,
-          start: 2.5,
-          end: 5.6,
-          words: [
-            { text: "Jade", start: 3.2, end: 3.5 },
-            { text: "starts", start: 3.5, end: 3.8 },
-            { text: "to", start: 3.8, end: 4.1 },
-            { text: "eat", start: 4.1, end: 4.4 },
-            { text: "her", start: 4.4, end: 4.7 },
-            { text: "lunch.", start: 4.7, end: 5.5 },
-          ],
+      start: 2.5,
+      end: 5.6,
+      words: [
+        { text: "Jade", start: 3.2, end: 3.5 },
+        { text: "starts", start: 3.5, end: 3.8 },
+        { text: "to", start: 3.8, end: 4.1 },
+        { text: "eat", start: 4.1, end: 4.4 },
+        { text: "her", start: 4.4, end: 4.7 },
+        { text: "lunch.", start: 4.7, end: 5.5 },
+      ],
     },
     {
       videoIndex: 2,
-        start: 5.6,
-          end: 7.2,
-          words: [
-            { text: "Ella", start: 5.9, end: 6.2 },
-            { text: "looks", start: 6.2, end: 6.5 },
-            { text: "sad.", start: 6.5, end: 6.8 },
-          ],
+      start: 5.6,
+      end: 7.2,
+      words: [
+        { text: "Ella", start: 5.9, end: 6.2 },
+        { text: "looks", start: 6.2, end: 6.5 },
+        { text: "sad.", start: 6.5, end: 6.8 },
+      ],
     },
 
     {
       videoIndex: 3,
       start: 0,
-          end: 6.4,
-          words: [
-            { text: "Jade", start: 0.2, end: 0.5 },
-            { text: "doesn’t", start: 0.5, end: 0.8 },
-            { text: "want", start: 0.8, end: 1.1 },
-            { text: "to", start: 1.1, end: 1.4 },
-            { text: "give", start: 1.4, end: 1.7 },
-            { text: "up", start: 1.7, end: 2.0 },
-            { text: "any", start: 2.0, end: 2.3 },
-            { text: "of", start: 2.3, end: 2.6 },
-            { text: "her", start: 2.6, end: 2.9 },
-            { text: "yummy", start: 2.9, end: 3.2 },
-            { text: "lunch,", start: 3.2, end: 3.5 },
-            { text: "but", start: 3.5, end: 3.8 },
-            { text: "she", start: 3.8, end: 4.1 },
-            { text: "knows", start: 4.1, end: 4.4 },
-            { text: "that", start: 4.4, end: 4.7 },
-            { text: "Ella", start: 4.7, end: 5.0 },
-            { text: "must", start: 5.0, end: 5.3 },
-            { text: "be", start: 5.3, end: 5.6 },
-            { text: "hungry.", start: 5.6, end: 6.2 },
-          ],
+      end: 6.4,
+      words: [
+        { text: "Jade", start: 0.2, end: 0.5 },
+        { text: "doesn’t", start: 0.5, end: 0.8 },
+        { text: "want", start: 0.8, end: 1.1 },
+        { text: "to", start: 1.1, end: 1.4 },
+        { text: "give", start: 1.4, end: 1.7 },
+        { text: "up", start: 1.7, end: 2.0 },
+        { text: "any", start: 2.0, end: 2.3 },
+        { text: "of", start: 2.3, end: 2.6 },
+        { text: "her", start: 2.6, end: 2.9 },
+        { text: "yummy", start: 2.9, end: 3.2 },
+        { text: "lunch,", start: 3.2, end: 3.5 },
+        { text: "but", start: 3.5, end: 3.8 },
+        { text: "she", start: 3.8, end: 4.1 },
+        { text: "knows", start: 4.1, end: 4.4 },
+        { text: "that", start: 4.4, end: 4.7 },
+        { text: "Ella", start: 4.7, end: 5.0 },
+        { text: "must", start: 5.0, end: 5.3 },
+        { text: "be", start: 5.3, end: 5.6 },
+        { text: "hungry.", start: 5.6, end: 6.2 },
+      ],
     },
     {
       videoIndex: 3,
-     start: 6.4,
-          end: 8,
-          words: [
-            { text: "Oh", start: 7.1, end: 7.5 },
-            { text: "dear!", start: 7.5, end: 7.9 },
-          ],
+      start: 6.4,
+      end: 8,
+      words: [
+        { text: "Oh", start: 7.1, end: 7.5 },
+        { text: "dear!", start: 7.5, end: 7.9 },
+      ],
     },
     {
       videoIndex: 3,
-     start: 8,
-          end: 10,
-          words: [
-            { text: "Jade", start: 7.9, end: 8.3 },
-            { text: "thinks", start: 8.3, end: 8.7 },
-            { text: "and", start: 8.7, end: 9.1 },
-            { text: "thinks.", start: 9.1, end: 9.5 },
-          ],
+      start: 8,
+      end: 10,
+      words: [
+        { text: "Jade", start: 7.9, end: 8.3 },
+        { text: "thinks", start: 8.3, end: 8.7 },
+        { text: "and", start: 8.7, end: 9.1 },
+        { text: "thinks.", start: 9.1, end: 9.5 },
+      ],
     },
     {
       videoIndex: 4,
-       start: 0,
-          end: 5,
-          words: [
-            { text: "Jade", start: 1.3, end: 1.6 },
-            { text: "decides", start: 1.6, end: 1.9 },
-            { text: "to", start: 1.9, end: 2.2 },
-            { text: "care", start: 2.2, end: 2.5 },
-            { text: "for", start: 2.5, end: 2.8 },
-            { text: "her", start: 2.8, end: 3.1 },
-            { text: "friend", start: 3.1, end: 3.4 },
-            { text: "by", start: 3.4, end: 3.7 },
-            { text: "sharing", start: 3.7, end: 4.0 },
-            { text: "her", start: 4.0, end: 4.3 },
-            { text: "food.", start: 4.3, end: 5.0 },
-          ],
+      start: 0,
+      end: 5,
+      words: [
+        { text: "Jade", start: 1.3, end: 1.6 },
+        { text: "decides", start: 1.6, end: 1.9 },
+        { text: "to", start: 1.9, end: 2.2 },
+        { text: "care", start: 2.2, end: 2.5 },
+        { text: "for", start: 2.5, end: 2.8 },
+        { text: "her", start: 2.8, end: 3.1 },
+        { text: "friend", start: 3.1, end: 3.4 },
+        { text: "by", start: 3.4, end: 3.7 },
+        { text: "sharing", start: 3.7, end: 4.0 },
+        { text: "her", start: 4.0, end: 4.3 },
+        { text: "food.", start: 4.3, end: 5.0 },
+      ],
     },
     {
       videoIndex: 4,
-          start: 4.8,
-          end: 9.2,
-          words: [
-            { text: "Jade", start: 6.1, end: 6.4 },
-            { text: "gives", start: 6.4, end: 6.7 },
-            { text: "Ella", start: 6.7, end: 7.0 },
-            { text: "her", start: 7.0, end: 7.3 },
-            { text: "juice", start: 7.3, end: 7.6 },
-            { text: "and", start: 7.6, end: 7.9 },
-            { text: "half", start: 7.9, end: 8.2 },
-            { text: "of", start: 8.2, end: 8.5 },
-            { text: "her", start: 8.5, end: 8.8 },
-            { text: "sandwich.", start: 8.8, end: 9.1 },
-          ],
+      start: 4.8,
+      end: 9.2,
+      words: [
+        { text: "Jade", start: 6.1, end: 6.4 },
+        { text: "gives", start: 6.4, end: 6.7 },
+        { text: "Ella", start: 6.7, end: 7.0 },
+        { text: "her", start: 7.0, end: 7.3 },
+        { text: "juice", start: 7.3, end: 7.6 },
+        { text: "and", start: 7.6, end: 7.9 },
+        { text: "half", start: 7.9, end: 8.2 },
+        { text: "of", start: 8.2, end: 8.5 },
+        { text: "her", start: 8.5, end: 8.8 },
+        { text: "sandwich.", start: 8.8, end: 9.1 },
+      ],
     },
     {
       videoIndex: 4,
-     start: 9.2,
-          end: 11.0,
-          words: [
-            { text: "Ella", start: 9.3, end: 9.5 },
-            { text: "thanks", start: 9.5, end: 9.7 },
-            { text: "Jade.", start: 9.7, end: 10.0 },
-          ],
+      start: 9.2,
+      end: 11.0,
+      words: [
+        { text: "Ella", start: 9.3, end: 9.5 },
+        { text: "thanks", start: 9.5, end: 9.7 },
+        { text: "Jade.", start: 9.7, end: 10.0 },
+      ],
     },
-   
+
   ];
-    useEffect(() => {
-        const bubbleToShow = extraBubblesData.find(
-          (bubble) =>
-            bubble.videoIndex === currentVideo &&
-            currentTime >= bubble.start &&
-            currentTime < bubble.end
-        );
-    
-        setExtraBubble(bubbleToShow || null);
-      }, [currentVideo, currentTime]);
+  useEffect(() => {
+    const bubbleToShow = extraBubblesData.find(
+      (bubble) =>
+        bubble.videoIndex === currentVideo &&
+        currentTime >= bubble.start &&
+        currentTime < bubble.end
+    );
+
+    setExtraBubble(bubbleToShow || null);
+  }, [currentVideo, currentTime]);
   const currentVideoData = videos[currentVideo];
   const activeSubtitleIndex = currentVideoData.subtitles.findIndex(
     (sub) => currentTime >= sub.start && currentTime < sub.end
@@ -369,7 +364,7 @@ export const StoryPage = () => {
 
     const handleCanPlay = () => {
       setIsLoading(false);
-      if (!showBanner) video.play().catch(() => {});
+      if (!showBanner) video.play().catch(() => { });
     };
     video.addEventListener("canplay", handleCanPlay);
     return () => {
@@ -427,7 +422,7 @@ export const StoryPage = () => {
       } else {
         const playPromise = videoRef.current.play();
         if (playPromise !== undefined) {
-          playPromise.catch(() => {});
+          playPromise.catch(() => { });
         }
       }
     }
@@ -470,8 +465,11 @@ export const StoryPage = () => {
   };
 
   const handleNext = () => {
-    setShowBanner(false);
-    setCurrentVideo((prev) => (prev < videos.length - 1 ? prev + 1 : 0));
+    if (currentVideo === videos.length - 1) {
+      navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+    } else {
+      setCurrentVideo(prev => prev + 1);
+    }
   };
 
   const handleEnded = useCallback(() => {
@@ -616,9 +614,8 @@ export const StoryPage = () => {
             showSubtitles && (
               <div className="subtitle-container" style={activeCloudPosition}>
                 <div
-                  className={`bubble-cloud animate__animated animate__fadeIn ${
-                    activeCloudPosition.isFlipped ? "flipped" : ""
-                  }`}
+                  className={`bubble-cloud animate__animated animate__fadeIn ${activeCloudPosition.isFlipped ? "flipped" : ""
+                    }`}
                 >
                   <p>
                     {activeSubtitle.words.map((word, index) => {
@@ -634,11 +631,10 @@ export const StoryPage = () => {
                           className={`
                 word-span
                 ${isHighlighted ? "active-word" : ""}
-                ${
-                  currentVideo === 4 && selectedWords.includes(word.text)
-                    ? "selected-word"
-                    : ""
-                }
+                ${currentVideo === 4 && selectedWords.includes(word.text)
+                              ? "selected-word"
+                              : ""
+                            }
                 ${currentVideo === 4 ? "clickable-word" : ""}
               `}
                         >
@@ -657,7 +653,7 @@ export const StoryPage = () => {
               </div>
             )}
 
-                {showCaption && extraBubble && extraBubble.words && (
+          {showCaption && extraBubble && extraBubble.words && (
             <div
               className="subtitle-container"
               style={{
@@ -675,9 +671,8 @@ export const StoryPage = () => {
                     return (
                       <span
                         key={index}
-                        className={`word-span ${
-                          isHighlighted ? "active-word" : ""
-                        }`}
+                        className={`word-span ${isHighlighted ? "active-word" : ""
+                          }`}
                       >
                         {word.text}{" "}
                       </span>
@@ -709,21 +704,22 @@ export const StoryPage = () => {
               <div className="controls-row">
                 <div className="controls-group-left">
                   <button
+                    onClick={() => setShowCaption(!showCaption)}
+                    className={`control-btn ${!showCaption ? "disabled-btn" : ""}`}
+                    title="Caption"
+                  >
+                    <MessageSquareText className="w-6 h-6" />
+                    <span className="control-label">Caption</span>
+                  </button>
+
+                  <button
                     onClick={() => setShowSubtitles(!showSubtitles)}
-                    className="control-btn"
+                    className={`control-btn ${!showSubtitles ? "disabled-btn" : ""}`}
                     title="Subtitles"
                   >
                     <Subtitles className="w-6 h-6" />
                     <span className="control-label">Subtitle</span>
                   </button>
-                     <button
-                                                        onClick={() => setShowCaption(!showCaption)}
-                                                        className="control-btn"
-                                                        title="Caption"
-                                                      >
-                                                        <MessageSquareText className="w-6 h-6" />
-                                                        <span className="control-label">Caption</span>
-                                                      </button>
                   <div
                     className="volume-control"
                     onMouseEnter={() => setShowVolumeSlider(true)}
@@ -804,9 +800,8 @@ export const StoryPage = () => {
             {videos.map((_, index) => (
               <div
                 key={index}
-                className={`progress-dot ${
-                  index === currentVideo ? "active" : ""
-                }`}
+                className={`progress-dot ${index === currentVideo ? "active" : ""
+                  }`}
               />
             ))}
           </div>

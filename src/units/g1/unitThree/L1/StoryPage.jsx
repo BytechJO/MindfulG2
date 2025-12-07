@@ -37,7 +37,7 @@ export const StoryPage = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [showBubble, setShowBubble] = useState(true);
   const [showBanner, setShowBanner] = useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1);
+  const [playbackSpeed, setPlaybackSpeed] = useState(0.75);
   const [volume, setVolume] = useState(1);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [showSubtitles, setShowSubtitles] = useState(true);
@@ -69,7 +69,7 @@ export const StoryPage = () => {
       title: "Section 2",
       subtitles: [
         {
-          
+
         },
 
         {
@@ -139,10 +139,10 @@ export const StoryPage = () => {
       title: "Section 4",
       subtitles: [
         {
-       
+
         },
         {
-    
+
         },
       ],
     },
@@ -152,24 +152,19 @@ export const StoryPage = () => {
       title: "Section 5",
       subtitles: [
         {
-          
+
         },
 
         {
-        
+
         },
 
         {
-       
+
         },
       ],
     },
 
-    {
-      url: img,
-      title: "Section 6",
-      subtitles: [],
-    },
   ];
 
   const cloudPositions = {
@@ -199,107 +194,107 @@ export const StoryPage = () => {
       { top: "5%", left: "35%", isFlipped: true },
     ],
   };
- const extraBubblesData = [
+  const extraBubblesData = [
     {
       videoIndex: 1,
-     start: 0,
-          end: 7.6,
-          words: [
-            { text: "Emma", start: 0.1, end: 0.4 },
-            { text: "is", start: 0.4, end: 0.7 },
-            { text: "at", start: 0.7, end: 0.9 },
-            { text: "home", start: 0.9, end: 1.2 },
-            { text: "with", start: 1.2, end: 1.3 },
-            { text: "her", start: 1.3, end: 1.5 },
-            { text: "parents.", start: 1.5, end: 2.4 },
+      start: 0,
+      end: 7.6,
+      words: [
+        { text: "Emma", start: 0.1, end: 0.4 },
+        { text: "is", start: 0.4, end: 0.7 },
+        { text: "at", start: 0.7, end: 0.9 },
+        { text: "home", start: 0.9, end: 1.2 },
+        { text: "with", start: 1.2, end: 1.3 },
+        { text: "her", start: 1.3, end: 1.5 },
+        { text: "parents.", start: 1.5, end: 2.4 },
 
-            { text: "Mum", start: 2.4, end: 2.8 },
-            { text: "dusts", start: 2.8, end: 3.1 },
-            { text: "and", start: 3.2, end: 3.6 },
-            { text: "Dad", start: 3.6, end: 3.9 },
-            { text: "vacuums.", start: 3.9, end: 4.7 },
+        { text: "Mum", start: 2.4, end: 2.8 },
+        { text: "dusts", start: 2.8, end: 3.1 },
+        { text: "and", start: 3.2, end: 3.6 },
+        { text: "Dad", start: 3.6, end: 3.9 },
+        { text: "vacuums.", start: 3.9, end: 4.7 },
 
-            { text: "Mum", start: 5.5, end: 5.7 },
-            { text: "asks", start: 5.7, end: 6 },
-            { text: "Emma", start: 6, end: 6.4 },
-            { text: "to", start: 6.4, end: 6.9 },
-            { text: "help.", start: 6.9, end: 7.5 },
-          ],
+        { text: "Mum", start: 5.5, end: 5.7 },
+        { text: "asks", start: 5.7, end: 6 },
+        { text: "Emma", start: 6, end: 6.4 },
+        { text: "to", start: 6.4, end: 6.9 },
+        { text: "help.", start: 6.9, end: 7.5 },
+      ],
     },
     {
       videoIndex: 3,
-       start: 0,
-          end: 2.2,
-          words: [
-            { text: "Emma", start: 0.1, end: 0.4 },
-            { text: "thinks", start: 0.4, end: 0.7 },
-            { text: "about", start: 0.7, end: 1.0 },
-            { text: "what", start: 1.0, end: 1.3 },
-            { text: "her", start: 1.3, end: 1.6 },
-            { text: "parents", start: 1.6, end: 1.9 },
-            { text: "said.", start: 1.9, end: 2.2 },
-          ],
+      start: 0,
+      end: 2.2,
+      words: [
+        { text: "Emma", start: 0.1, end: 0.4 },
+        { text: "thinks", start: 0.4, end: 0.7 },
+        { text: "about", start: 0.7, end: 1.0 },
+        { text: "what", start: 1.0, end: 1.3 },
+        { text: "her", start: 1.3, end: 1.6 },
+        { text: "parents", start: 1.6, end: 1.9 },
+        { text: "said.", start: 1.9, end: 2.2 },
+      ],
     },
     {
       videoIndex: 3,
-          start: 2.3,
-          end: 4.9,
-          words: [
-            { text: "She", start: 2.4, end: 2.7 },
-            { text: "decides", start: 2.7, end: 3.2 },
-            { text: "to", start: 3.2, end: 3.3 },
-            { text: "help", start: 3.3, end: 3.8 },
-            { text: "Mum", start: 3.8, end: 4.1 },
-            { text: "and", start: 4.1, end: 4.4 },
-            { text: "Dad.", start: 4.4, end: 4.8 },
-          ],
+      start: 2.3,
+      end: 4.9,
+      words: [
+        { text: "She", start: 2.4, end: 2.7 },
+        { text: "decides", start: 2.7, end: 3.2 },
+        { text: "to", start: 3.2, end: 3.3 },
+        { text: "help", start: 3.3, end: 3.8 },
+        { text: "Mum", start: 3.8, end: 4.1 },
+        { text: "and", start: 4.1, end: 4.4 },
+        { text: "Dad.", start: 4.4, end: 4.8 },
+      ],
     },
 
     {
       videoIndex: 4,
-    start: 0,
-          end: 3.1,
-          words: [
-            { text: "Emma", start: 0.1, end: 0.4 },
-            { text: "and", start: 0.4, end: 0.6 },
-            { text: "her", start: 0.6, end: 0.9 },
-            { text: "parents", start: 0.9, end: 1.3 },
-            { text: "finish", start: 1.3, end: 1.6 },
-            { text: "cleaning", start: 1.6, end: 1.9 },
-            { text: "the", start: 1.9, end: 2.2 },
-            { text: "living", start: 2.2, end: 2.5 },
-            { text: "room.", start: 2.5, end: 3.0 },
-          ],
+      start: 0,
+      end: 3.1,
+      words: [
+        { text: "Emma", start: 0.1, end: 0.4 },
+        { text: "and", start: 0.4, end: 0.6 },
+        { text: "her", start: 0.6, end: 0.9 },
+        { text: "parents", start: 0.9, end: 1.3 },
+        { text: "finish", start: 1.3, end: 1.6 },
+        { text: "cleaning", start: 1.6, end: 1.9 },
+        { text: "the", start: 1.9, end: 2.2 },
+        { text: "living", start: 2.2, end: 2.5 },
+        { text: "room.", start: 2.5, end: 3.0 },
+      ],
     },
     {
       videoIndex: 4,
       start: 3.1,
-          end: 5.5,
-          words: [
-            { text: "It", start: 3.2, end: 3.5 },
-            { text: "is", start: 3.5, end: 3.7 },
-            { text: "nice", start: 3.7, end: 4 },
-            { text: "and", start: 4, end: 4.3 },
-            { text: "clean", start: 4.3, end: 4.7 },
-            { text: "now.", start: 4.7, end: 5.2 },
-          ],
+      end: 5.5,
+      words: [
+        { text: "It", start: 3.2, end: 3.5 },
+        { text: "is", start: 3.5, end: 3.7 },
+        { text: "nice", start: 3.7, end: 4 },
+        { text: "and", start: 4, end: 4.3 },
+        { text: "clean", start: 4.3, end: 4.7 },
+        { text: "now.", start: 4.7, end: 5.2 },
+      ],
     },
     {
       videoIndex: 4,
       start: 6.0,
-          end: 12,
-          words: [
-            { text: "Emma", start: 6.5, end: 6.7 },
-            { text: "is", start: 6.7, end: 6.9 },
-            { text: "happy", start: 6.9, end: 7.2 },
-            { text: "that", start: 7.2, end: 7.5 },
-            { text: "she", start: 7.5, end: 7.8 },
-            { text: "helped", start: 7.8, end: 8.1 },
-            { text: "her", start: 8.1, end: 8.4 },
-            { text: "parents", start: 8.4, end: 8.7 },
-            { text: "at", start: 8.7, end: 9.0 },
-            { text: "home.", start: 9.0, end: 9.3 },
-          ],
+      end: 12,
+      words: [
+        { text: "Emma", start: 6.5, end: 6.7 },
+        { text: "is", start: 6.7, end: 6.9 },
+        { text: "happy", start: 6.9, end: 7.2 },
+        { text: "that", start: 7.2, end: 7.5 },
+        { text: "she", start: 7.5, end: 7.8 },
+        { text: "helped", start: 7.8, end: 8.1 },
+        { text: "her", start: 8.1, end: 8.4 },
+        { text: "parents", start: 8.4, end: 8.7 },
+        { text: "at", start: 8.7, end: 9.0 },
+        { text: "home.", start: 9.0, end: 9.3 },
+      ],
     },
     {
       videoIndex: 3,
@@ -313,21 +308,21 @@ export const StoryPage = () => {
         { text: "test", start: 4.1, end: 4.4 },
         { text: "faster.", start: 4.4, end: 4.8 },
       ],
-    
-    
+
+
     },
   ];
 
-    useEffect(() => {
-      const bubbleToShow = extraBubblesData.find(
-        (bubble) =>
-          bubble.videoIndex === currentVideo &&
-          currentTime >= bubble.start &&
-          currentTime < bubble.end
-      );
-  
-      setExtraBubble(bubbleToShow || null);
-    }, [currentVideo, currentTime]);
+  useEffect(() => {
+    const bubbleToShow = extraBubblesData.find(
+      (bubble) =>
+        bubble.videoIndex === currentVideo &&
+        currentTime >= bubble.start &&
+        currentTime < bubble.end
+    );
+
+    setExtraBubble(bubbleToShow || null);
+  }, [currentVideo, currentTime]);
   const currentVideoData = videos[currentVideo];
   const activeSubtitleIndex = currentVideoData.subtitles.findIndex(
     (sub) => currentTime >= sub.start && currentTime < sub.end
@@ -358,7 +353,7 @@ export const StoryPage = () => {
 
     const handleCanPlay = () => {
       setIsLoading(false);
-      if (!showBanner) video.play().catch(() => {});
+      if (!showBanner) video.play().catch(() => { });
     };
     video.addEventListener("canplay", handleCanPlay);
     return () => {
@@ -416,7 +411,7 @@ export const StoryPage = () => {
       } else {
         const playPromise = videoRef.current.play();
         if (playPromise !== undefined) {
-          playPromise.catch(() => {});
+          playPromise.catch(() => { });
         }
       }
     }
@@ -457,8 +452,11 @@ export const StoryPage = () => {
   };
 
   const handleNext = () => {
-    setShowBanner(false);
-    setCurrentVideo((prev) => (prev < videos.length - 1 ? prev + 1 : 0));
+    if (currentVideo === videos.length - 1) {
+      navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+    } else {
+      setCurrentVideo(prev => prev + 1);
+    }
   };
 
   const handleEnded = useCallback(() => {
@@ -605,9 +603,8 @@ export const StoryPage = () => {
             showSubtitles && (
               <div className="subtitle-container" style={activeCloudPosition}>
                 <div
-                  className={`bubble-cloud animate__animated animate__fadeIn ${
-                    activeCloudPosition.isFlipped ? "flipped" : ""
-                  }`}
+                  className={`bubble-cloud animate__animated animate__fadeIn ${activeCloudPosition.isFlipped ? "flipped" : ""
+                    }`}
                 >
                   <p>
                     {activeSubtitle.words.map((word, index) => {
@@ -623,11 +620,10 @@ export const StoryPage = () => {
                           className={`
                 word-span
                 ${isHighlighted ? "active-word" : ""}
-                ${
-                  currentVideo === 4 && selectedWords.includes(word.text)
-                    ? "selected-word"
-                    : ""
-                }
+                ${currentVideo === 4 && selectedWords.includes(word.text)
+                              ? "selected-word"
+                              : ""
+                            }
                 ${currentVideo === 4 ? "clickable-word" : ""}
               `}
                         >
@@ -647,7 +643,7 @@ export const StoryPage = () => {
             )}
 
 
-               
+
           {showCaption && extraBubble && extraBubble.words && (
             <div
               className="subtitle-container"
@@ -666,9 +662,8 @@ export const StoryPage = () => {
                     return (
                       <span
                         key={index}
-                        className={`word-span ${
-                          isHighlighted ? "active-word" : ""
-                        }`}
+                        className={`word-span ${isHighlighted ? "active-word" : ""
+                          }`}
                       >
                         {word.text}{" "}
                       </span>
@@ -699,30 +694,27 @@ export const StoryPage = () => {
             <div className="controls-wrapper-new">
               <div className="controls-row">
                 <div className="controls-group-left">
+
+                  <button
+                    onClick={() => setShowCaption(!showCaption)}
+                    className={`control-btn ${!showCaption ? "disabled-btn" : ""}`}
+                    title="Caption"
+                  >
+                    <MessageSquareText className="w-6 h-6" />
+                    <span className="control-label">Caption</span>
+                  </button>
+
                   <button
                     onClick={() => setShowSubtitles(!showSubtitles)}
-                    className="control-btn"
+                    className={`control-btn ${!showSubtitles ? "disabled-btn" : ""}`}
                     title="Subtitles"
                   >
                     <Subtitles className="w-6 h-6" />
                     <span className="control-label">Subtitle</span>
                   </button>
-                 
-                 
-                                   <button
-                                     onClick={() => setShowCaption(!showCaption)}
-                                     className="control-btn"
-                                     title="Caption"
-                                   >
-                                     <MessageSquareText className="w-6 h-6" />
-                                     <span className="control-label">Caption</span>
-                                   </button>
-                 
-                 
-                 
-                 
+
                   <div
-                  
+
                     className="volume-control"
                     onMouseEnter={() => setShowVolumeSlider(true)}
                     onMouseLeave={() => setShowVolumeSlider(false)}
@@ -734,7 +726,7 @@ export const StoryPage = () => {
                         <Volume2 className="w-6 h-6" />
                       )}
                     </button>
-                    
+
                     {showVolumeSlider && (
                       <div className="volume-slider-container">
                         <input
@@ -803,9 +795,8 @@ export const StoryPage = () => {
             {videos.map((_, index) => (
               <div
                 key={index}
-                className={`progress-dot ${
-                  index === currentVideo ? "active" : ""
-                }`}
+                className={`progress-dot ${index === currentVideo ? "active" : ""
+                  }`}
               />
             ))}
           </div>

@@ -37,7 +37,7 @@ export const StoryPage = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [showBubble, setShowBubble] = useState(true);
   const [showBanner, setShowBanner] = useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1);
+  const [playbackSpeed, setPlaybackSpeed] = useState(0.75);
   const [volume, setVolume] = useState(1);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [showSubtitles, setShowSubtitles] = useState(true);
@@ -54,12 +54,6 @@ export const StoryPage = () => {
       title: "Section 1",
       subtitles: [
         {
-          // start: 0, end: 3.12,
-          // words: [
-          //   { text: "Kate's", start: 0.5, end: 1.2 },
-          //   { text: "Big", start: 1.2, end: 1.7 },
-          //   { text: "Feelings", start: 1.7, end: 2.5 },
-          // ]
         },
       ],
     },
@@ -68,12 +62,12 @@ export const StoryPage = () => {
       url: video2,
       title: "Section 2",
       subtitles: [
-   
+
         {
- 
+
         },
         {
-  
+
         },
       ],
     },
@@ -83,13 +77,13 @@ export const StoryPage = () => {
       title: "Section 3",
       subtitles: [
         {
-       
+
         },
         {
-       
+
         },
         {
-     
+
         },
       ],
     },
@@ -208,7 +202,7 @@ export const StoryPage = () => {
           ],
         },
         {
-       
+
         },
         {
           start: 5.1,
@@ -222,23 +216,17 @@ export const StoryPage = () => {
         },
       ],
     },
-
-    {
-      url: img,
-      title: "Section 6",
-      subtitles: [],
-    },
   ];
-    useEffect(() => {
-      const bubbleToShow = extraBubblesData.find(
-        (bubble) =>
-          bubble.videoIndex === currentVideo &&
-          currentTime >= bubble.start &&
-          currentTime < bubble.end
-      );
-  
-      setExtraBubble(bubbleToShow || null);
-    }, [currentVideo, currentTime]);
+  useEffect(() => {
+    const bubbleToShow = extraBubblesData.find(
+      (bubble) =>
+        bubble.videoIndex === currentVideo &&
+        currentTime >= bubble.start &&
+        currentTime < bubble.end
+    );
+
+    setExtraBubble(bubbleToShow || null);
+  }, [currentVideo, currentTime]);
   const cloudPositions = {
     0: [
       // { bottom: '35rem', left: '50%', transform: 'translateX(-50%)', isFlipped: true }
@@ -284,143 +272,143 @@ export const StoryPage = () => {
     //   { top: '10%', left: '50%', isFlipped: true },
     // ],
   };
- const extraBubblesData = [
+  const extraBubblesData = [
     {
       videoIndex: 1,
-       start: 0,
-          end: 2.5,
-          words: [
-            { text: "Sid", start: 0.7, end: 0.9 },
-            { text: "plays", start: 0.9, end: 1.3 },
-            { text: "basketball", start: 1.3, end: 1.7 },
-            { text: "with", start: 1.7, end: 2.1 },
-            { text: "his", start: 2.1, end: 2.3 },
-            { text: "neighbours.", start: 2.3, end: 2.9 },
-          ],
+      start: 0,
+      end: 2.5,
+      words: [
+        { text: "Sid", start: 0.7, end: 0.9 },
+        { text: "plays", start: 0.9, end: 1.3 },
+        { text: "basketball", start: 1.3, end: 1.7 },
+        { text: "with", start: 1.7, end: 2.1 },
+        { text: "his", start: 2.1, end: 2.3 },
+        { text: "neighbours.", start: 2.3, end: 2.9 },
+      ],
     },
     {
       videoIndex: 1,
-             start: 2.5,
-          end: 5.1,
-          words: [
-            { text: "There", start: 3.1, end: 3.4 },
-            { text: "are", start: 3.4, end: 3.7 },
-            { text: "two", start: 3.7, end: 4 },
-            { text: "teams.", start: 4, end: 4.3 },
-          ],
+      start: 2.5,
+      end: 5.1,
+      words: [
+        { text: "There", start: 3.1, end: 3.4 },
+        { text: "are", start: 3.4, end: 3.7 },
+        { text: "two", start: 3.7, end: 4 },
+        { text: "teams.", start: 4, end: 4.3 },
+      ],
     },
     {
       videoIndex: 1,
-             start: 5.1,
-          end: 10.6,
-          words: [
-            { text: "Sid", start: 4.7, end: 5 },
-            { text: "is", start: 5, end: 5.2 },
-            { text: "on", start: 5.2, end: 5.4 },
-            { text: "the", start: 5.4, end: 5.6 },
-            { text: "red", start: 5.6, end: 5.8 },
-            { text: "team", start: 5.8, end: 6 },
-            { text: "with", start: 6, end: 6.3 },
-            { text: "his", start: 6.3, end: 6.6 },
-            { text: "friend", start: 6.6, end: 6.9 },
-            { text: "Bob.", start: 6.9, end: 7.6 },
-            { text: "The", start: 7.6, end: 7.9 },
-            { text: "boys", start: 7.9, end: 8.2 },
-            { text: "need", start: 8.2, end: 8.4 },
-            { text: "two", start: 8.4, end: 8.7 },
-            { text: "more", start: 8.7, end: 9.1 },
-            { text: "points", start: 9.1, end: 9.4 },
-            { text: "to", start: 9.4, end: 9.6 },
-            { text: "win.", start: 9.6, end: 10.3 },
-          ],
+      start: 5.1,
+      end: 10.6,
+      words: [
+        { text: "Sid", start: 4.7, end: 5 },
+        { text: "is", start: 5, end: 5.2 },
+        { text: "on", start: 5.2, end: 5.4 },
+        { text: "the", start: 5.4, end: 5.6 },
+        { text: "red", start: 5.6, end: 5.8 },
+        { text: "team", start: 5.8, end: 6 },
+        { text: "with", start: 6, end: 6.3 },
+        { text: "his", start: 6.3, end: 6.6 },
+        { text: "friend", start: 6.6, end: 6.9 },
+        { text: "Bob.", start: 6.9, end: 7.6 },
+        { text: "The", start: 7.6, end: 7.9 },
+        { text: "boys", start: 7.9, end: 8.2 },
+        { text: "need", start: 8.2, end: 8.4 },
+        { text: "two", start: 8.4, end: 8.7 },
+        { text: "more", start: 8.7, end: 9.1 },
+        { text: "points", start: 9.1, end: 9.4 },
+        { text: "to", start: 9.4, end: 9.6 },
+        { text: "win.", start: 9.6, end: 10.3 },
+      ],
     },
 
     {
       videoIndex: 2,
-   start: 0,
-          end: 2.5,
-          words: [
-            { text: "Sid", start: 0.1, end: 0.2 },
-            { text: "passes", start: 0.2, end: 0.5 },
-            { text: "the", start: 0.5, end: 0.7 },
-            { text: "ball", start: 0.7, end: 1 },
-            { text: "to", start: 1, end: 1.3 },
-            { text: "Bob.", start: 1.3, end: 2.2 },
-          ],
+      start: 0,
+      end: 2.5,
+      words: [
+        { text: "Sid", start: 0.1, end: 0.2 },
+        { text: "passes", start: 0.2, end: 0.5 },
+        { text: "the", start: 0.5, end: 0.7 },
+        { text: "ball", start: 0.7, end: 1 },
+        { text: "to", start: 1, end: 1.3 },
+        { text: "Bob.", start: 1.3, end: 2.2 },
+      ],
     },
     {
       videoIndex: 2,
-    start: 2.5,
-          end: 6.5,
-          words: [
-            { text: "Bob", start: 2.2, end: 2.6 },
-            { text: "dribbles", start: 2.8, end: 3.1 },
-            { text: "the", start: 3.1, end: 3.3 },
-            { text: "ball", start: 3.3, end: 3.5 },
-            { text: "to", start: 3.5, end: 3.7 },
-            { text: "the", start: 3.7, end: 4 },
-            { text: "net", start: 4, end: 4.2 },
-            { text: "and", start: 4.2, end: 4.5 },
-            { text: "takes", start: 4.5, end: 4.7 },
-            { text: "a", start: 4.7, end: 4.9 },
-            { text: "shot.", start: 4.9, end: 5.3 },
-          ],
+      start: 2.5,
+      end: 6.5,
+      words: [
+        { text: "Bob", start: 2.2, end: 2.6 },
+        { text: "dribbles", start: 2.8, end: 3.1 },
+        { text: "the", start: 3.1, end: 3.3 },
+        { text: "ball", start: 3.3, end: 3.5 },
+        { text: "to", start: 3.5, end: 3.7 },
+        { text: "the", start: 3.7, end: 4 },
+        { text: "net", start: 4, end: 4.2 },
+        { text: "and", start: 4.2, end: 4.5 },
+        { text: "takes", start: 4.5, end: 4.7 },
+        { text: "a", start: 4.7, end: 4.9 },
+        { text: "shot.", start: 4.9, end: 5.3 },
+      ],
     },
-     {
+    {
       videoIndex: 2,
-        start: 6,
-          end: 10.5,
-          words: [
-            { text: "He", start: 5.3, end: 5.5 },
-            { text: "misses.", start: 5.5, end: 6.3 },
-            { text: "Oh", start: 6.5, end: 6.8 },
-            { text: "dear!", start: 6.8, end: 7.2 },
+      start: 6,
+      end: 10.5,
+      words: [
+        { text: "He", start: 5.3, end: 5.5 },
+        { text: "misses.", start: 5.5, end: 6.3 },
+        { text: "Oh", start: 6.5, end: 6.8 },
+        { text: "dear!", start: 6.8, end: 7.2 },
 
-            { text: "Sid", start: 7.7, end: 7.9 },
-            { text: "feels", start: 8, end: 8.4 },
-            { text: "angry", start: 8.4, end: 8.6 },
-            { text: "with", start: 8.6, end: 8.9 },
-            { text: "Bob", start: 8.9, end: 10 },
-          ],
+        { text: "Sid", start: 7.7, end: 7.9 },
+        { text: "feels", start: 8, end: 8.4 },
+        { text: "angry", start: 8.4, end: 8.6 },
+        { text: "with", start: 8.6, end: 8.9 },
+        { text: "Bob", start: 8.9, end: 10 },
+      ],
     },
     {
       videoIndex: 3,
       start: 0,
-          end: 7,
-          words: [
-           { text: "Sid", start: 0.2, end: 0.6 },
-            { text: "feels", start: 0.6, end: 1.0 },
-            { text: "like", start: 1.0, end: 1.4 },
-            { text: "saying", start: 1.4, end: 1.8 },
-            { text: "mean", start: 1.8, end: 2.2 },
-            { text: "things", start: 2.2, end: 2.6 },
-            { text: "to", start: 2.6, end: 3.0 },
-            { text: "Bob.", start: 3.0, end: 3.4 },
+      end: 7,
+      words: [
+        { text: "Sid", start: 0.2, end: 0.6 },
+        { text: "feels", start: 0.6, end: 1.0 },
+        { text: "like", start: 1.0, end: 1.4 },
+        { text: "saying", start: 1.4, end: 1.8 },
+        { text: "mean", start: 1.8, end: 2.2 },
+        { text: "things", start: 2.2, end: 2.6 },
+        { text: "to", start: 2.6, end: 3.0 },
+        { text: "Bob.", start: 3.0, end: 3.4 },
 
-            { text: "Then,", start: 3.6, end: 4.0 },
-            { text: "he", start: 4.0, end: 4.4 },
-            { text: "remembers", start: 4.4, end: 4.8 },
-            { text: "what", start: 4.8, end: 5.2 },
-            { text: "his", start: 5.2, end: 5.6 },
-            { text: "brother", start: 5.6, end: 6.0 },
-            { text: "said:", start: 6.0, end: 6.4 },
-          ],
+        { text: "Then,", start: 3.6, end: 4.0 },
+        { text: "he", start: 4.0, end: 4.4 },
+        { text: "remembers", start: 4.4, end: 4.8 },
+        { text: "what", start: 4.8, end: 5.2 },
+        { text: "his", start: 5.2, end: 5.6 },
+        { text: "brother", start: 5.6, end: 6.0 },
+        { text: "said:", start: 6.0, end: 6.4 },
+      ],
     },
     {
       videoIndex: 4,
-        start: 2.7,
-          end: 5.1,
-          words: [
-            { text: "The", start: 2.4, end: 2.8 },
-            { text: "boys", start: 2.8, end: 3.2 },
-            { text: "smile", start: 3.2, end: 3.6 },
-            { text: "and", start: 3.6, end: 4.0 },
-            { text: "play", start: 4.0, end: 4.4 },
-            { text: "another", start: 4.4, end: 4.8 },
-            { text: "game", start: 4.8, end: 5.2 },
-            { text: "of", start: 5.2, end: 5.6 },
-            { text: "basketball", start: 5.6, end: 6.0 },
-          ],
+      start: 2.7,
+      end: 5.1,
+      words: [
+        { text: "The", start: 2.4, end: 2.8 },
+        { text: "boys", start: 2.8, end: 3.2 },
+        { text: "smile", start: 3.2, end: 3.6 },
+        { text: "and", start: 3.6, end: 4.0 },
+        { text: "play", start: 4.0, end: 4.4 },
+        { text: "another", start: 4.4, end: 4.8 },
+        { text: "game", start: 4.8, end: 5.2 },
+        { text: "of", start: 5.2, end: 5.6 },
+        { text: "basketball", start: 5.6, end: 6.0 },
+      ],
     },
     {
       videoIndex: 3,
@@ -434,8 +422,8 @@ export const StoryPage = () => {
         { text: "test", start: 4.1, end: 4.4 },
         { text: "faster.", start: 4.4, end: 4.8 },
       ],
-    
-    
+
+
     },
   ];
   const currentVideoData = videos[currentVideo];
@@ -468,7 +456,7 @@ export const StoryPage = () => {
 
     const handleCanPlay = () => {
       setIsLoading(false);
-      if (!showBanner) video.play().catch(() => {});
+      if (!showBanner) video.play().catch(() => { });
     };
     video.addEventListener("canplay", handleCanPlay);
     return () => {
@@ -525,7 +513,7 @@ export const StoryPage = () => {
       } else {
         const playPromise = videoRef.current.play();
         if (playPromise !== undefined) {
-          playPromise.catch(() => {});
+          playPromise.catch(() => { });
         }
       }
     }
@@ -568,8 +556,11 @@ export const StoryPage = () => {
   };
 
   const handleNext = () => {
-    setShowBanner(false);
-    setCurrentVideo((prev) => (prev < videos.length - 1 ? prev + 1 : 0));
+    if (currentVideo === videos.length - 1) {
+      navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+    } else {
+      setCurrentVideo(prev => prev + 1);
+    }
   };
 
   const handleEnded = useCallback(() => {
@@ -717,9 +708,8 @@ export const StoryPage = () => {
             showSubtitles && (
               <div className="subtitle-container" style={activeCloudPosition}>
                 <div
-                  className={`bubble-cloud animate__animated animate__fadeIn ${
-                    activeCloudPosition.isFlipped ? "flipped" : ""
-                  }`}
+                  className={`bubble-cloud animate__animated animate__fadeIn ${activeCloudPosition.isFlipped ? "flipped" : ""
+                    }`}
                 >
                   <p>
                     {activeSubtitle.words.map((word, index) => {
@@ -735,11 +725,10 @@ export const StoryPage = () => {
                           className={`
                 word-span
                 ${isHighlighted ? "active-word" : ""}
-                ${
-                  currentVideo === 4 && selectedWords.includes(word.text)
-                    ? "selected-word"
-                    : ""
-                }
+                ${currentVideo === 4 && selectedWords.includes(word.text)
+                              ? "selected-word"
+                              : ""
+                            }
                 ${currentVideo === 4 ? "clickable-word" : ""}
               `}
                         >
@@ -754,12 +743,12 @@ export const StoryPage = () => {
                   >
                     ×
                   </button>
-                  
+
                 </div>
               </div>
             )}
 
-                   
+
           {showCaption && extraBubble && extraBubble.words && (
             <div
               className="subtitle-container"
@@ -778,9 +767,8 @@ export const StoryPage = () => {
                     return (
                       <span
                         key={index}
-                        className={`word-span ${
-                          isHighlighted ? "active-word" : ""
-                        }`}
+                        className={`word-span ${isHighlighted ? "active-word" : ""
+                          }`}
                       >
                         {word.text}{" "}
                       </span>
@@ -812,23 +800,24 @@ export const StoryPage = () => {
               <div className="controls-row">
                 <div className="controls-group-left">
                   <button
+                    onClick={() => setShowCaption(!showCaption)}
+                    className={`control-btn ${!showCaption ? "disabled-btn" : ""}`}
+                    title="Caption"
+                  >
+                    <MessageSquareText className="w-6 h-6" />
+                    <span className="control-label">Caption</span>
+                  </button>
+
+                  <button
                     onClick={() => setShowSubtitles(!showSubtitles)}
-                    className="control-btn"
+                    className={`control-btn ${!showSubtitles ? "disabled-btn" : ""}`}
                     title="Subtitles"
                   >
                     <Subtitles className="w-6 h-6" />
                     <span className="control-label">Subtitle</span>
                   </button>
-                      <button
-                                     onClick={() => setShowCaption(!showCaption)}
-                                     className="control-btn"
-                                     title="Caption"
-                                   >
-                                     <MessageSquareText className="w-6 h-6" />
-                                     <span className="control-label">Caption</span>
-                                   </button>
 
-                  
+
                   <div
                     className="volume-control"
                     onMouseEnter={() => setShowVolumeSlider(true)}
@@ -909,9 +898,8 @@ export const StoryPage = () => {
             {videos.map((_, index) => (
               <div
                 key={index}
-                className={`progress-dot ${
-                  index === currentVideo ? "active" : ""
-                }`}
+                className={`progress-dot ${index === currentVideo ? "active" : ""
+                  }`}
               />
             ))}
           </div>

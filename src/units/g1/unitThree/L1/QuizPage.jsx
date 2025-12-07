@@ -9,10 +9,22 @@ export const QuizPage = () => {
   const { unitId, lessonId } = useParams();
   const navigate = useNavigate();
   const [answers, setAnswers] = useState({ q1: null, q2: null, q3: null });
+  const [showSkip, setShowSkip] = useState(false);
+  const [showtry, setshowtry] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAnswers(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleTryAgain = () => {
+    setAnswers({ q1: null, q2: null, q3: null });
+    setShowSkip(true);
+    setshowtry(true);
+
+    // إزالة التحديد عن كل radio
+    const radios = document.querySelectorAll('input[type="radio"]');
+    radios.forEach(radio => (radio.checked = false));
   };
 
   const handleSubmit = () => {
@@ -26,6 +38,8 @@ export const QuizPage = () => {
       q2: answers.q2 === correctAnswers.q2,
       q3: answers.q3 === correctAnswers.q3
     };
+    setShowSkip(true);
+    setshowtry(true);
     const score = Object.values(results).filter(isCorrect => isCorrect).length;
     const totalQuestions = Object.keys(results).length;
     const scoreString = `${score}/${totalQuestions}`;
@@ -49,6 +63,9 @@ export const QuizPage = () => {
     }
   };
 
+  const handleSkip = () => {
+    navigate(`/unit/${unitId}/lesson/${lessonId}/feedBack`);
+  };
   return (
     <div className="story-pages-container">
       <div className="w-full max-w-6xl">
@@ -84,6 +101,17 @@ export const QuizPage = () => {
             </div>
 
             <button type="button" id="submitBtn" onClick={handleSubmit}>Submit</button>
+            {showSkip && (
+              <button type="button" className="skip-btn" onClick={handleSkip}>
+                Skip
+              </button>
+            )}
+
+            {showtry &&(
+            <button className="try-btn" onClick={handleTryAgain}>
+              Try again
+            </button>
+            )}
           </div>
 
         </div>

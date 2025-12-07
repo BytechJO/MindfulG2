@@ -29,7 +29,7 @@ export const StoryPage = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [showBubble, setShowBubble] = useState(true);
   const [showBanner, setShowBanner] = useState(false);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1);
+  const [playbackSpeed, setPlaybackSpeed] = useState(0.75);
   const [volume, setVolume] = useState(1);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [showSubtitles, setShowSubtitles] = useState(true);
@@ -154,8 +154,6 @@ export const StoryPage = () => {
         },
       ]
     },
-
-
     {
       url: video5,
       title: "Section 5",
@@ -185,15 +183,6 @@ export const StoryPage = () => {
         },
       ]
     },
-
-    {
-      url: img,
-      title: "Section 6",
-      subtitles: [
-      ]
-    },
-
-
   ];
 
 
@@ -216,7 +205,7 @@ export const StoryPage = () => {
       { top: '10%', left: '45%', isFlipped: true },
       { bottom: '80%', left: '28%', isFlipped: true },
       { top: '10%', left: '15%' },
-      { bottom: '80%', left: '10%'},
+      { bottom: '80%', left: '10%' },
     ],
 
     4: [
@@ -476,7 +465,7 @@ export const StoryPage = () => {
     }
   }, [currentVideo, videos]);
 
-  // Video event listeners
+
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -501,8 +490,6 @@ export const StoryPage = () => {
 
   useEffect(() => {
     if (videoRef.current) {
-      // videoRef.current.load();
-      // setCurrentTime(0);
       setShowBubble(true);
 
       if (showBanner) {
@@ -564,8 +551,11 @@ export const StoryPage = () => {
   };
 
   const handleNext = () => {
-    setShowBanner(false);
-    setCurrentVideo(prev => (prev < videos.length - 1 ? prev + 1 : 0));
+    if (currentVideo === videos.length - 1) {
+      navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+    } else {
+      setCurrentVideo(prev => prev + 1);
+    }
   };
 
 
@@ -745,14 +735,22 @@ export const StoryPage = () => {
               <div className="controls-row">
                 <div className="controls-group-left">
 
-                  <button onClick={() => setShowSubtitles(!showSubtitles)} className="control-btn" title="Subtitles">
-                    <Subtitles className="w-6 h-6" />
-                    <span className="control-label">Subtitle</span>
-                  </button>
-
-                  <button onClick={() => setShowCaption(!showCaption)} className="control-btn" title="Caption">
+                  <button
+                    onClick={() => setShowCaption(!showCaption)}
+                    className={`control-btn ${!showCaption ? "disabled-btn" : ""}`}
+                    title="Caption"
+                  >
                     <MessageSquareText className="w-6 h-6" />
                     <span className="control-label">Caption</span>
+                  </button>
+
+                  <button
+                    onClick={() => setShowSubtitles(!showSubtitles)}
+                    className={`control-btn ${!showSubtitles ? "disabled-btn" : ""}`}
+                    title="Subtitles"
+                  >
+                    <Subtitles className="w-6 h-6" />
+                    <span className="control-label">Subtitle</span>
                   </button>
 
                   <div

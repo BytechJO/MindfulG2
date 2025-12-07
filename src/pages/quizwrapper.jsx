@@ -1,6 +1,6 @@
 import { Suspense, lazy, useState } from "react";
 import { motion } from "framer-motion";
-import { Home, PlayCircle, Menu } from "lucide-react";
+import { Home, PlayCircle, ChevronRight, ChevronLeft } from "lucide-react";
 import { AnimatedBackground } from "./AnimatedBackground";
 import { AnimatedCharacter } from "./AnimatedCharacter";
 import { useParams, useNavigate } from "react-router-dom";
@@ -48,6 +48,13 @@ export default function VideoPlayerPage() {
     navigate("/UnitsPage");
   };
 
+  const handlePrevious = () => {
+    navigate(-1);
+  };
+  const handleSkip = () => {
+    navigate(`/unit/${unitId}/lesson/${lessonId}/feedBack`);
+  };
+
   if (!Component) return <div>Quiz Not Found</div>;
 
   return (
@@ -56,6 +63,9 @@ export default function VideoPlayerPage() {
       <AnimatedCharacter />
 
       <div className="flex-1 p-4 sm:p-6 md:p-8 flex items-center justify-center overflow-hidden">
+        <button onClick={handlePrevious} className="feedquiz left">
+          <ChevronLeft className="w-8 h-8" />
+        </button>
         <div className="max-w-5xl mx-auto relative z-10 w-full">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -68,6 +78,10 @@ export default function VideoPlayerPage() {
             </Suspense>
           </motion.div>
         </div>
+        <button onClick={handleSkip} className="feedquiz right">
+          <ChevronRight className="w-8 h-8" />
+        </button>
+
       </div>
 
       <div className="w-full h-[2px] bg-white/30 relative z-10"></div>
