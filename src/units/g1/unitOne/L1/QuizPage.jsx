@@ -32,7 +32,7 @@ export const QuizPage = () => {
     radios.forEach(radio => (radio.checked = false));
   };
 
-  
+
 
   const handleSubmit = () => {
     if (!answers.q1 || !answers.q2 || !answers.q3) {
@@ -64,18 +64,18 @@ export const QuizPage = () => {
     }
   };
 
-  const renderAnswerGif = (question, optionValue) => {
-    if (results[question] === null) return null;
-    if (answers[question] !== optionValue) return null;
 
-    return results[question]
-      ? <img src={Timg} alt="correct" className="answer-gif" />
-      : <img src={Fimg} alt="wrong" className="answer-gif" />;
-  };
 
   const handleSkip = () => {
     navigate(`/unit/${unitId}/lesson/${lessonId}/feedBack`);
   };
+
+  const renderAnswerGif = (question, optionValue) => {
+    if (results[question] === null) return null;
+    if (answers[question] !== optionValue) return null;
+    return results[question] ? <img src={Timg} alt="correct" className="answer-gif" />
+      : <img src={Fimg} alt="wrong" className="answer-gif" />;
+  }
 
   return (
     <div className="story-pages-container">
@@ -89,27 +89,63 @@ export const QuizPage = () => {
             <div className="Q1">
               <span>What was Sue worried about?</span>
               <ul>
-                <li>How to spell ‘apple’ <input type="radio" name="q1" value="0" onChange={handleChange} /></li>
-                <li>The teacher getting angry <input type="radio" name="q1" value="1" onChange={handleChange} /></li>
-                <li>Playing outside <input type="radio" name="q1" value="2" onChange={handleChange} /></li>
+                <li>
+                  How to spell ‘apple’
+                  <input type="radio" name="q1" value="0" onChange={handleChange} />
+                  {renderAnswerGif('q1', '0')}
+                </li>
+                <li>
+                  The teacher getting angry
+                  <input type="radio" name="q1" value="1" onChange={handleChange} />
+                  {renderAnswerGif('q1', '1')}
+                </li>
+                <li>
+                  Playing outside
+                  <input type="radio" name="q1" value="2" onChange={handleChange} />
+                  {renderAnswerGif('q1', '2')}
+                </li>
               </ul>
             </div>
 
             <div className="Q2">
               <span>Who helped Sue to spell?</span>
               <ul>
-                <li>The teacher <input type="radio" name="q2" value="0" onChange={handleChange} /></li>
-                <li>Her parents<input type="radio" name="q2" value="1" onChange={handleChange} /></li>
-                <li>Her classmate<input type="radio" name="q2" value="2" onChange={handleChange} /></li>
+                <li>
+                  The teacher 
+                  <input type="radio" name="q2" value="0" onChange={handleChange}/>
+                  {renderAnswerGif('q2', '0')}
+                </li>
+                <li>
+                  Her parents
+                  <input type="radio" name="q2" value="1" onChange={handleChange}/>
+                  {renderAnswerGif('q2', '1')}
+                </li>
+                <li>
+                  Her classmate
+                  <input type="radio" name="q2" value="2" onChange={handleChange}/>
+                  {renderAnswerGif('q2', '2')}
+                </li>
               </ul>
             </div>
 
             <div className="Q3" >
               <span>How did Sue feel at the end of the story?</span>
               <ul>
-                <li>Worried<input type="radio" name="q3" value="0" onChange={handleChange} /></li>
-                <li>Angry<input type="radio" name="q3" value="1" onChange={handleChange} /></li>
-                <li>Happy<input type="radio" name="q3" value="2" onChange={handleChange} /></li>
+                <li>
+                  Worried
+                  <input type="radio" name="q3" value="0" onChange={handleChange}/>
+                  {renderAnswerGif('q3', '0')}
+                </li>
+                <li>
+                  Angry
+                  <input type="radio" name="q3" value="1" onChange={handleChange}/>
+                  {renderAnswerGif('q3', '1')}
+                </li>
+                <li>
+                  Happy
+                  <input type="radio" name="q3" value="2" onChange={handleChange}/>
+                  {renderAnswerGif('q3', '2')}
+                </li>
               </ul>
             </div>
 

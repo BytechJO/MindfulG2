@@ -4,6 +4,8 @@ import '../../shared/Quiz.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../../shared/StoryPage.css';
 import ValidationAlert from '../../shared/ValidationAlert';
+import Timg from '../../../../assets/Gif/Approve.Gif';
+import Fimg from '../../../../assets/Gif/False.gif';
 
 export const QuizPage = () => {
   const { unitId, lessonId } = useParams();
@@ -11,6 +13,12 @@ export const QuizPage = () => {
   const [answers, setAnswers] = useState({ q1: null, q2: null, q3: null });
   const [showSkip, setShowSkip] = useState(false);
   const [showtry, setshowtry] = useState(false);
+  const [results, setResults] = useState({
+    q1: null,
+    q2: null,
+    q3: null
+  });
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,13 +27,14 @@ export const QuizPage = () => {
 
   const handleTryAgain = () => {
     setAnswers({ q1: null, q2: null, q3: null });
+    setResults({ q1: null, q2: null, q3: null });
     setShowSkip(true);
     setshowtry(true);
 
-    // إزالة التحديد عن كل radio
     const radios = document.querySelectorAll('input[type="radio"]');
     radios.forEach(radio => (radio.checked = false));
   };
+
 
   const handleSubmit = () => {
     // ... (دالة handleSubmit تبقى كما هي)
@@ -34,23 +43,25 @@ export const QuizPage = () => {
       return;
     }
     const correctAnswers = { q1: "0", q2: "1", q3: "1" };
-    const results = {
+    const newResults = {
       q1: answers.q1 === correctAnswers.q1,
       q2: answers.q2 === correctAnswers.q2,
       q3: answers.q3 === correctAnswers.q3
     };
+
+    setResults(newResults);
     setShowSkip(true);
     setshowtry(true);
-    const score = Object.values(results).filter(isCorrect => isCorrect).length;
-    const totalQuestions = Object.keys(results).length;
+    const score = Object.values(newResults).filter(isCorrect => isCorrect).length;
+    const totalQuestions = Object.keys(newResults).length;
     const scoreString = `${score}/${totalQuestions}`;
 
     const resultsHtml = `
-      Q1: ${results.q1 ? '✅ Correct' : '❌ Wrong'}  <br>
+      Q1: ${newResults.q1 ? '✅ Correct' : '❌ Wrong'}  <br>
 
-      Q2: ${results.q2 ? '✅ Correct' : '❌ Wrong'}  <br>
+      Q2: ${renewResultsults.q2 ? '✅ Correct' : '❌ Wrong'}  <br>
 
-      Q3: ${results.q3 ? '✅ Correct' : '❌ Wrong'}<br>
+      Q3: ${newResults.q3 ? '✅ Correct' : '❌ Wrong'}<br>
       <hr>
       <p><strong>Score:</strong> ${score}/${totalQuestions}</p>
     `;
@@ -60,7 +71,7 @@ export const QuizPage = () => {
           navigate(`/unit/${unitId}/lesson/${lessonId}/feedBack`);
         });
     } else {
-      ValidationAlert.error("Try again", "", scoreString)  
+      ValidationAlert.error("Try again", "", scoreString)
     }
   };
 
@@ -68,40 +79,83 @@ export const QuizPage = () => {
     navigate(`/unit/${unitId}/lesson/${lessonId}/feedBack`);
   };
 
+  const renderAnswerGif = (question, optionValue) => {
+    if (results[question] === null) return null; // لم يتم التحقق بعد → لا يظهر شيء
+    if (answers[question] !== optionValue) return null; // لم يتم اختيار هذا الخيار → لا يظهر شيء
+    return results[question] ? <img src={Timg} alt="correct" className="answer-gif" />
+      : <img src={Fimg} alt="wrong" className="answer-gif" />;
+  };
+
   return (
     <div className="story-pages-container">
       <div className="w-full max-w-6xl">
         <div className="paper animate__animated animate__backInDown" id="p3">
           <img src={Q1Image} alt="Background" className="bg-img" />
-          
+
           {/* --- بداية التعديل --- */}
           <div className="content">
             <div className="Q1">
               <span>What was the lesson the teacher taught the girls?</span>
               <ul>
-                <li>Traffic rules <input type="radio" name="q1" value="0" onChange={handleChange} /></li>
-                <li>classroom rules <input type="radio" name="q1" value="1" onChange={handleChange}/></li>
-                <li>Playground rules <input type="radio" name="q1" value="2" onChange={handleChange}/></li>
+                <li>
+                  Traffic rules
+                  <input type="radio" name="q1" value="0" onChange={handleChange} />
+                  {renderAnswerGif('q1', '0')}
+                </li>
+                <li>
+                  Classroom rules
+                  <input type="radio" name="q1" value="1" onChange={handleChange} />
+                  {renderAnswerGif('q1', '1')}
+                </li>
+                <li>
+                  Playground rules
+                  <input type="radio" name="q1" value="2" onChange={handleChange} />
+                  {renderAnswerGif('q1', '2')}
+                </li>
               </ul>
             </div>
-            
-            {/* تم حذف   
- لتنسيق أفضل عبر CSS */}
+
+            {/* --- Question 2 --- */}
             <div className="Q2">
               <span>When do we cross the road?</span>
               <ul>
-                <li>When there are cars moving. <input type="radio" name="q2" value="0" onChange={handleChange}/></li>
-                <li>When the green man lights up. <input type="radio" name="q2" value="1" onChange={handleChange}/></li>
-                <li>When the red man lights up. <input type="radio" name="q2" value="2" onChange={handleChange}/></li>
+                <li>
+                  When there are cars moving.
+                  <input type="radio" name="q2" value="0" onChange={handleChange} />
+                  {renderAnswerGif('q2', '0')}
+                </li>
+                <li>
+                  When the green man lights up.
+                  <input type="radio" name="q2" value="1" onChange={handleChange} />
+                  {renderAnswerGif('q2', '1')}
+                </li>
+                <li>
+                  When the red man lights up.
+                  <input type="radio" name="q2" value="2" onChange={handleChange} />
+                  {renderAnswerGif('q2', '2')}
+                </li>
               </ul>
             </div>
-            
-            <div className="Q3" >
+
+            {/* --- Question 3 --- */}
+            <div className="Q3">
               <span>What is a pedestrian?</span>
               <ul>
-                <li>A young cat <input type="radio" name="q3" value="0" onChange={handleChange}/></li>
-                <li>A person walking <input type="radio" name="q3" value="1" onChange={handleChange}/></li>
-                <li>A person driving <input type="radio" name="q3" value="2" onChange={handleChange}/></li>
+                <li>
+                  A young cat
+                  <input type="radio" name="q3" value="0" onChange={handleChange} />
+                  {renderAnswerGif('q3', '0')}
+                </li>
+                <li>
+                  A person walking
+                  <input type="radio" name="q3" value="1" onChange={handleChange} />
+                  {renderAnswerGif('q3', '1')}
+                </li>
+                <li>
+                  A person driving
+                  <input type="radio" name="q3" value="2" onChange={handleChange} />
+                  {renderAnswerGif('q3', '2')}
+                </li>
               </ul>
             </div>
 
@@ -113,10 +167,10 @@ export const QuizPage = () => {
               </button>
             )}
 
-            {showtry &&(
-            <button className="try-btn" onClick={handleTryAgain}>
-              Try again
-            </button>
+            {showtry && (
+              <button className="try-btn" onClick={handleTryAgain}>
+                Try again
+              </button>
             )}
           </div>
           {/* --- نهاية التعديل --- */}

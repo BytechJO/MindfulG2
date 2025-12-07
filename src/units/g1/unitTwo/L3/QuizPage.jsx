@@ -4,6 +4,8 @@ import '../../shared/Quiz.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../../shared/StoryPage.css';
 import ValidationAlert from '../../shared/ValidationAlert';
+import Timg from "../../../../assets/Gif/Approve.Gif";
+import Fimg from "../../../../assets/Gif/False.gif";
 
 export const QuizPage = () => {
   const { unitId, lessonId } = useParams();
@@ -11,6 +13,11 @@ export const QuizPage = () => {
   const [answers, setAnswers] = useState({ q1: null, q2: null, q3: null });
   const [showSkip, setShowSkip] = useState(false);
   const [showtry, setshowtry] = useState(false);
+  const [results, setResults] = useState({
+    q1: null,
+    q2: null,
+    q3: null
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,23 +39,26 @@ export const QuizPage = () => {
       return;
     }
     const correctAnswers = { q1: "0", q2: "1", q3: "2" };
-    const results = {
+    const newResults = {
       q1: answers.q1 === correctAnswers.q1,
       q2: answers.q2 === correctAnswers.q2,
       q3: answers.q3 === correctAnswers.q3
     };
+
+    setResults(newResults);
+
     setShowSkip(true);
     setshowtry(true);
-    const score = Object.values(results).filter(isCorrect => isCorrect).length;
-    const totalQuestions = Object.keys(results).length;
+    const score = Object.values(newResults).filter(isCorrect => isCorrect).length;
+    const totalQuestions = Object.keys(newResults).length;
     const scoreString = `${score}/${totalQuestions}`;
 
     const resultsHtml = `
-      Q1: ${results.q1 ? '✅ Correct' : '❌ Wrong'}  <br>
+      Q1: ${newResults.q1 ? '✅ Correct' : '❌ Wrong'}  <br>
 
-      Q2: ${results.q2 ? '✅ Correct' : '❌ Wrong'}  <br>
+      Q2: ${newResults.q2 ? '✅ Correct' : '❌ Wrong'}  <br>
 
-      Q3: ${results.q3 ? '✅ Correct' : '❌ Wrong'}<br>
+      Q3: ${newResults.q3 ? '✅ Correct' : '❌ Wrong'}<br>
       <hr>
       <p><strong>Score:</strong> ${score}/${totalQuestions}</p>
     `;
@@ -58,7 +68,7 @@ export const QuizPage = () => {
           navigate(`/unit/${unitId}/lesson/${lessonId}/feedBack`);
         });
     } else {
-      ValidationAlert.error("Try again", "", scoreString)  
+      ValidationAlert.error("Try again", "", scoreString)
     }
   };
 
@@ -66,40 +76,133 @@ export const QuizPage = () => {
     navigate(`/unit/${unitId}/lesson/${lessonId}/feedBack`);
   };
 
+  const renderAnswerGif = (question, optionValue) => {
+    if (results[question] === null) return null;
+    if (answers[question] !== optionValue) return null;
+    return results[question]
+      ? <img src={Timg} alt="correct" className="answer-gif" />
+      : <img src={Fimg} alt="wrong" className="answer-gif" />;
+  }
+
+
   return (
     <div className="story-pages-container">
       <div className="w-full max-w-6xl">
         <div className="paper animate__animated animate__backInDown" id="p3">
           <img src={Q1Image} alt="Background" className="bg-img" />
-          
-          {/* --- بداية التعديل --- */}
+
           <div className="content">
             <div className="Q1">
-              <span>How did Kate feel in the beginning of the story?</span>
+              <span>
+                What were Leo and Zack excited about at the beginning of the
+                story?
+              </span>
               <ul>
-                <li>Sad and angry <input type="radio" name="q1" value="0" onChange={handleChange} /></li>
-                <li>Happy <input type="radio" name="q1" value="1" onChange={handleChange}/></li>
-                <li>Tired <input type="radio" name="q1" value="2" onChange={handleChange}/></li>
+                <li>
+                  The weather
+                  <input
+                    type="radio"
+                    name="q1"
+                    value="0"
+                    onChange={handleChange}
+                  />
+                  {renderAnswerGif("q1", "0")}
+                </li>
+                <li>
+                  Leo’s new bike
+                  <input
+                    type="radio"
+                    name="q1"
+                    value="1"
+                    onChange={handleChange}
+                  />
+                  {renderAnswerGif("q1", "1")}
+                </li>
+                <li>
+                  Zack’s new bike
+                  <input
+                    type="radio"
+                    name="q1"
+                    value="2"
+                    onChange={handleChange}
+                  />
+                  {renderAnswerGif("q1", "2")}
+                </li>
               </ul>
             </div>
-            
-            {/* تم حذف   
- لتنسيق أفضل عبر CSS */}
+
+            {/* Question 2 */}
             <div className="Q2">
-              <span>Why did Kate need less help than May?</span>
+              <span>
+                Who wanted to race?
+              </span>
               <ul>
-                <li>Mum loved May more. <input type="radio" name="q2" value="0" onChange={handleChange}/></li>
-                <li>Kate was a big girl. <input type="radio" name="q2" value="1" onChange={handleChange}/></li>
-                <li>May watched TV. <input type="radio" name="q2" value="2" onChange={handleChange}/></li>
+                <li>
+                  Zack
+                  <input
+                    type="radio"
+                    name="q2"
+                    value="0"
+                    onChange={handleChange}
+                  />
+                  {renderAnswerGif("q2", "0")}
+                </li>
+                <li>
+                  Tom                  <input
+                    type="radio"
+                    name="q2"
+                    value="1"
+                    onChange={handleChange}
+                  />
+                  {renderAnswerGif("q2", "1")}
+                </li>
+                <li>
+                  Leo
+                  <input
+                    type="radio"
+                    name="q2"
+                    value="2"
+                    onChange={handleChange}
+                  />
+                  {renderAnswerGif("q2", "2")}
+                </li>
               </ul>
             </div>
-            
-            <div className="Q3" >
-              <span>What did Kate ask her mum to help her with?</span>
+
+            {/* Question 3 */}
+            <div className="Q3">
+              <span>Why did Zack say sorry to Leo?</span>
               <ul>
-                <li>Clean her room <input type="radio" name="q3" value="0" onChange={handleChange}/></li>
-                <li>Feed May <input type="radio" name="q3" value="1" onChange={handleChange}/></li>
-                <li>Bake a cake <input type="radio" name="q3" value="2" onChange={handleChange}/></li>
+                <li>
+                  He took Leo’s toy.
+                  <input
+                    type="radio"
+                    name="q3"
+                    value="0"
+                    onChange={handleChange}
+                  />
+                  {renderAnswerGif("q3", "0")}
+                </li>
+                <li>
+                  He ate all of Leo’s lunch.
+                  <input
+                    type="radio"
+                    name="q3"
+                    value="1"
+                    onChange={handleChange}
+                  />
+                  {renderAnswerGif("q3", "1")}
+                </li>
+                <li>
+                  He crashed Leo’s bike.
+                  <input
+                    type="radio"
+                    name="q3"
+                    value="2"
+                    onChange={handleChange}
+                  />
+                  {renderAnswerGif("q3", "2")}
+                </li>
               </ul>
             </div>
 
@@ -111,10 +214,10 @@ export const QuizPage = () => {
               </button>
             )}
 
-            {showtry &&(
-            <button className="try-btn" onClick={handleTryAgain}>
-              Try again
-            </button>
+            {showtry && (
+              <button className="try-btn" onClick={handleTryAgain}>
+                Try again
+              </button>
             )}
           </div>
           {/* --- نهاية التعديل --- */}

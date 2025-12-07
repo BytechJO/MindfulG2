@@ -4,6 +4,8 @@ import '../../shared/Quiz.css';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../../shared/StoryPage.css';
 import ValidationAlert from '../../shared/ValidationAlert';
+import Timg from '../../../../assets/Gif/Approve.Gif';
+import Fimg from '../../../../assets/Gif/False.gif';
 
 export const QuizPage = () => {
   const { unitId, lessonId } = useParams();
@@ -11,7 +13,8 @@ export const QuizPage = () => {
   const [answers, setAnswers] = useState({ q1: null, q2: null, q3: null });
   const [showSkip, setShowSkip] = useState(false);
   const [showtry, setshowtry] = useState(false);
-
+  const [results, setResults] = useState({ q1: null, q2: null, q3: null });
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAnswers(prev => ({ ...prev, [name]: value }));
@@ -33,15 +36,17 @@ export const QuizPage = () => {
       return;
     }
     const correctAnswers = { q1: "0", q2: "1", q3: "0" };
-    const results = {
+    const newResults = {
       q1: answers.q1 === correctAnswers.q1,
       q2: answers.q2 === correctAnswers.q2,
       q3: answers.q3 === correctAnswers.q3
     };
+
+    setResults(newResults);
     setShowSkip(true);
     setshowtry(true);
-    const score = Object.values(results).filter(isCorrect => isCorrect).length;
-    const totalQuestions = Object.keys(results).length;
+    const score = Object.values(newResults).filter(isCorrect => isCorrect).length;
+    const totalQuestions = Object.keys(newResults).length;
     const scoreString = `${score}/${totalQuestions}`;
 
     const resultsHtml = `
@@ -67,6 +72,16 @@ export const QuizPage = () => {
     navigate(`/unit/${unitId}/lesson/${lessonId}/feedBack`);
   };
 
+  const renderAnswerGif = (question, optionValue) => {
+    if (results[question] === null) return null;
+    if (answers[question] !== optionValue) return null;
+    return results[question] ? (
+      <img src={Timg} alt="correct" className="answer-gif" />
+    ) : (
+      <img src={Fimg} alt="wrong" className="answer-gif" />
+    );
+  };
+
   return (
     <div className="story-pages-container">
       <div className="w-full max-w-6xl">
@@ -77,27 +92,65 @@ export const QuizPage = () => {
             <div className="Q1">
               <span>Why was Ella sad?</span>
               <ul>
-                <li>She forgot her lunch box. <input type="radio" name="q1" value="0" onChange={handleChange} /></li>
-                <li>She wanted cake. <input type="radio" name="q1" value="1" onChange={handleChange} /></li>
-                <li>She wanted to play outside.<input type="radio" name="q1" value="2" onChange={handleChange} /></li>
+                <li>
+                  She forgot her lunch box.
+                  <input type="radio" name="q1" value="0" onChange={handleChange} />
+                  {renderAnswerGif('q1', '0')}
+                </li>
+                <li>
+                  She wanted cake.
+                  <input type="radio" name="q1" value="1" onChange={handleChange} />
+                  {renderAnswerGif('q1', '1')}
+                </li>
+                <li>
+                  She wanted to play outside.
+                  <input type="radio" name="q1" value="2" onChange={handleChange} />
+                  {renderAnswerGif('q1', '2')}
+                </li>
               </ul>
             </div>
 
+            {/* Question 2 */}
             <div className="Q2">
               <span>Why didn’t Jade want to share her food?</span>
               <ul>
-                <li>She didn’t like to share<input type="radio" name="q2" value="0" onChange={handleChange} /></li>
-                <li>She wanted to eat all her yummy food.<input type="radio" name="q2" value="1" onChange={handleChange} /></li>
-                <li>She wanted to save her lunch for later<input type="radio" name="q2" value="2" onChange={handleChange} /></li>
+                <li>
+                  She didn’t like to share
+                  <input type="radio" name="q2" value="0" onChange={handleChange} />
+                  {renderAnswerGif('q2', '0')}
+                </li>
+                <li>
+                  She wanted to eat all her yummy food.
+                  <input type="radio" name="q2" value="1" onChange={handleChange} />
+                  {renderAnswerGif('q2', '1')}
+                </li>
+                <li>
+                  She wanted to save her lunch for later
+                  <input type="radio" name="q2" value="2" onChange={handleChange} />
+                  {renderAnswerGif('q2', '2')}
+                </li>
               </ul>
             </div>
 
-            <div className="Q3" >
+            {/* Question 3 */}
+            <div className="Q3">
               <span>How did Jade care for her friend?</span>
               <ul>
-                <li>She played with Ella.<input type="radio" name="q3" value="0" onChange={handleChange} /></li>
-                <li>She helped Ella with her homework.<input type="radio" name="q3" value="1" onChange={handleChange} /></li>
-                <li>She shared her lunch with Ella.<input type="radio" name="q3" value="2" onChange={handleChange} /></li>
+                <li>
+                  She played with Ella.
+                  <input type="radio" name="q3" value="0" onChange={handleChange} />
+                  {renderAnswerGif('q3', '0')}
+                </li>
+                <li>
+                  She helped Ella with her homework.
+                  <input type="radio" name="q3" value="1" onChange={handleChange} />
+                  {renderAnswerGif('q3', '1')}
+                </li>
+                <li>
+                  She shared her lunch with Ella.
+                  <input type="radio" name="q3" value="2" onChange={handleChange} />
+                  {renderAnswerGif('q3', '2')}
+                </li>
               </ul>
             </div>
 
@@ -108,10 +161,10 @@ export const QuizPage = () => {
               </button>
             )}
 
-            {showtry &&(
-            <button className="try-btn" onClick={handleTryAgain}>
-              Try again
-            </button>
+            {showtry && (
+              <button className="try-btn" onClick={handleTryAgain}>
+                Try again
+              </button>
             )}
           </div>
 
