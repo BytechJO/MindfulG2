@@ -38,7 +38,7 @@ export const QuizPage = () => {
       ValidationAlert.info("Incomplete", "Please answer all questions before submitting!");
       return;
     }
-    const correctAnswers = { q1: "0", q2: "1", q3: "2" };
+    const correctAnswers = { q1: "0", q2: "0", q3: "1" };
     const newResults = {
       q1: answers.q1 === correctAnswers.q1,
       q2: answers.q2 === correctAnswers.q2,
@@ -94,12 +94,11 @@ export const QuizPage = () => {
           <div className="content">
             <div className="Q1">
               <span>
-                What were Leo and Zack excited about at the beginning of the
-                story?
+                What made Cole upset?
               </span>
               <ul>
                 <li>
-                  The weather
+                  Max left his rubbish on the table.
                   <input
                     type="radio"
                     name="q1"
@@ -109,7 +108,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q1", "0")}
                 </li>
                 <li>
-                  Leo’s new bike
+                  The ice skating rink was closed.
                   <input
                     type="radio"
                     name="q1"
@@ -119,7 +118,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q1", "1")}
                 </li>
                 <li>
-                  Zack’s new bike
+                  Cole left his skates at home.
                   <input
                     type="radio"
                     name="q1"
@@ -134,11 +133,11 @@ export const QuizPage = () => {
             {/* Question 2 */}
             <div className="Q2">
               <span>
-                Who wanted to race?
+               What did Cole say to Max about leaving his rubbish?
               </span>
               <ul>
                 <li>
-                  Zack
+                  That’s his job.
                   <input
                     type="radio"
                     name="q2"
@@ -148,7 +147,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q2", "0")}
                 </li>
                 <li>
-                  Tom                  <input
+                  You are not following the rules.’                  <input
                     type="radio"
                     name="q2"
                     value="1"
@@ -157,7 +156,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q2", "1")}
                 </li>
                 <li>
-                  Leo
+                  I’m sorry, I was rude.
                   <input
                     type="radio"
                     name="q2"
@@ -171,10 +170,10 @@ export const QuizPage = () => {
 
             {/* Question 3 */}
             <div className="Q3">
-              <span>Why did Zack say sorry to Leo?</span>
+              <span>did Max show that he followed the rules?</span>
               <ul>
                 <li>
-                  He took Leo’s toy.
+                  He left his rubbish on the table.
                   <input
                     type="radio"
                     name="q3"
@@ -184,7 +183,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q3", "0")}
                 </li>
                 <li>
-                  He ate all of Leo’s lunch.
+                  He put his rubbish in the bin.
                   <input
                     type="radio"
                     name="q3"
@@ -194,7 +193,7 @@ export const QuizPage = () => {
                   {renderAnswerGif("q3", "1")}
                 </li>
                 <li>
-                  He crashed Leo’s bike.
+                  He said sorry to Cole.
                   <input
                     type="radio"
                     name="q3"

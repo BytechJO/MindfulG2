@@ -134,7 +134,7 @@ export default function UnitsPage() {
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
-                        className="absolute left-full top-0 ml-2 bg-white rounded-2xl shadow-xl p-3 flex flex-col gap-2 min-w-[200px] border border-gray-100 z-30"
+                        className="absolute left-full top-0 ml-2 bg-white rounded-2xl shadow-xl p-3 flex flex-col gap-2 min-w-[300px] border border-gray-100 z-30"
 
                       >
                         {lessonContent.map((content) => {

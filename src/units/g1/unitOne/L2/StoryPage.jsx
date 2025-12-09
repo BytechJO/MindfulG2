@@ -700,13 +700,14 @@ export const StoryPage = () => {
             <div className="controls-wrapper-new">
               <div className="controls-row">
                 <div className="controls-group-left">
+
                   <button
                     onClick={() => setShowCaption(!showCaption)}
                     className={`control-btn ${!showCaption ? "disabled-btn" : ""}`}
                     title="Caption"
                   >
-                    <MessageSquareText className="w-6 h-6" />
-                    <span className="control-label">Caption</span>
+                    <Subtitles className="w-6 h-6" />
+                    <span className="control-label">Narration</span>
                   </button>
 
                   <button
@@ -714,9 +715,10 @@ export const StoryPage = () => {
                     className={`control-btn ${!showSubtitles ? "disabled-btn" : ""}`}
                     title="Subtitles"
                   >
-                    <Subtitles className="w-6 h-6" />
-                    <span className="control-label">Subtitle</span>
+                    <MessageSquareText className="w-6 h-6" />
+                    <span className="control-label">Caption</span>
                   </button>
+
                   <div
                     className="volume-control"
                     onMouseEnter={() => setShowVolumeSlider(true)}

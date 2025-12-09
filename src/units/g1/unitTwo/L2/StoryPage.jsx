@@ -32,7 +32,7 @@ export const StoryPage = () => {
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
   const [showSubtitles, setShowSubtitles] = useState(true);
   const [showSpeedMenu, setShowSpeedMenu] = useState(false);
-  
+
   const availableSpeeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
 
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -288,8 +288,6 @@ export const StoryPage = () => {
       ]
     },
   ];
-
-
 
   const cloudPositions = {
     0: [],
@@ -657,17 +655,17 @@ export const StoryPage = () => {
                     className={`control-btn ${!showCaption ? "disabled-btn" : ""}`}
                     title="Caption"
                   >
-                    <MessageSquareText className="w-6 h-6" />
-                    <span className="control-label">Caption</span>
+                    <Subtitles className="w-6 h-6" />
+                    <span className="control-label">Narration</span>
                   </button>
-                  
+
                   <button
                     onClick={() => setShowSubtitles(!showSubtitles)}
                     className={`control-btn ${!showSubtitles ? "disabled-btn" : ""}`}
                     title="Subtitles"
                   >
-                    <Subtitles className="w-6 h-6" />
-                    <span className="control-label">Subtitle</span>
+                    <MessageSquareText className="w-6 h-6" />
+                    <span className="control-label">Caption</span>
                   </button>
                   <div
                     className="volume-control"

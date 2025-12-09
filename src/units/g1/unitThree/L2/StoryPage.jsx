@@ -804,8 +804,8 @@ export const StoryPage = () => {
                     className={`control-btn ${!showCaption ? "disabled-btn" : ""}`}
                     title="Caption"
                   >
-                    <MessageSquareText className="w-6 h-6" />
-                    <span className="control-label">Caption</span>
+                    <Subtitles className="w-6 h-6" />
+                    <span className="control-label">Narration</span>
                   </button>
 
                   <button
@@ -813,8 +813,8 @@ export const StoryPage = () => {
                     className={`control-btn ${!showSubtitles ? "disabled-btn" : ""}`}
                     title="Subtitles"
                   >
-                    <Subtitles className="w-6 h-6" />
-                    <span className="control-label">Subtitle</span>
+                    <MessageSquareText className="w-6 h-6" />
+                    <span className="control-label">Caption</span>
                   </button>
 
 

@@ -54,12 +54,6 @@ export const StoryPage = () => {
       title: "Section 1",
       subtitles: [
         {
-          // start: 0, end: 3.12,
-          // words: [
-          //   { text: "Kate's", start: 0.5, end: 1.2 },
-          //   { text: "Big", start: 1.2, end: 1.7 },
-          //   { text: "Feelings", start: 1.7, end: 2.5 },
-          // ]
         },
       ],
     },
@@ -169,7 +163,6 @@ export const StoryPage = () => {
 
   const cloudPositions = {
     0: [
-      // { bottom: '35rem', left: '50%', transform: 'translateX(-50%)', isFlipped: true }
     ],
 
     1: [
@@ -700,8 +693,8 @@ export const StoryPage = () => {
                     className={`control-btn ${!showCaption ? "disabled-btn" : ""}`}
                     title="Caption"
                   >
-                    <MessageSquareText className="w-6 h-6" />
-                    <span className="control-label">Caption</span>
+                    <Subtitles className="w-6 h-6" />
+                    <span className="control-label">Narration</span>
                   </button>
 
                   <button
@@ -709,8 +702,8 @@ export const StoryPage = () => {
                     className={`control-btn ${!showSubtitles ? "disabled-btn" : ""}`}
                     title="Subtitles"
                   >
-                    <Subtitles className="w-6 h-6" />
-                    <span className="control-label">Subtitle</span>
+                    <MessageSquareText className="w-6 h-6" />
+                    <span className="control-label">Caption</span>
                   </button>
 
                   <div

@@ -613,16 +613,6 @@ export const StoryPage = () => {
 
           {showFeedback && <div className="feedback-popup">Good Job! 👍</div>}
 
-          {/* {currentVideo === 3 && showBanner && (
-            <div className="instruction-banner show">
-              <p style={{ fontSize: '1.8em', textAlign: 'left' }}>
-                Highlight the word that shows how someone
-              </p>
-              <p style={{ fontSize: '1.8em', textAlign: 'left' }}>
-                feels when their personal space is crossed.
-              </p>
-            </div>
-          )} */}
 
           {activeSubtitle &&
             activeCloudPosition &&
@@ -723,8 +713,8 @@ export const StoryPage = () => {
                     className={`control-btn ${!showCaption ? "disabled-btn" : ""}`}
                     title="Caption"
                   >
-                    <MessageSquareText className="w-6 h-6" />
-                    <span className="control-label">Caption</span>
+                    <Subtitles className="w-6 h-6" />
+                    <span className="control-label">Narration</span>
                   </button>
 
                   <button
@@ -732,8 +722,8 @@ export const StoryPage = () => {
                     className={`control-btn ${!showSubtitles ? "disabled-btn" : ""}`}
                     title="Subtitles"
                   >
-                    <Subtitles className="w-6 h-6" />
-                    <span className="control-label">Subtitle</span>
+                    <MessageSquareText className="w-6 h-6" />
+                    <span className="control-label">Caption</span>
                   </button>
 
                   <div

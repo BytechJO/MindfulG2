@@ -35,7 +35,7 @@ export const QuizPage = () => {
       ValidationAlert.info("Incomplete", "Please answer all questions before submitting!");
       return;
     }
-    const correctAnswers = { q1: "2", q2: "0", q3: "1" };
+    const correctAnswers = { q1: "2", q2: "0", q3: "0" };
     const newResults = {
   q1: answers.q1 === correctAnswers.q1,
   q2: answers.q2 === correctAnswers.q2,
