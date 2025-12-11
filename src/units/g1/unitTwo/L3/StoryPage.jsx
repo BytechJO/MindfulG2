@@ -2,35 +2,39 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Subtitles, Maximize2, Minimize2, MessageSquareText } from 'lucide-react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../../shared/StoryPage.css';
-import ValidationAlert from '../../shared/ValidationAlert';
 
 import video1 from "./assets/1.mp4";
 import video2 from "./assets/2.mp4";
 import video3 from "./assets/3.mp4";
 import video4 from "./assets/4.mp4";
-import img1 from "./assets/nex.png";
 
 export const StoryPage = () => {
-  const [showCaption, setShowCaption] = useState(true);
   const [extraBubble, setExtraBubble] = useState(null);
-  const [currentItemIndex, setCurrentItemIndex] = useState(0);
+  const [currentVideo, setCurrentVideo] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(1);
-  const [playbackSpeed, setPlaybackSpeed] = useState(0.75);
-  const [showSubtitles, setShowSubtitles] = useState(true);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [showBubble, setShowBubble] = useState(true);
-  const [showVolumeSlider, setShowVolumeSlider] = useState(false);
-  const [showSpeedMenu, setShowSpeedMenu] = useState(false);
+  const videoRef = useRef(null);
+  const [selectedWords, setSelectedWords] = useState([]);
   const { unitId, lessonId } = useParams();
   const navigate = useNavigate();
-  const videoRef = useRef(null);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [showBubble, setShowBubble] = useState(true);
+  const [showBanner, setShowBanner] = useState(false);
+  const [playbackSpeed, setPlaybackSpeed] = useState(0.75);
+  const [volume, setVolume] = useState(1);
+  const [showVolumeSlider, setShowVolumeSlider] = useState(false);
+  const [showSubtitles, setShowSubtitles] = useState(true);
+  const [showCaption, setShowCaption] = useState(true);
+  const [showSpeedMenu, setShowSpeedMenu] = useState(false);
+
+  const availableSpeeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
+
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const fullscreenContainerRef = useRef(null);
 
-  const mediaItems = [
+  const videos = [
     {
       type: 'video',
       url: video1,
@@ -137,6 +141,18 @@ export const StoryPage = () => {
             { text: "his", start: 3.9, end: 4.1 },
             { text: "rubbish", start: 4.1, end: 4.4 },
             { text: "away.", start: 4.4, end: 4.8 }
+          ]
+        },
+        {
+          start: 11.0, end: 12.5,
+          words: [
+            { text: "Max", start: 5.5, end: 5.8 },
+            { text: "puts", start: 5.8, end: 6.1 },
+            { text: "his", start: 6.1, end: 6.4 },
+            { text: "rubbish", start: 6.5, end: 6.8 },
+            { text: "in", start: 6.8, end: 7.1 },
+            { text: "the", start: 7.1, end: 7.4 },
+            { text: "bin.", start: 7.7, end: 8.0 }
           ]
         },
       ]
@@ -288,22 +304,20 @@ export const StoryPage = () => {
     },
     {
       videoIndex: 3,
-      start: 9.0, end: 12.5,
+      start: 9.0, end: 11.0,
       words: [
         { text: "Max", start: 9.5, end: 9.7 },
         { text: "is", start: 9.7, end: 10.0 },
         { text: "happy", start: 10.0, end: 10.3 },
         { text: "that", start: 10.3, end: 10.6 },
-        { text: "he", start: 10.6, end: 11.0 },
-        { text: "follows", start: 11.0, end: 11.3 },
-        { text: "the", start: 11.3, end: 11.6 },
-        { text: "rules.", start: 11.6, end: 12.0 }
+        { text: "he", start: 10.6, end: 10.9 },
+        { text: "follows", start: 10.9, end: 11.2 },
+        { text: "the", start: 11.2, end: 11.5 },
+        { text: "rules.", start: 11.5, end: 11.8 }
       ]
     },
   ];
 
-  const currentItem = mediaItems[currentItemIndex];
-  const availableSpeeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
 
   const cloudPositions = {
     0: [
@@ -320,6 +334,7 @@ export const StoryPage = () => {
     ],
     3: [
       { bottom: '65%', left: '60%', isFlipped: true },
+      { bottom: '65%', left: '60%', isFlipped: true },
     ],
     5: [
     ]
@@ -328,65 +343,90 @@ export const StoryPage = () => {
 
 
 
+  const [showWrongFeedback, setShowWrongFeedback] = useState(false);
+  const [isSelecting, setIsSelecting] = useState(false);
+  const [showSettingsPopup, setShowSettingsPopup] = useState(false);
+  const [autoPlayNext, setAutoPlayNext] = useState(true);
+  const [textHighlight, setTextHighlight] = useState(true);
+  const settingsPopupRef = useRef(null);
+  const [narrationHighlight, setNarrationHighlight] = useState(true);
+  const currentVideoData = videos[currentVideo];
+
+
+  useEffect(() => {
+    if (showSettingsPopup && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [showSettingsPopup]);
+
+  const activeSubtitleIndex = currentVideoData.subtitles.findIndex(
+    sub => currentTime >= sub.start && currentTime < sub.end
+  );
+  const activeSubtitle = activeSubtitleIndex !== -1
+    ? currentVideoData.subtitles[activeSubtitleIndex]
+    : null;
+  const bubbleStyle = cloudPositions[currentVideo] && cloudPositions[currentVideo][activeSubtitleIndex]
+    ? cloudPositions[currentVideo][activeSubtitleIndex]
+    : {};
+
+  const handleMouseDown = () => {
+    setIsSelecting(true);
+  };
+  const handleMouseUp = () => {
+    if (isSelecting) {
+      handleTextSelection();
+    }
+    setIsSelecting(false);
+  };
   useEffect(() => {
     const bubbleToShow = extraBubblesData.find(bubble =>
-      bubble.videoIndex === currentItemIndex &&
+      bubble.videoIndex === currentVideo &&
       currentTime >= bubble.start &&
       currentTime < bubble.end
     );
 
     setExtraBubble(bubbleToShow || null);
 
-  }, [currentItemIndex, currentTime]);
-  const activeSubtitleIndex = currentItem.type === 'video' ? currentItem.subtitles.findIndex(sub => currentTime >= sub.start && currentTime < sub.end) : 0;
-  const activeSubtitle = activeSubtitleIndex !== -1 ? currentItem.subtitles[activeSubtitleIndex] : null;
-  const activeCloudPosition = activeSubtitleIndex !== -1 ? cloudPositions[currentItemIndex]?.[activeSubtitleIndex] : null;
-
-  // --- دوال التحكم بالوسائط ---
-  const handleNext = useCallback(() => {
-  if (currentItemIndex === mediaItems.length - 1) {
-    navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
-  } else {
-    setCurrentItemIndex(prev => prev + 1);
-  }
-}, [currentItemIndex, mediaItems.length, navigate, unitId, lessonId]);
-
-  const handlePrevious = () => {
-    setCurrentItemIndex(prev => (prev > 0 ? prev - 1 : mediaItems.length - 1));
-  };
-
-  const togglePlay = () => {
-    if (currentItem.type !== 'video' || !videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-    } else {
-      videoRef.current.play();
-    }
-  };
-
-  // --- التأثيرات الجانبية (useEffect) ---
-
-  // 2. useEffect للتحكم بالصور والفيديوهات عند تغيير الشريحة
+  }, [currentVideo, currentTime]);
   useEffect(() => {
-    setShowBubble(true);
-
-    if (currentItem.type === 'image') {
-      setIsPlaying(false);
-      const timer = setTimeout(handleNext, 1000); // الانتقال بعد 5 ثوانٍ
-      return () => clearTimeout(timer);
+    const nextVideoIndex = currentVideo + 1;
+    if (nextVideoIndex < videos.length) {
+      const nextVideoUrl = videos[nextVideoIndex].url;
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'video';
+      link.href = nextVideoUrl;
+      document.head.appendChild(link);
+      return () => {
+        document.head.removeChild(link);
+      };
     }
-
-    if (currentItem.type === 'video' && videoRef.current) {
-      videoRef.current.load();
-      videoRef.current.play().catch(() => setIsPlaying(false));
-      setCurrentTime(0);
-    }
-  }, [currentItemIndex, currentItem.type, handleNext]);
-
-  // useEffect لربط مستمعات الأحداث للفيديو فقط
+  }, [currentVideo, videos]);
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const video = videoRef.current;
-    if (currentItem.type !== 'video' || !video) return;
+    if (!video) return;
+
+    if (currentVideo === 3 && isPlaying) {
+      console.log(`Current Time: ${currentTime}, Duration: ${duration}`);
+      if (duration > 0 && currentTime >= duration - 0.1) {
+        video.pause();
+        setShowBanner(true);
+      }
+    }
+  }, [currentTime, currentVideo, isPlaying, duration]);
+
+  const handleTryAgain = () => {
+    setSelectedWords([]);
+    setShowFeedback(false);
+  };
+  useEffect(() => {
+    setSelectedWords([]);
+    setShowFeedback(false);
+  }, [currentVideo]);
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
 
     const handleTimeUpdate = () => setCurrentTime(video.currentTime);
     const handlePlay = () => setIsPlaying(true);
@@ -404,74 +444,279 @@ export const StoryPage = () => {
       video.removeEventListener('pause', handlePause);
       video.removeEventListener('loadeddata', handleLoadedData);
     };
-  }, [currentItem.type, currentItemIndex]); // يعتمد على نوع العنصر وفهرسه
-
-  // useEffect للتحكم بملء الشاشة
-  useEffect(() => {
-    const handleFullscreenChange = () => setIsFullscreen(!!document.fullscreenElement);
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
-    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
   }, []);
+  useEffect(() => {
+    if (showBanner && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [showBanner]);
 
-  // --- دوال أخرى ---
-  const toggleMute = () => setIsMuted(!isMuted);
-  const handleVolumeChange = (e) => {
-    const newVolume = parseFloat(e.target.value);
-    setVolume(newVolume);
-    if (videoRef.current) videoRef.current.volume = newVolume;
-    setIsMuted(newVolume === 0);
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      setCurrentTime(0);
+      setShowBubble(true);
+
+      // حاول تشغيل الفيديو الجديد تلقائيًا
+      const playPromise = videoRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // لا بأس، المتصفح منع التشغيل التلقائي
+        });
+      }
+    }
+  }, [currentVideo]);
+  useEffect(() => {
+    if (showBanner && videoRef.current) {
+      videoRef.current.pause();
+    }
+  }, [showBanner]);
+
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+    };
+  }, []);
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = playbackSpeed;
+    }
+  }, [currentVideo, isPlaying, playbackSpeed]);
+  const handlePrevious = () => {
+    setCurrentVideo(prev => (prev > 0 ? prev - 1 : videos.length - 1));
+  };
+  const handleNext = () => {
+    if (currentVideo === videos.length - 1) {
+      navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+    } else {
+      setCurrentVideo(prev => prev + 1);
+    }
+  };
+  const handleTextSelection = () => {
+    const selection = window.getSelection();
+    if (!selection || selection.rangeCount === 0) return;
+
+    const selectedText = selection.toString().trim();
+    if (!selectedText) return;
+
+    // الكلمات الصحيحة فقط
+    const allCorrectWords = ["puts", "rubbish", "in", "bin"];
+
+    // تقسيم النص المحدد لكلمات
+    const wordsInSelection = selectedText
+      .split(/\s+/)
+      .map(word => word.replace(/[.,?!]/g, '').toLowerCase());
+
+    // التحقق: هل كل الكلمات المحددة صحيحة؟
+    const hasWrongWords = wordsInSelection.some(word =>
+      word && !allCorrectWords.includes(word)
+    );
+
+    // إذا في كلمات غلط
+    if (hasWrongWords) {
+      setShowWrongFeedback(true);
+      setTimeout(() => setShowWrongFeedback(false), 2000);
+      selection.removeAllRanges();
+      return;
+    }
+
+    // التحقق من الكلمات الصحيحة في التحديد
+    const correctWordsInSelection = wordsInSelection.filter(word =>
+      allCorrectWords.includes(word)
+    );
+
+    if (correctWordsInSelection.length > 0) {
+      setSelectedWords(prev => {
+        const newWords = [...new Set([...prev, ...correctWordsInSelection])];
+        const allCorrectSelected = allCorrectWords.every(correctWord =>
+          newWords.some(w => w.toLowerCase() === correctWord)
+        );
+
+        if (allCorrectSelected && newWords.length === allCorrectWords.length) {
+          setShowFeedback(true);
+          setTimeout(() => setShowFeedback(false), 2000);
+        }
+
+        return newWords;
+      });
+    }
+
+    selection.removeAllRanges();
+  };
+  const togglePlay = () => {
+    if (videoRef.current) {
+      isPlaying ? videoRef.current.pause() : videoRef.current.play();
+    }
+  };
+  const toggleMute = () => {
+    setIsMuted(prev => !prev);
   };
   const selectPlaybackSpeed = (speed) => {
     setPlaybackSpeed(speed);
-    if (videoRef.current) videoRef.current.playbackRate = speed;
+    if (videoRef.current) {
+      videoRef.current.playbackRate = speed;
+    }
     setShowSpeedMenu(false);
   };
+  const handleVolumeChange = (e) => {
+    const newVolume = parseFloat(e.target.value);
+    setVolume(newVolume);
+    if (videoRef.current) {
+      videoRef.current.volume = newVolume;
+    }
+    setIsMuted(newVolume === 0);
+  };
   const toggleFullscreen = () => {
+    const container = fullscreenContainerRef.current;
+    if (!container) return;
+
     if (!document.fullscreenElement) {
-      fullscreenContainerRef.current?.requestFullscreen();
+      container.requestFullscreen().catch(err => {
+        alert(`Error attempting to enable full-screen mode: ${err.message} (${err.name})`);
+      });
     } else {
       document.exitFullscreen();
     }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        settingsPopupRef.current &&
+        !settingsPopupRef.current.contains(event.target)
+      ) {
+        setShowSettingsPopup(false);
+
+      }
+    };
+
+    if (showSettingsPopup) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () =>
+      document.removeEventListener('mousedown', handleClickOutside);
+  }, [showSettingsPopup]);
+
+
+  const handleEnded = useCallback(() => {
+    if (currentVideo === 3) {
+      setShowBanner(true);
+      if (videoRef.current) {
+        videoRef.current.pause();
+        videoRef.current.currentTime = videoRef.current.duration;
+      }
+    }
+    else if (currentVideo === videos.length - 1) {
+      navigate(`/unit/${unitId}/lesson/${lessonId}/quiz`);
+    }
+    else {
+      setShowBanner(false);
+      if (autoPlayNext) {
+        setCurrentVideo(prev => (prev < videos.length - 1 ? prev + 1 : prev));
+      } else {
+        if (videoRef.current) {
+          videoRef.current.pause();
+        }
+      }
+    }
+  }, [currentVideo, videos.length, navigate, unitId, lessonId, autoPlayNext]);
+
+
   return (
     <div className="story-page-container">
+      {isLoading && (
+        <div className="loading-overlay">
+          <div className="spinner"></div>
+        </div>
+      )}
       <div className="w-full max-w-6xl">
         <div ref={fullscreenContainerRef} className="video-wrapper">
-
-          {currentItem.type === 'video' ? (
+          {videos.map((vid, index) => (
             <video
-              ref={videoRef}
-              className="w-full aspect-video object-cover"
-              src={currentItem.url}
-              muted={isMuted}
-              onEnded={handleNext}
+              key={index}
+              src={vid.url}
               preload="auto"
-              style={{ display: 'block' }}
+              style={{ display: 'none' }}
             />
-          ) : (
-            <img
-              src={currentItem.url}
-              alt={currentItem.title}
-              className="w-full aspect-video object-cover"
-            />
+          ))}
+
+          <video
+            ref={videoRef}
+            className="w-full aspect-video object-cover"
+            muted={isMuted}
+            onEnded={handleEnded}
+            preload="auto"
+            src={currentVideoData.url}
+          >
+            Your browser does not support the video tag.
+          </video>
+
+          {showWrongFeedback && (
+            <div className="wrong-feedback">
+              Try Again! ❌
+            </div>
           )}
 
-          {/* --- عرض الفقاعات (Subtitles) --- */}
-          {activeSubtitle && activeCloudPosition && showBubble && showSubtitles && (
-            <div className="subtitle-container" style={activeCloudPosition}>
-              <div className={`bubble-cloud animate__animated animate__fadeIn ${activeCloudPosition.isFlipped ? 'flipped' : ''}`}>
-                <p>
+          {showFeedback && (
+            <div className="feedback-popup">
+              Good Job! 👍
+            </div>
+          )}
+
+          {currentVideo === 3 && showBanner && (
+            <div className="instruction-banner show">
+              <p style={{ fontSize: '1.8em', textAlign: 'left' }}>
+                Highlight what Leo said to forgive Zack.
+              </p>
+            </div>
+          )}
+
+          {showBubble && showSubtitles && activeSubtitle && activeSubtitle.words && (
+            <div className="subtitle-container" style={bubbleStyle}>
+
+              <div className={`bubble-cloud animate__animated animate__fadeIn ${bubbleStyle?.isFlipped ? 'flipped' : ''}
+          `}>
+                <p
+                  onMouseDown={handleMouseDown}
+                  onMouseUp={handleMouseUp}
+                  style={{ userSelect: 'text', cursor: 'text' }}
+                >
                   {activeSubtitle.words.map((word, index) => {
-                    const isHighlighted = currentItem.type === 'video' && currentTime >= word.start && currentTime < word.end;
+                    const isHighlighted = currentTime >= word.start && currentTime < word.end;
+                    const cleanWord = word.text.replace(/[.,?!]/g, '');
+                    const isSelected = selectedWords.some(w =>
+                      w.toLowerCase() === cleanWord.toLowerCase()
+                    );
+
                     return (
-                      <span key={index} className={`word-span ${isHighlighted ? 'active-word' : ''}`}>
+                      <span
+                        key={index}
+                        className={`word-span 
+                  ${isHighlighted && textHighlight ? 'active-word' : ''} 
+                  ${isSelected ? 'selected-word' : ''}`}
+                      >
                         {word.text}{' '}
                       </span>
                     );
                   })}
                 </p>
-                <button className="close" onClick={() => setShowBubble(false)}>×</button>
+
+                {selectedWords.length === 4 && (
+                  <div className="try-again-container">
+                    <button
+                      onClick={handleTryAgain}
+                      className="tryy"
+                    >
+                      Try Again
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -485,62 +730,183 @@ export const StoryPage = () => {
                 <p>
                   {extraBubble.words.map((word, index) => {
                     const isHighlighted = currentTime >= word.start && currentTime < word.end;
-                    return <span key={index} className={`word-span ${isHighlighted ? 'active-word' : ''}`}>{word.text}{' '}</span>;
+                    return (
+                      <span
+                        key={index}
+                        className={`word-span ${isHighlighted && narrationHighlight ? 'active-word' : ''}`}
+                      >
+                        {word.text}{' '}
+                      </span>
+                    );
                   })}
                 </p>
               </div>
             </div>
           )}
 
-
-          {/* --- أزرار التحكم --- */}
           <div className="video-overlay" />
           <div className="controls-container">
+
             <div className="controlbbtn">
-              <button onClick={handlePrevious} className="control-btn left-nav-btn"><ChevronLeft className="w-8 h-8" /></button>
-              <button onClick={handleNext} className="control-btn right-nav-btn"><ChevronRight className="w-8 h-8" /></button>
+              <button onClick={handlePrevious} className="control-btn left-nav-btn">
+                <ChevronLeft className="w-8 h-8" />
+              </button>
+
+              <button onClick={handleNext} className="control-btn right-nav-btn">
+                <ChevronRight className="w-8 h-8" />
+              </button>
             </div>
 
             <div className="controls-wrapper-new">
               <div className="controls-row">
                 <div className="controls-group-left">
 
-                  <button
-                    onClick={() => setShowCaption(!showCaption)}
-                    className={`control-btn ${!showCaption ? "disabled-btn" : ""}`}
-                    title="Caption"
-                  >
-                    <Subtitles className="w-6 h-6" />
-                    <span className="control-label">Narration</span>
-                  </button>
-
-                  <button
-                    onClick={() => setShowSubtitles(!showSubtitles)}
-                    className={`control-btn ${!showSubtitles ? "disabled-btn" : ""}`}
-                    title="Subtitles"
-                  >
-                    <MessageSquareText className="w-6 h-6" />
-                    <span className="control-label">Caption</span>
-                  </button>
-
-                  <div className="volume-control" onMouseEnter={() => setShowVolumeSlider(true)} onMouseLeave={() => setShowVolumeSlider(false)}>
-                    <button onClick={toggleMute} className="control-btn" disabled={currentItem.type === 'image'}>
-                      {isMuted || volume === 0 ? <VolumeX className="w-6 h-6" /> : <Volume2 className="w-6 h-6" />}
+                  <div className="settings-container">
+                    <button
+                      onClick={() => setShowSettingsPopup(prev => !prev)}
+                      className="control-btn settings-btn"
+                      title="Settings"
+                    >
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                      <span className="control-label">Settings</span>
                     </button>
-                    {showVolumeSlider && currentItem.type === 'video' && (
+
+                    {showSettingsPopup && (
+                      <>
+                        {/* 1. الخلفية الضبابية (Overlay) */}
+                        <div className="settings-overlay" onClick={() => setShowSettingsPopup(false)}></div>
+
+                        {/* 2. حاوية النافذة لتوسيطها */}
+                        <div className="settings-popup-container">
+                          <div ref={settingsPopupRef} className="settings-popup">
+                            <button
+                              onClick={() => setShowSettingsPopup(false)}
+                              className="close-popup-btn"
+                            >
+                              ×
+                            </button>
+
+                            <h3>Settings</h3>
+
+                            <div className="settings-options-grid">
+                              <div className="setting-item">
+                                <span className="setting-label">Conversation Caption</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={showSubtitles}
+                                    onChange={() => setShowSubtitles(!showSubtitles)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+
+                              <div className="setting-item">
+                                <span className="setting-label">Text Highlight</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={textHighlight}
+                                    onChange={() => setTextHighlight(!textHighlight)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+
+                              <div className="setting-item">
+                                <span className="setting-label">Narration</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={showCaption}
+                                    onChange={() => setShowCaption(!showCaption)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+
+                              <div className="setting-item">
+                                <span className="setting-label">Narration Highlight</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={narrationHighlight}
+                                    onChange={() => setNarrationHighlight(!narrationHighlight)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+
+                              <div className="setting-item">
+                                <span className="setting-label">Auto Page Turn</span>
+                                <label className="toggle-switch">
+                                  <input
+                                    type="checkbox"
+                                    checked={autoPlayNext}
+                                    onChange={() => setAutoPlayNext(!autoPlayNext)}
+                                  />
+                                  <span className="toggle-slider"></span>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+
+                  <div
+                    className="volume-control"
+                    onMouseEnter={() => setShowVolumeSlider(true)}
+                    onMouseLeave={() => setShowVolumeSlider(false)}
+                  >
+                    <button onClick={toggleMute} className="control-btn">
+                      {isMuted || volume === 0 ? (
+                        <VolumeX className="w-6 h-6" />
+                      ) : (
+                        <Volume2 className="w-6 h-6" />
+                      )}
+                    </button>
+                    {showVolumeSlider && (
                       <div className="volume-slider-container">
-                        <input type="range" min="0" max="1" step="0.1" value={volume} onChange={handleVolumeChange} className="volume-slider" orient="vertical" />
+                        <input
+                          type="range"
+                          min="0"
+                          max="1"
+                          step="0.1"
+                          value={volume}
+                          onChange={handleVolumeChange}
+                          className="volume-slider"
+                          orient="vertical"
+                        />
                       </div>
                     )}
                   </div>
+
                   <div className="speed-control-container">
-                    <button onClick={() => setShowSpeedMenu(!showSpeedMenu)} className="control-btn speed-btn" title="Playback Speed" disabled={currentItem.type === 'image'}>
+                    <button
+                      onClick={() => setShowSpeedMenu(prev => !prev)}
+                      className="control-btn speed-btn"
+                      title="Playback Speed"
+                    >
                       <span className="speed-label">{playbackSpeed}x</span>
                     </button>
-                    {showSpeedMenu && currentItem.type === 'video' && (
+
+                    {showSpeedMenu && (
                       <ul className="speed-dropdown-list">
-                        {availableSpeeds.map(speed => (
-                          <li key={speed} onClick={() => selectPlaybackSpeed(speed)} className={playbackSpeed === speed ? 'active-speed' : ''}>{speed}x</li>
+                        {availableSpeeds.map((speed) => (
+                          <li
+                            key={speed}
+                            onClick={() => selectPlaybackSpeed(speed)}
+                            className={playbackSpeed === speed ? 'active-speed' : ''}
+                          >
+                            {speed}x
+                          </li>
                         ))}
                       </ul>
                     )}
@@ -548,24 +914,35 @@ export const StoryPage = () => {
                 </div>
 
                 <div className="controls-group-center">
-                  <button onClick={togglePlay} className="control-btn play-btn" disabled={currentItem.type === 'image'}>
-                    {isPlaying ? <Pause className="w-12 h-12" fill="white" /> : <Play className="w-12 h-12" fill="white" />}
+                  <button onClick={togglePlay} className="control-btn play-btn">
+                    {isPlaying ? (
+                      <Pause className="w-12 h-12" fill="white" />
+                    ) : (
+                      <Play className="w-12 h-12" fill="white" />
+                    )}
                   </button>
                 </div>
 
                 <div className="controls-group-right">
                   <button onClick={toggleFullscreen} className="control-btn">
-                    {isFullscreen ? <Minimize2 className="w-6 h-6" /> : <Maximize2 className="w-6 h-6" />}
+                    {isFullscreen ? (
+                      <Minimize2 className="w-6 h-6" />
+                    ) : (
+                      <Maximize2 className="w-6 h-6" />
+                    )}
                   </button>
                 </div>
               </div>
             </div>
+
           </div>
 
-          {/* --- مؤشر التقدم --- */}
           <div className="progress-indicator-container">
-            {mediaItems.map((_, index) => (
-              <div key={index} className={`progress-dot ${index === currentItemIndex ? 'active' : ''}`} />
+            {videos.map((_, index) => (
+              <div
+                key={index}
+                className={`progress-dot ${index === currentVideo ? 'active' : ''}`}
+              />
             ))}
           </div>
         </div>
@@ -573,5 +950,4 @@ export const StoryPage = () => {
     </div>
   );
 };
-
 export default StoryPage;

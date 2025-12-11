@@ -14,7 +14,7 @@ export const QuizPage = () => {
   const [showSkip, setShowSkip] = useState(false);
   const [showtry, setshowtry] = useState(false);
   const [results, setResults] = useState({ q1: null, q2: null, q3: null });
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setAnswers(prev => ({ ...prev, [name]: value }));
